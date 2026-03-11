@@ -782,80 +782,20 @@ const TYPES={constant:{l:'Постоянный',c:'t-yellow'},project:{l:'Раз
 const EMOJIS=['📄','📝','📖','🎬','🎵','🎓','⭐','✅','🏠','👗','📽','🗒','💡','🔥','🎯','📊','🗓','📦','🧠','🚀'];
 
 function defaultDB(){
+  // ⚠️ Чистый шаблон для новых пользователей — без личных данных
   return{
     pages:[
-      {id:'pg-plan',icon:'✅',name:'Планер',type:'planner',fav:true,parentId:null,open:true,content:'',comments:[]},
-      {id:'pg-notes',icon:'📝',name:'Заметки',type:'notes',fav:false,parentId:null,open:false,content:'',comments:[],blocks:[]},
-      {id:'pg-book',icon:'📖',name:'Книга «Проклятие»',type:'notes',fav:false,parentId:null,open:true,content:'',comments:[],blocks:[
-        {id:'b1',type:'h1',text:'Проклятие наследства'},
-        {id:'b2',type:'text',text:'Фэнтезийный роман. 43+ страниц.'},
-        {id:'b3',type:'divider'},
-        {id:'b4',type:'h2',text:'Персонажи'},
-        {id:'b5',type:'bullet',text:'Сел — главный герой'},
-        {id:'b6',type:'bullet',text:'Кас — напарник'},
-        {id:'b7',type:'bullet',text:'Агни — ведьма'},
-        {id:'b8',type:'bullet',text:'Салуна — ведьма'},
-      ]},
-      {id:'pg-book-1',icon:'📄',name:'Глава 1 — Проклятие',type:'notes',fav:false,parentId:'pg-book',open:false,content:'',comments:[],blocks:[{id:'bb1',type:'text',text:'Начало первой главы...'}]},
-      {id:'pg-book-2',icon:'📄',name:'Глава 2 — Ведьмы',type:'notes',fav:false,parentId:'pg-book',open:false,content:'',comments:[],blocks:[]},
-      {id:'pg-course',icon:'🎓',name:'Курс видеографии',type:'notes',fav:true,parentId:null,open:true,content:'',comments:[],blocks:[
-        {id:'c1',type:'h1',text:'Курс видеографии'},
-        {id:'c2',type:'callout',text:'🎯 Цель: запуск предпродаж в Q2 2025'},
-        {id:'c3',type:'h2',text:'Структура'},
-        {id:'c4',type:'numbered',text:'Модуль 1 — Основы (готов)'},
-        {id:'c5',type:'numbered',text:'Модуль 2 — Экспозиция'},
-        {id:'c6',type:'numbered',text:'Модуль 3 — Работа со светом'},
-      ]},
-      {id:'pg-course-1',icon:'📽',name:'Модуль 1 — Основы',type:'notes',fav:false,parentId:'pg-course',open:false,content:'',comments:[],blocks:[
-        {id:'m1',type:'h1',text:'Модуль 1: Основы видеографии'},
-        {id:'m2',type:'todo',text:'Урок 1: Что такое видеография',done:true},
-        {id:'m3',type:'todo',text:'Урок 2: Выбор камеры',done:true},
-        {id:'m4',type:'todo',text:'Урок 3: Sony FX30 — полный обзор',done:false},
-      ]},
-      {id:'pg-course-2',icon:'📽',name:'Модуль 2 — Экспозиция',type:'notes',fav:false,parentId:'pg-course',open:false,content:'',comments:[],blocks:[
-        {id:'e1',type:'h1',text:'Модуль 2: Экспозиция'},
-        {id:'e2',type:'todo',text:'ISO — теория и практика',done:false},
-        {id:'e3',type:'todo',text:'Выдержка',done:false},
-        {id:'e4',type:'todo',text:'Диафрагма',done:false},
-      ]},
-      {id:'pg-board1',icon:'🗺',name:'Стратегия 2026',type:'board',fav:true,parentId:null,open:false,comments:[],cards:[
-        {id:'card1',type:'note',x:60,y:80,w:220,h:160,color:'#2a2a2a',title:'🎯 Главная цель',text:'Запуск курса по видеографии\nПредпродажи: апрель 2026\nЦель: 50 предзаказов'},
-        {id:'card2',type:'note',x:340,y:80,w:220,h:160,color:'#1e2d1e',title:'📸 Инста Видео',text:'• Reel каждую неделю\n• Sony FX30 контент\n• SEO описания'},
-        {id:'card3',type:'note',x:620,y:80,w:220,h:160,color:'#1e1e2d',title:'🎵 Музыка',text:'• Каверы русских песен\n• НОВАЯ ЗВЕЗДА\n• Стримы в ВК'},
-        {id:'card4',type:'note',x:60,y:300,w:220,h:160,color:'#2d1e1e',title:'📖 Книга',text:'Проклятие наследства\n• Глава 5 — в работе\n• Цель: 100 стр к лету'},
-        {id:'card5',type:'todo',x:340,y:300,w:220,h:200,color:'#252525',title:'✅ Задачи недели',todos:[{t:'Снять Reel про FX30',d:false},{t:'Написать скрипт Модуль 2',d:true},{t:'Встреча с командой Секта',d:false},{t:'Глава 5 черновик',d:false}]},
-        {id:'card6',type:'link',x:620,y:300,w:220,h:100,color:'#252525',title:'🔗 Ресурсы',url:'https://app.milanote.com',label:'Milanote вдохновение'},
-        {id:'card7',type:'heading',x:60,y:30,w:780,h:40,color:'transparent',text:'Стратегия 2026 — Ali Kazakov'},
-        {id:'card8',type:'image',x:900,y:80,w:200,h:200,color:'#252525',emoji:'🎬',label:'Sony FX30\nГлавная камера'},
-      ], arrows:[]},
       {id:'pg-planner-full',icon:'📅',name:'Планер',type:'planner-full',fav:true,parentId:null,open:false,comments:[]},
       {id:'pg-finance',icon:'💰',name:'Финансы',type:'finance',fav:true,parentId:null,open:false,comments:[]},
-      {id:'pg-videos',icon:'🎬',name:'Медиатека',type:'videos',fav:true,parentId:null,open:false,comments:[]},
+      {id:'pg-notes',icon:'📝',name:'Заметки',type:'notes',fav:false,parentId:null,open:false,content:'',comments:[],blocks:[]},
+      {id:'pg-board1',icon:'🗺',name:'Доска идей',type:'board',fav:false,parentId:null,open:false,comments:[],cards:[],arrows:[]},
+      {id:'pg-videos',icon:'🎬',name:'Медиатека',type:'videos',fav:false,parentId:null,open:false,comments:[]},
     ],
-    rows:[
-      {id:'r1',icon:'🎵',name:'Инста Муз',status:'process',type:'constant',deadline:'',desc:'Музыкальный аккаунт. Каверы русских песен.',notes:'',comments:[{id:'c1',author:'Али',text:'Записать кавер Земфиры в марте',date:'09.03.2026'}],subs:[{id:'s1',text:'Набрать 1000 подписчиков',done:false,deadline:'2026-03-14'},{id:'s2',text:'Провести анализ конкурентов',done:false,deadline:'2026-02-13'}],open:false},
-      {id:'r2',icon:'🎬',name:'Инста Видео',status:'process',type:'constant',deadline:'',desc:'Экспертный контент про видеографию.',notes:'Reel каждую неделю',comments:[{id:'c1',author:'Али',text:'Снять Reel про Sony FX30',date:'09.03.2026'},{id:'c2',author:'Али',text:'Написать SEO описание',date:'08.03.2026'},{id:'c3',author:'Али',text:'Добавить субтитры',date:'07.03.2026'}],subs:[{id:'s1',text:'Набрать 1000 просмотров',done:false,deadline:'2026-03-14'},{id:'s2',text:'Провести анализ',done:false,deadline:'2026-02-13'}],open:false},
-      {id:'r3',icon:'▶️',name:'Ютуб видео',status:'process',type:'constant',deadline:'',desc:'YouTube канал по видеографии.',notes:'',comments:[{id:'c1',author:'Али',text:'Скрипт урока про экспозицию',date:'09.03.2026'}],subs:[],open:false},
-      {id:'r4',icon:'🎓',name:'Курс видеограф',status:'process',type:'project',deadline:'2025-06-30',desc:'12 модулей, 72 урока.',notes:'Модуль 1 готов',comments:[],subs:[{id:'s1',text:'Модуль 2 — Экспозиция',done:false,deadline:'2026-03-20'},{id:'s2',text:'Лендинг курса',done:false,deadline:'2026-04-01'},{id:'s3',text:'Запуск предпродаж',done:false,deadline:'2026-04-15'}],open:false},
-      {id:'r5',icon:'📖',name:'Книга «Проклятие»',status:'process',type:'project',deadline:'',desc:'Фэнтезийный роман. 43+ страниц.',notes:'',comments:[],subs:[{id:'s1',text:'Написать главу 5',done:false,deadline:''},{id:'s2',text:'Расшифровать стр. 44–50',done:false,deadline:''}],open:false},
-      {id:'r6',icon:'⭐',name:'НОВАЯ ЗВЕЗДА',status:'process',type:'constant',deadline:'',desc:'Музыкальный проект.',notes:'',comments:[],subs:[],open:false},
-      {id:'r7',icon:'👗',name:'Секта',status:'notstart',type:'constant',deadline:'',desc:'Бренд одежды SEKTA.',notes:'',comments:[],subs:[],open:false},
-      {id:'r8',icon:'🏠',name:'Личные',status:'notstart',type:'constant',deadline:'',desc:'Личные задачи и дела.',notes:'',comments:[],subs:[],open:false},
-    ],
+    rows:[],
     events:[],calM:new Date().getMonth(),calY:new Date().getFullYear(),calView:'month',settings:{},
     curPage:'pg-planner-full',curView:'table',
-    plannerFull:{tab:'weekdays',wdChecks:{},weChecks:{},wkData:{},mtChecks:{},hChecks:{},ymChecks:{},ypChecks:{},ytData:{},fyChecks:{}},
-    finance:{tab:'dashboard',
-      inc:{'inc1-0':160000,'inc1-1':160000,'inc1-2':200000,'inc3-0':40000,'inc3-1':40000,'inc3-2':60000},
-      exp:{'exp1-0':70000,'exp1-1':70000,'exp1-2':66000,'exp2-0':15000,'exp2-1':15000,'exp2-2':14000,'exp3-0':20000,'exp3-1':20000,'exp3-2':3000,'exp5-0':5000,'exp5-1':5000},
-      log:[
-        {id:'el1',date:'07.01',cat:'🏠 Аренда',amount:70000,type:'Необходимое',method:'Карта',note:'Квартира'},
-        {id:'el2',date:'22.01',cat:'💳 Кредит',amount:20000,type:'Необходимое',method:'Карта',note:'Яндекс'},
-        {id:'el3',date:'27.01',cat:'📱 Подписки',amount:2500,type:'Необходимое',method:'Карта',note:'МТС+Облако'},
-        {id:'el4',date:'07.03',cat:'🏠 Аренда',amount:63600,type:'Необходимое',method:'Карта',note:'Квартира март'},
-        {id:'el5',date:'07.03',cat:'🍽 Питание',amount:3000,type:'Желаемое',method:'Карта',note:'Кафе с Анной'},
-      ],
-      sav:{},cs:{},r5inc:200000,r5f:{}},
+    plannerFull:{tab:'weekdays',wd:{},we:{},wk:{},mt:{},hb:{},ym:{},yp:{},yt:{},fy:{},miss:''},
+    finance:{tab:'dashboard',inc:{},exp:{},log:[],sav:{},cs:{},r5inc:0,r5f:{}},
   };
 }
 
@@ -1596,202 +1536,59 @@ function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'
 const MN_SHORT=['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
 const MN_FULL=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 
-const WD_ROWS=[
-  {id:'w01',t:'05:00',b:'😴 Подъём',task:'Встать, стакан воды, план на день'},
-  {id:'w02',t:'05:10',b:'🏃 Спорт',task:'Бег / тренировка — без телефона'},
-  {id:'w03',t:'05:40',b:'🏃 Спорт',task:'Растяжка / заминка после бега'},
-  {id:'w04',t:'06:00',b:'🏃 Спорт',task:'Душ'},
-  {id:'w05',t:'06:30',b:'🎬 Курс — Блок 1',task:'Написать текст урока / структуру'},
-  {id:'w06',t:'07:00',b:'🎬 Курс — Блок 1',task:'Записать голос / видео к уроку / монтаж'},
-  {id:'w07',t:'07:30',b:'🎬 Курс — Блок 2',task:'PDF-материал / задание / проверка урока'},
-  {id:'w08',t:'08:00',b:'📚 Чтение',task:'Книга по профессии / бизнесу / саморазвитию'},
-  {id:'w09',t:'08:30',b:'🍽 Завтрак',task:'Каша, фрукты'},
-  {id:'w10',t:'09:00',b:'🚌 Дорога',task:'Читать / подкаст / аудиокнига'},
-  {id:'w11',t:'09:30',b:'🚌 Дорога',task:'Набросать 1 идею для Reels / поста (голосом)'},
-  {id:'w12',t:'09:30',b:'💼 Работа',task:'Рабочие задачи (основная занятость)'},
-  {id:'w13',t:'10:30',b:'💼 Работа + Контент',task:'Набросать раскадровку для Reels или YouTube'},
-  {id:'w14',t:'12:00',b:'🍽 Обед',task:'Обед. Смотреть референсы / тренды видеографии'},
-  {id:'w15',t:'12:30',b:'💡 Идеи',task:'Записать 2–3 идеи для контента (заметки/голос)'},
-  {id:'w16',t:'13:00',b:'💼 Работа',task:'Рабочие задачи'},
-  {id:'w17',t:'14:00',b:'💼 Работа + Контент',task:'Написать текст поста / сценарий Reels'},
-  {id:'w18',t:'15:30',b:'💼 Работа',task:'Рабочие задачи'},
-  {id:'w19',t:'17:00',b:'💼 Работа + Контент',task:'Раскадровка следующего видео / YouTube-план'},
-  {id:'w20',t:'17:30',b:'💼 Работа',task:'Завершить рабочие дела, подготовка к выходу'},
-  {id:'w21',t:'18:00',b:'🚌 Дорога домой',task:'Читать / аудиокнига / подкаст'},
-  {id:'w22',t:'18:00',b:'🚌 Дорога домой',task:'Ответить на комментарии / DM в Instagram'},
-  {id:'w23',t:'18:30',b:'🌆 Вечер',task:'Ужин + восстановление'},
-  {id:'w24',t:'19:00',b:'📱 Instagram',task:'Опубликовать запланированный пост / Stories'},
-  {id:'w25',t:'19:15',b:'📱 Instagram',task:'15 мин активность: лайки, ответы, DM'},
-  {id:'w26',t:'19:30',b:'📖 Свободное время',task:'Чтение / отдых / семья'},
-  {id:'w27',t:'21:00',b:'🌙 Подготовка к сну',task:'Без экранов. Записать итоги дня (3 строки)'},
-  {id:'w28',t:'22:00',b:'😴 Сон',task:'Отбой 💪'},
-];
-const WE_ROWS=[
-  {id:'e01',t:'07:00',b:'😴 Подъём',task:'Встать, вода, план выходного дня'},
-  {id:'e02',t:'07:30',b:'🏃 Спорт',task:'Тренировка / бег (можно дольше — выходной!)'},
-  {id:'e03',t:'07:30',b:'🏃 Спорт',task:'Душ + плотный завтрак'},
-  {id:'e04',t:'08:00',b:'📚 Чтение',task:'Чтение книги 45–60 мин'},
-  {id:'e05',t:'08:30',b:'📋 Подготовка',task:'Собрать оборудование, зарядить батарейки/карты'},
-  {id:'e06',t:'08:30',b:'📋 Подготовка',task:'Пересмотреть раскадровки из заметок за неделю'},
-  {id:'e07',t:'09:00',b:'🎥 Съёмка СБ',task:'Снять Reels #1 (идея из раскадровки)'},
-  {id:'e08',t:'09:45',b:'🎥 Съёмка СБ',task:'Снять Reels #2 / YouTube-блок / урок'},
-  {id:'e09',t:'10:45',b:'🎥 Съёмка СБ',task:'Снять Stories / закулисье / b-roll'},
-  {id:'e10',t:'11:30',b:'🎥 Съёмка СБ',task:'Проверить материал, переснять брак'},
-  {id:'e11',t:'12:00',b:'🍽 Обед',task:'Обед + лёгкий отдых'},
-  {id:'e12',t:'13:00',b:'✂️ Монтаж СБ',task:'Черновой монтаж Reels #1'},
-  {id:'e13',t:'14:00',b:'✂️ Монтаж СБ',task:'Черновой монтаж Reels #2'},
-  {id:'e14',t:'15:00',b:'✂️ Монтаж ВС',task:'Финальный монтаж + субтитры + цвет'},
-  {id:'e15',t:'16:30',b:'✂️ Монтаж ВС',task:'Монтаж видео для курса (если есть)'},
-  {id:'e16',t:'17:30',b:'📱 Публикация',task:'Загрузить Reels + посты на неделю (SMMplanner)'},
-  {id:'e17',t:'18:00',b:'📋 Контент-план',task:'Составить контент-план на следующую неделю'},
-  {id:'e18',t:'21:30',b:'🎵 Ресторан',task:'Петь живьём 🎤'},
-  {id:'e19',t:'22:30',b:'🚌 Дорога домой',task:'Подкасты / аудиокнига'},
-  {id:'e20',t:'23:30',b:'😴 Сон',task:'Отбой 💪'},
-];
-const WK_METRICS=[
-  {id:'wk1',cat:'🎬 Курс',name:'Уроков написано/записано (шт)',goal:'2–3/нед'},
-  {id:'wk2',cat:'🎬 Курс',name:'Уроков смонтировано (шт)',goal:'2–3/нед'},
-  {id:'wk3',cat:'🎬 Курс',name:'PDF / материалы созданы (шт)',goal:'1–2/нед'},
-  {id:'wk4',cat:'🎬 Курс',name:'% готовности курса',goal:'→ 100% к запуску'},
-  {id:'wk5',cat:'📱 Инста Видео',name:'Постов / Reels опубликовано',goal:'3–4/нед'},
-  {id:'wk6',cat:'📱 Инста Видео',name:'Stories (дней активно из 7)',goal:'5–7 дней'},
-  {id:'wk7',cat:'📱 Инста Видео',name:'Прирост подписчиков (шт)',goal:'+50–100/нед'},
-  {id:'wk8',cat:'📱 Инста Видео',name:'DM / запросов о курсе',goal:'> 5/нед'},
-  {id:'wk9',cat:'📱 Инста Муз',name:'Постов / Reels опубликовано',goal:'3–4/нед'},
-  {id:'wk10',cat:'📱 Инста Муз',name:'Прирост подписчиков (шт)',goal:'+50–100/нед'},
-  {id:'wk11',cat:'🎬 Съёмка',name:'Reels снято (шт)',goal:'2–3/нед'},
-  {id:'wk12',cat:'🎬 Съёмка',name:'Видео для курса снято (шт)',goal:'1–2/нед'},
-  {id:'wk13',cat:'💰 Продажи',name:'Продаж курса (шт)',goal:'→ после запуска'},
-];
-const MT_TASKS=[
-  {id:'mt1',cat:'🎬 Курс',task:'Написать уроки (план: 10 шт)'},
-  {id:'mt2',cat:'🎬 Курс',task:'Записать видеоуроки (план: 3 шт)'},
-  {id:'mt3',cat:'🎬 Курс',task:'Смонтировать уроки'},
-  {id:'mt4',cat:'🎬 Курс',task:'Создать PDF-материалы к урокам'},
-  {id:'mt5',cat:'🎬 Курс',task:'Загрузить уроки на платформу'},
-  {id:'mt6',cat:'📱 Instagram',task:'Опубликовать ___ постов / Reels'},
-  {id:'mt7',cat:'📱 Instagram',task:'Stories каждый день (5–7 дней/нед)'},
-  {id:'mt8',cat:'📱 Instagram',task:'Снять ___ Reels в выходные'},
-  {id:'mt9',cat:'📱 Instagram',task:'Прирост подписчиков: цель ___ чел'},
-  {id:'mt10',cat:'📱 Instagram',task:'Коллаборация с другим экспертом'},
-  {id:'mt11',cat:'💰 Продажи',task:'Прогрев: серия Stories про курс'},
-  {id:'mt12',cat:'💰 Продажи',task:'Написать продающий пост'},
-  {id:'mt13',cat:'💰 Продажи',task:'Открыть продажи / собрать заявки'},
-  {id:'mt14',cat:'💰 Продажи',task:'Ответить на все DM про курс'},
-  {id:'mt15',cat:'📚 Развитие',task:'Прочитать ___ страниц / книгу'},
-  {id:'mt16',cat:'📚 Развитие',task:'Изучить 1 новую технику съёмки/монтажа'},
-  {id:'mt17',cat:'📚 Развитие',task:'Посмотреть 5 каналов конкурентов (анализ)'},
-  {id:'mt18',cat:'⚙️ Система',task:'Составить контент-план на следующий месяц'},
-  {id:'mt19',cat:'⚙️ Система',task:'Подвести итоги: метрики / выполнение задач'},
-  {id:'mt20',cat:'⚙️ Система',task:'Планирование бюджета (оборудование / реклама)'},
-];
-const HABITS=[
-  {id:'hb1',cat:'💪',name:'⏰ Подъём в 05:00',goal:'31'},
-  {id:'hb2',cat:'💪',name:'🏃 Тренировка / бег',goal:'26'},
-  {id:'hb3',cat:'📚',name:'📚 Чтение (утро + дорога)',goal:'31'},
-  {id:'hb4',cat:'🎬',name:'🎬 Работа над курсом (2 ч)',goal:'22'},
-  {id:'hb5',cat:'💡',name:'✍️ Идеи записаны в заметки',goal:'31'},
-  {id:'hb6',cat:'📱',name:'📱 Instagram Stories вышли',goal:'25'},
-  {id:'hb7',cat:'📱',name:'📱 Пост / Reels опубликован',goal:'12'},
-  {id:'hb8',cat:'📱',name:'💬 Ответы на DM / комменты',goal:'31'},
-  {id:'hb9',cat:'🎥',name:'🎥 Съёмка (только Сб)',goal:'5'},
-  {id:'hb10',cat:'✂️',name:'✂️ Монтаж (только Вс)',goal:'5'},
-  {id:'hb11',cat:'💪',name:'🌙 Отбой до 22:00',goal:'31'},
-  {id:'hb12',cat:'⚙️',name:'📝 Записаны итоги дня',goal:'31'},
-];
-const YM_GOALS=[
-  {id:'ym1',cat:'🎬 Курс',task:'Завершить написание всех уроков'},
-  {id:'ym2',cat:'🎬 Курс',task:'Записать и смонтировать все видеоуроки'},
-  {id:'ym3',cat:'🎬 Курс',task:'Создать все PDF и задания'},
-  {id:'ym4',cat:'🎬 Курс',task:'Запустить Поток #1 (первые продажи)'},
-  {id:'ym5',cat:'🎬 Курс',task:'Запустить Поток #2'},
-  {id:'ym6',cat:'📱 Instagram',task:'Достичь 7 000 подписчиков'},
-  {id:'ym7',cat:'📱 Instagram',task:'Достичь 10 000 подписчиков'},
-  {id:'ym8',cat:'📱 Instagram',task:'Достичь 15 000 подписчиков'},
-  {id:'ym9',cat:'📱 Instagram',task:'Запустить регулярные Reels (3–4/нед)'},
-  {id:'ym10',cat:'🎬 YouTube',task:'Создать YouTube-канал'},
-  {id:'ym11',cat:'🎬 YouTube',task:'Опубликовать первые 10 видео'},
-  {id:'ym12',cat:'🎬 YouTube',task:'Набрать 1 000 подписчиков'},
-  {id:'ym13',cat:'💰 Продажи',task:'Первые 10 продаж курса'},
-  {id:'ym14',cat:'💰 Продажи',task:'Первые 50 продаж курса'},
-  {id:'ym15',cat:'💰 Продажи',task:'Настроить автоворонку продаж'},
-  {id:'ym16',cat:'📚 Развитие',task:'Прочитать 12 книг (1 в месяц)'},
-  {id:'ym17',cat:'📚 Развитие',task:'Пройти 1 курс по монтажу / маркетингу'},
-];
-const YT_METRICS=[
-  {id:'yt1',cat:'📱 Instagram',name:'Подписчики (шт)',goal:'15 000',def:[500,750]},
-  {id:'yt2',cat:'📱 Instagram',name:'Охват Reels (ср./пост)',goal:'5 000',def:[150,100]},
-  {id:'yt3',cat:'📱 Instagram',name:'Постов/Reels в мес',goal:'≥ 16',def:[31,26]},
-  {id:'yt4',cat:'📱 Instagram',name:'Продажи через Instagram',goal:'50+ шт',def:[0,0]},
-  {id:'yt5',cat:'🎬 Курс',name:'Уроков в курсе (накоп.)',goal:'30+',def:[0,0]},
-  {id:'yt6',cat:'🎬 Курс',name:'Продаж курса за месяц',goal:'20+',def:[0,0]},
-  {id:'yt7',cat:'🎬 YouTube',name:'Подписчиков YouTube',goal:'1 000',def:[0,250]},
-  {id:'yt8',cat:'🎬 YouTube',name:'Видео на YouTube (накоп.)',goal:'20+',def:[0,4]},
-  {id:'yt9',cat:'💪 Личное',name:'Книг прочитано (накоп.)',goal:'12',def:[0,0]},
-  {id:'yt10',cat:'💪 Личное',name:'Тренировок в месяц',goal:'26+',def:[0,0]},
-];
-const FY_GOALS=[
-  {cat:'📱 Instagram',name:'Подписчики',vals:['15К','30К','60К','100К','150К+']},
-  {cat:'📱 Instagram',name:'Ежемесячный охват',vals:['100К','300К','700К','1.5М','3М+']},
-  {cat:'🎬 Курс',name:'Потоков проведено',vals:['2','5','8','12','16+']},
-  {cat:'🎬 Курс',name:'Всего учеников',vals:['30','150','400','800','2000+']},
-  {cat:'🎬 YouTube',name:'Подписчиков',vals:['1К','10К','30К','70К','150К+']},
-  {cat:'💰 Доход',name:'Ежемесячный доход (руб)',vals:['50К','150К','300К','600К','1М+']},
-  {cat:'💰 Доход',name:'Пассивный доход %',vals:['10%','30%','50%','70%','90%']},
-  {cat:'⚙️ Система',name:'Команда (чел)',vals:['0','1','2','3','5+']},
-  {cat:'📚 Развитие',name:'Книг прочитано',vals:['12','24','36','48','60+']},
-  {cat:'🌍 Свобода',name:'Рабочих часов/нед',vals:['50','40','30','20','15']},
-];
-const QP=[
-  {q:'Q1 (Янв–Март)',theme:'🏗 СОЗДАНИЕ курса',tasks:['Завершить написание всех уроков курса','Записать видеоуроки (снять + смонтировать)','Создать PDF-материалы к каждому уроку','Подключить платформу продаж (Getcourse/Boosty)','Написать продающую страницу курса','Вести Instagram 3–4 раза в неделю','Набрать 6 000 подписчиков']},
-  {q:'Q2 (Апр–Июнь)',theme:'🚀 ЗАПУСК первых продаж',tasks:['Провести прогрев 2–3 недели','Открыть продажи Потока #1','Собрать обратную связь от учеников','Доработать курс по фидбэку','Создать мини-продукт (чек-лист / гайд)','Запустить серию обучающих Reels','Достичь 8 000 подписчиков']},
-  {q:'Q3 (Июль–Сент)',theme:'📈 РОСТ аудитории',tasks:['Открыть Поток #2','Запустить коллаборации с экспертами','Систематизировать контент-план','Запустить YouTube-канал','Создать автоворонку в Stories','Достичь 12 000 подписчиков']},
-  {q:'Q4 (Окт–Дек)',theme:'💰 МАСШТАБ и автоматизация',tasks:['Открыть Поток #3','Выпустить курс v2.0','Настроить полную автоворонку продаж','Провести прямой эфир / вебинар','Подвести итоги года и план на 2027','Достичь 15 000 подписчиков']},
-];
+const WD_ROWS=[];
+const WE_ROWS=[];
+const WK_METRICS=[];
+const MT_TASKS=[];
+const HABITS=[];
+const YM_GOALS=[];
+const YT_METRICS=[];
+const FY_GOALS=[];
+const QP=[];
 // Finance
 const INC_SRC=[
-  {id:'i1',name:'🏢 Зарплата',plan:200000},
-  {id:'i2',name:'🎥 Съёмки на заказ',plan:50000},
-  {id:'i3',name:'🎵 Ресторан (пение)',plan:60000},
-  {id:'i4',name:'🎓 Продажи курса',plan:100000},
+  {id:'i1',name:'💰 Зарплата / доход',plan:0},
+  {id:'i2',name:'🎥 Доп. доход 1',plan:0},
+  {id:'i3',name:'🎵 Доп. доход 2',plan:0},
+  {id:'i4',name:'🎓 Продажи / проект',plan:0},
   {id:'i5',name:'💻 Фриланс / прочее',plan:0},
 ];
 const EXP_CAT=[
-  {id:'x1',name:'🏠 Аренда жилья',plan:63600,type:'Необходимое'},
-  {id:'x2',name:'💳 Кредит',plan:20000,type:'Необходимое'},
-  {id:'x3',name:'🍽 Питание',plan:15000,type:'Необходимое'},
+  {id:'x1',name:'🏠 Аренда жилья',plan:0,type:'Необходимое'},
+  {id:'x2',name:'💳 Кредит',plan:0,type:'Необходимое'},
+  {id:'x3',name:'🍽 Питание',plan:0,type:'Необходимое'},
   {id:'x4',name:'🏋 Зал',plan:0,type:'Необходимое'},
-  {id:'x5',name:'📱 Подписки/сервисы',plan:5000,type:'Желаемое'},
+  {id:'x5',name:'📱 Подписки/сервисы',plan:0,type:'Желаемое'},
   {id:'x6',name:'📣 Реклама/продвижение',plan:0,type:'Инвестиция'},
   {id:'x7',name:'🎬 Оборудование',plan:0,type:'Инвестиция'},
   {id:'x8',name:'📚 Обучение/книги',plan:0,type:'Инвестиция'},
-  {id:'x9',name:'🚗 Транспорт',plan:3000,type:'Необходимое'},
-  {id:'x10',name:'💊 Здоровье',plan:1500,type:'Необходимое'},
-  {id:'x11',name:'👗 Одежда/прочее',plan:2000,type:'Желаемое'},
-  {id:'x12',name:'🎁 Развлечения/кафе',plan:3000,type:'Желаемое'},
-  {id:'x13',name:'🚨 Непредвиденные',plan:2000,type:'Необходимое'},
+  {id:'x9',name:'🚗 Транспорт',plan:0,type:'Необходимое'},
+  {id:'x10',name:'💊 Здоровье',plan:0,type:'Необходимое'},
+  {id:'x11',name:'👗 Одежда/прочее',plan:0,type:'Желаемое'},
+  {id:'x12',name:'🎁 Развлечения/кафе',plan:0,type:'Желаемое'},
+  {id:'x13',name:'🚨 Непредвиденные',plan:0,type:'Необходимое'},
 ];
 const SAV_FUNDS=[
-  {id:'s1',name:'🛡 Подушка безопасности',goal:600000,monthly:20000},
-  {id:'s2',name:'🎬 Фонд оборудования',goal:50000,monthly:5000},
-  {id:'s3',name:'📈 Инвестиции/депозит',goal:60000,monthly:5000},
-  {id:'s4',name:'🎓 Реклама курса',goal:20000,monthly:5000},
-  {id:'s5',name:'🏖 Резерв/путешествие',goal:100000,monthly:5000},
+  {id:'s1',name:'🛡 Подушка безопасности',goal:0,monthly:0},
+  {id:'s2',name:'🎬 Фонд оборудования',goal:0,monthly:0},
+  {id:'s3',name:'📈 Инвестиции/депозит',goal:0,monthly:0},
+  {id:'s4',name:'🎓 Реклама курса',goal:0,monthly:0},
+  {id:'s5',name:'🏖 Резерв/путешествие',goal:0,monthly:0},
 ];
 const CS_STREAMS=[
-  {id:'c1',name:'Поток #1',date:'Апр 2026',price:2500,plan:30,exp:{rec:3000,mont:2000,serv:500,des:1500,oth:500}},
-  {id:'c2',name:'Поток #2',date:'Июл 2026',price:5000,plan:40,exp:{rec:3000,mont:1000,serv:500,des:0,oth:500}},
-  {id:'c3',name:'Поток #3',date:'Окт 2026',price:4500,plan:50,exp:{rec:3000,mont:1000,serv:500,des:0,oth:500}},
+  {id:'c1',name:'Запуск #1',date:'',price:0,plan:0,exp:{rec:3000,mont:2000,serv:500,des:1500,oth:500}},
+  {id:'c2',name:'Запуск #2',date:'',price:0,plan:0,exp:{rec:3000,mont:1000,serv:500,des:0,oth:500}},
+  {id:'c3',name:'Запуск #3',date:'',price:0,plan:0,exp:{rec:3000,mont:1000,serv:500,des:0,oth:500}},
 ];
 const R53_CATS=[
-  {id:'r1',name:'🏠 Аренда жилья',cat:'Необходимое',plan:70000},
-  {id:'r2',name:'💳 Кредит',cat:'Необходимое',plan:20000},
-  {id:'r3',name:'🍽 Питание',cat:'Необходимое',plan:20000},
-  {id:'r4',name:'🚗 Транспорт',cat:'Необходимое',plan:3000},
-  {id:'r5',name:'📱 Подписки',cat:'Желаемое',plan:5000},
+  {id:'r1',name:'🏠 Аренда жилья',cat:'Необходимое',plan:0},
+  {id:'r2',name:'💳 Кредит',cat:'Необходимое',plan:0},
+  {id:'r3',name:'🍽 Питание',cat:'Необходимое',plan:0},
+  {id:'r4',name:'🚗 Транспорт',cat:'Необходимое',plan:0},
+  {id:'r5',name:'📱 Подписки',cat:'Желаемое',plan:0},
   {id:'r6',name:'🎁 Развлечения',cat:'Желаемое',plan:0},
   {id:'r7',name:'📣 Реклама (курс)',cat:'Инвестиция',plan:0},
-  {id:'r8',name:'🛡 Подушка безопасности',cat:'Накопления',plan:40000},
+  {id:'r8',name:'🛡 Подушка безопасности',cat:'Накопления',plan:0},
   {id:'r9',name:'🎬 Оборудование (фонд)',cat:'Накопления',plan:0},
   {id:'r10',name:'📈 Инвестиции',cat:'Накопления',plan:0},
 ];
@@ -1954,21 +1751,35 @@ function ptWeekend(){
 }
 
 function ptWeekly(){
-  const d=getPF().wk||{}; let lcat='';
+  const pf=getPF(); const d=pf.wk||{};
+  const customMetrics=pf.wk_rows||[];
+  const allMetrics=[...WK_METRICS,...customMetrics];
   return`<div class="sec-lbl">Заполняй каждое воскресенье вечером — 5 минут на итоги недели</div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
     <th style="min-width:260px">Показатель</th>
     ${[1,2,3,4,5].map(w=>`<th style="width:72px;text-align:center">Нед ${w}</th>`).join('')}
-    <th style="min-width:100px">Цель / Норма</th>
+    <th style="min-width:100px">Цель / Норма</th><th style="width:32px"></th>
   </tr></thead><tbody>
-  ${WK_METRICS.map(m=>{const sep=m.cat!==lcat;lcat=m.cat;
-    return(sep?`<tr><td colspan="7" style="padding:0"><div style="padding:10px 8px 2px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em">${m.cat}</div></td></tr>`:'')+
-    `<tr><td><div class="cc" style="font-size:12.5px">${m.name}</div></td>
+  ${allMetrics.length===0?`<tr><td colspan="8">${`<div style="padding:40px 20px;text-align:center;color:rgba(255,255,255,.2)"><div style="font-size:28px;margin-bottom:8px">✏️</div><div style="font-size:13px">Список пустой — нажми кнопку ниже чтобы добавить</div></div>`}</td></tr>`
+  :allMetrics.map(m=>{const isCustom=!!m._custom;return`<tr>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${m.name}" oninput="pfWkTxt('${m.id}','name',this.value)"></div></td>
     ${[1,2,3,4,5].map(w=>`<td><div class="cc" style="justify-content:center"><input type="number" value="${d[m.id+'-'+w]||''}" placeholder="0" oninput="pfNum('wk','${m.id}-${w}',this.value)" style="width:58px;text-align:center;background:none;border:none;color:rgba(255,255,255,.72);font-family:inherit;font-size:12.5px;outline:none"></div></td>`).join('')}
-    <td><div class="cc" style="font-size:11px;color:rgba(255,255,255,.35)">${m.goal}</div></td></tr>`;
-  }).join('')}
-  </tbody></table></div>`;
+    <td><div class="cc"><input class="edtxt" style="font-size:11px;color:rgba(255,255,255,.35)" value="${m.goal||''}" placeholder="норма" oninput="pfWkTxt('${m.id}','goal',this.value)"></div></td>
+    <td><button class="row-del-btn" onclick="delWkRow('${m.id}')">×</button></td>
+  </tr>`;}).join('')}
+  </tbody></table>
+  <div class="add-row-planner" onclick="addWkRow()">+ Добавить показатель</div>
+  </div>`;
 }
+function pfWkTxt(id,field,v){const pf=getPF();if(!pf.wk_rows)pf.wk_rows=[];const r=pf.wk_rows.find(x=>x.id===id);if(r){r[field]=v;save();}}
+function addWkRow(){
+  const name=prompt('Название показателя:','');if(!name)return;
+  const goal=prompt('Цель / норма (например 3/нед):','');
+  const pf=getPF();if(!pf.wk_rows)pf.wk_rows=[];
+  pf.wk_rows.push({id:'wk'+Date.now(),name,goal:goal||'',_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('weekly');
+}
+function delWkRow(id){const pf=getPF();if(!pf.wk_rows)return;pf.wk_rows=pf.wk_rows.filter(r=>r.id!==id);save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('weekly');}
 
 function ptMonthly(){
   const pf=getPF(); const d=pf.mt||{}; const tx=pf.mt_txt||{};
@@ -2007,100 +1818,208 @@ function ptMonthly(){
 }
 
 function ptHabits(){
-  const d=getPF().hb||{}; const days=Array.from({length:31},(_,i)=>i+1);
+  const pf=getPF(); const d=pf.hb||{}; const days=Array.from({length:31},(_,i)=>i+1);
+  const customHabits=pf.hb_rows||[];
+  const allHabits=[...HABITS,...customHabits];
   return`<div class="sec-lbl">Кликни на ячейку — ставь ✓ каждый день</div>
   <div style="overflow-x:auto"><table class="htbl"><thead><tr>
-    <th class="hn">Привычка / Задача</th>
+    <th class="hn" style="min-width:180px">Привычка / Задача</th>
     ${days.map(n=>`<th>${n}</th>`).join('')}
-    <th style="min-width:38px">✅</th><th style="min-width:44px">%</th><th style="min-width:52px">Норма</th>
+    <th style="min-width:38px">✅</th><th style="min-width:44px">%</th><th style="min-width:52px">Норма</th><th style="width:28px"></th>
   </tr></thead><tbody>
-  ${HABITS.map(h=>{const dc=days.map(n=>!!d[h.id+'-'+n]);const tot=dc.filter(Boolean).length;const p=Math.round(tot/31*100);return`<tr>
-    <td class="hn">${h.name}</td>
+  ${allHabits.length===0?`<tr><td colspan="37"><div style="padding:40px 20px;text-align:center;color:rgba(255,255,255,.2)"><div style="font-size:28px;margin-bottom:8px">✏️</div><div style="font-size:13px">Нет привычек — нажми кнопку ниже чтобы добавить</div></div></td></tr>`
+  :allHabits.map(h=>{const dc=days.map(n=>!!d[h.id+'-'+n]);const tot=dc.filter(Boolean).length;const p=Math.round(tot/31*100);const isCustom=!!h._custom;return`<tr>
+    <td class="hn"><input class="edtxt" value="${h.name}" style="width:170px" oninput="pfHbTxt('${h.id}','name',this.value)"></td>
     ${days.map((n,di)=>`<td class="hck${dc[di]?' on':''}" onclick="tgHabit('${h.id}',${n})"></td>`).join('')}
     <td class="hstat">${tot}</td>
     <td class="hstat" style="color:${p>=80?'#4db885':p>=50?'#e9a84c':'rgba(255,255,255,.4)'}">${p}%</td>
-    <td class="hstat" style="font-size:10px;color:rgba(255,255,255,.3)">${h.goal}</td>
+    <td class="hstat"><input class="edtxt" value="${h.goal||''}" style="width:44px;font-size:10px;color:rgba(255,255,255,.3)" placeholder="норма" oninput="pfHbTxt('${h.id}','goal',this.value)"></td>
+    <td class="hstat">${isCustom?`<button class="row-del-btn" style="color:rgba(255,80,80,.3)" onclick="delHabit('${h.id}')">×</button>`:''}</td>
   </tr>`;}).join('')}
-  </tbody></table></div>`;
+  </tbody></table>
+  <div class="add-row-planner" onclick="addHabit()">+ Добавить привычку</div>
+  </div>`;
 }
 function tgHabit(hid,day){pfChk('hb',hid+'-'+day,!getPF().hb[hid+'-'+day]);const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('habits');}
+function pfHbTxt(id,field,v){const pf=getPF();const r=(pf.hb_rows||[]).find(x=>x.id===id);if(r){r[field]=v;save();}}
+function addHabit(){
+  const name=prompt('Название привычки:','');if(!name)return;
+  const goal=prompt('Норма в месяц (например 26):','');
+  const pf=getPF();if(!pf.hb_rows)pf.hb_rows=[];
+  pf.hb_rows.push({id:'hb'+Date.now(),name,goal:goal||'',_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('habits');
+}
+function delHabit(id){const pf=getPF();if(!pf.hb_rows)return;pf.hb_rows=pf.hb_rows.filter(h=>h.id!==id);save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('habits');}
 
 function ptYearMonth(){
-  const d=getPF().ym||{}; let lcat='';
-  return`<div class="sec-lbl">Цели на 2026 — отмечай выполнение по месяцам</div>
+  const pf=getPF(); const d=pf.ym||{};
+  const customGoals=pf.ym_rows||[];
+  const allGoals=[...YM_GOALS,...customGoals];
+  let lcat='';
+  return`<div class="sec-lbl">Год по месяцам — отмечай выполнение каждого месяца</div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
-    <th style="min-width:100px">Категория</th><th style="min-width:240px">Цель / Задача на год</th>
+    <th style="min-width:110px">Категория</th><th style="min-width:240px">Цель / Задача</th>
     ${MN_SHORT.map(m=>`<th style="width:34px;text-align:center;font-size:10px">${m}</th>`).join('')}
-    <th style="width:46px;text-align:center">✅</th>
+    <th style="width:52px;text-align:center">✅</th>
   </tr></thead><tbody>
-  ${YM_GOALS.map(g=>{const sep=g.cat!==lcat;lcat=g.cat;const mc=MN_SHORT.map((_,mi)=>!!d[g.id+'-'+mi]);const tot=mc.filter(Boolean).length;
+  ${allGoals.length===0?`<tr><td colspan="15"><div style="padding:40px 20px;text-align:center;color:rgba(255,255,255,.2)"><div style="font-size:28px;margin-bottom:8px">✏️</div><div style="font-size:13px">Нет целей — нажми кнопку ниже чтобы добавить</div></div></td></tr>`
+  :allGoals.map(g=>{const sep=g.cat!==lcat;lcat=g.cat;const mc=MN_SHORT.map((_,mi)=>!!d[g.id+'-'+mi]);const tot=mc.filter(Boolean).length;const isCustom=!!g._custom;
     return(sep?`<tr><td colspan="15"><div style="padding:10px 8px 2px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em">${g.cat}</div></td></tr>`:'')+
-    `<tr><td><div class="cc"><span style="font-size:10px;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)">${g.cat}</span></div></td>
-    <td><div class="cc" style="font-size:12.5px">${g.task}</div></td>
+    `<tr><td><div class="cc"><input class="edtxt" style="font-size:10.5px;color:rgba(255,255,255,.4)" value="${g.cat}" oninput="pfYmTxt('${g.id}','cat',this.value)"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${g.task}" oninput="pfYmTxt('${g.id}','task',this.value)"></div></td>
     ${mc.map((v,mi)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('ym','${g.id}-${mi}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:12px;height:12px"></div></td>`).join('')}
-    <td><div class="cc" style="justify-content:center;font-weight:700;font-size:12px;color:${tot>0?'#0a84ff':'rgba(255,255,255,.2)'}">${tot}</div></td>
+    <td><div class="cc" style="justify-content:center;gap:3px;font-weight:700;font-size:12px;color:${tot>0?'#0a84ff':'rgba(255,255,255,.2)'}">${tot}
+    ${isCustom?`<button class="row-del-btn" onclick="delYmRow('${g.id}')">×</button>`:''}
+    </div></td>
   </tr>`;}).join('')}
-  </tbody></table></div>`;
+  </tbody></table>
+  <div class="add-row-planner" onclick="addYmRow()">+ Добавить цель</div>
+  </div>`;
 }
+function pfYmTxt(id,field,v){const pf=getPF();const r=(pf.ym_rows||[]).find(x=>x.id===id);if(r){r[field]=v;save();}}
+function addYmRow(){
+  const cat=prompt('Категория (например 📱 Instagram):','');if(cat===null)return;
+  const task=prompt('Цель / задача:','');if(!task)return;
+  const pf=getPF();if(!pf.ym_rows)pf.ym_rows=[];
+  pf.ym_rows.push({id:'ym'+Date.now(),cat,task,_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearmonth');
+}
+function delYmRow(id){const pf=getPF();if(!pf.ym_rows)return;pf.ym_rows=pf.ym_rows.filter(r=>r.id!==id);save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearmonth');}
 
 function ptYearPlan(){
-  const d=getPF().yp||{};
-  return`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-  ${QP.map(q=>`<div style="background:#222;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px">
-    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">${q.q}</div>
-    <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,.72);margin-bottom:12px">${q.theme}</div>
-    ${q.tasks.map((t,ti)=>{const k=q.q+ti;const v=!!d[k];return`<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)">
-      <input type="checkbox"${v?' checked':''} onchange="pfChk('yp','${k}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px;margin-top:2px;flex-shrink:0">
-      <span style="font-size:12.5px;color:rgba(255,255,255,${v?'.25':'.7'});${v?'text-decoration:line-through':''}">${t}</span>
+  const pf=getPF(); const d=pf.yp||{};
+  const customQP=pf.qp_rows||[];
+  const allQP=[...QP,...customQP];
+  if(allQP.length===0){return`<div style="padding:60px 20px;text-align:center;color:rgba(255,255,255,.2)">
+    <div style="font-size:36px;margin-bottom:12px">📋</div>
+    <div style="font-size:14px;margin-bottom:16px">Годовой план пустой</div>
+    <button onclick="addQPBlock()" style="padding:9px 20px;background:#0a84ff;border:none;border-radius:6px;color:#fff;font-family:inherit;font-size:13px;cursor:pointer">+ Добавить квартал</button>
+  </div>`;}
+  return`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+  ${allQP.map((q,qi)=>{const isCustom=!!q._custom;return`<div style="background:#222;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:14px 16px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <input class="edtxt" style="font-size:11px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em;width:120px" value="${q.q}" oninput="pfQPTxt(${qi},'q',this.value)">
+      ${isCustom?`<button class="row-del-btn" style="margin-left:auto;color:rgba(255,80,80,.3)" onclick="delQPBlock(${qi})">✕</button>`:''}
+    </div>
+    <input class="edtxt" style="font-size:14px;font-weight:700;color:rgba(255,255,255,.72);width:100%;margin-bottom:10px" value="${q.theme}" oninput="pfQPTxt(${qi},'theme',this.value)" placeholder="Тема квартала...">
+    ${(q.tasks||[]).map((t,ti)=>{const k=qi+'-'+ti;const v=!!d[k];return`<div style="display:flex;align-items:flex-start;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <input type="checkbox"${v?' checked':''} onchange="pfChk('yp','${k}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px;margin-top:3px;flex-shrink:0">
+      <input class="edtxt" style="font-size:12.5px;color:rgba(255,255,255,${v?'.25':'.7'});${v?'text-decoration:line-through':''}" value="${t}" oninput="pfQPTaskTxt(${qi},${ti},this.value)">
+      <button class="row-del-btn" onclick="delQPTask(${qi},${ti})">×</button>
     </div>`;}).join('')}
-  </div>`).join('')}
-  </div>`;
+    <div class="add-row-planner" style="font-size:11.5px;padding:4px 8px;border-top:none" onclick="addQPTask(${qi})">+ задача</div>
+  </div>`;}).join('')}
+  </div>
+  <div class="add-row-planner" onclick="addQPBlock()">+ Добавить квартал</div>`;
+}
+function pfQPTxt(qi,field,v){const pf=getPF();const arr=pf.qp_rows||[];if(arr[qi-QP.length]){arr[qi-QP.length][field]=v;pf.qp_rows=arr;save();}}
+function pfQPTaskTxt(qi,ti,v){const pf=getPF();const arr=pf.qp_rows||[];const idx=qi-QP.length;if(arr[idx]){arr[idx].tasks[ti]=v;save();}}
+function addQPTask(qi){
+  const pf=getPF();const arr=pf.qp_rows||[];const idx=qi-QP.length;
+  if(idx>=0&&arr[idx]){arr[idx].tasks.push('Новая задача');pf.qp_rows=arr;save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearplan');}
+}
+function delQPTask(qi,ti){
+  const pf=getPF();const arr=pf.qp_rows||[];const idx=qi-QP.length;
+  if(idx>=0&&arr[idx]){arr[idx].tasks.splice(ti,1);pf.qp_rows=arr;save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearplan');}
+}
+function addQPBlock(){
+  const pf=getPF();if(!pf.qp_rows)pf.qp_rows=[];
+  pf.qp_rows.push({q:'Квартал',theme:'🎯 Тема',tasks:['Первая задача'],_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearplan');
+}
+function delQPBlock(qi){
+  const pf=getPF();const arr=pf.qp_rows||[];const idx=qi-QP.length;
+  if(idx>=0){arr.splice(idx,1);pf.qp_rows=arr;save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yearplan');}
 }
 
 function ptYearTrack(){
-  const d=getPF().yt||{}; let lcat='';
+  const pf=getPF(); const d=pf.yt||{};
+  const customMetrics=pf.yt_rows||[];
+  const allMetrics=[...YT_METRICS,...customMetrics];
   return`<div class="sec-lbl">Вноси цифры раз в месяц — отслеживай рост за год</div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
-    <th style="min-width:210px">Показатель</th><th style="width:70px">Цель к дек</th>
+    <th style="min-width:200px">Показатель</th><th style="width:80px;text-align:center">Цель к дек</th>
     ${MN_SHORT.map(m=>`<th style="width:50px;text-align:center;font-size:10px">${m}</th>`).join('')}
-    <th style="width:60px;text-align:center">📈 Рост</th>
+    <th style="width:60px;text-align:center">📈 Рост</th><th style="width:28px"></th>
   </tr></thead><tbody>
-  ${YT_METRICS.map(m=>{const sep=m.cat!==lcat;lcat=m.cat;
-    const vals=MN_SHORT.map((_,i)=>{const s=d[m.id+'-'+i];if(s!==undefined)return s;return(i<m.def.length)?m.def[i]:'';});
+  ${allMetrics.length===0?`<tr><td colspan="16"><div style="padding:40px 20px;text-align:center;color:rgba(255,255,255,.2)"><div style="font-size:28px;margin-bottom:8px">📈</div><div style="font-size:13px">Нет показателей — нажми кнопку ниже чтобы добавить</div></div></td></tr>`
+  :allMetrics.map(m=>{const isCustom=!!m._custom;
+    const vals=MN_SHORT.map((_,i)=>{const s=d[m.id+'-'+i];return s!==undefined?s:'';});
     const v0=+(vals[0]||0),vL=+(vals[11]||0);const grow=v0&&vL?'×'+(vL/v0).toFixed(1):'—';
-    return(sep?`<tr><td colspan="15"><div style="padding:10px 8px 2px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em">${m.cat}</div></td></tr>`:'')+
-    `<tr><td><div class="cc" style="font-size:12.5px">${m.name}</div></td>
-    <td><div class="cc" style="justify-content:center;font-size:11.5px;color:rgba(255,255,255,.35)">${m.goal}</div></td>
+    return`<tr>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${m.name}" oninput="pfYtTxt('${m.id}','name',this.value)"></div></td>
+    <td><div class="cc" style="justify-content:center"><input class="edtxt" style="font-size:11.5px;color:rgba(255,255,255,.35);text-align:center;width:70px" value="${m.goal||''}" placeholder="цель" oninput="pfYtTxt('${m.id}','goal',this.value)"></div></td>
     ${vals.map((v,i)=>`<td><div class="cc" style="justify-content:center"><input type="number" value="${v}" placeholder="0" oninput="pfNum('yt','${m.id}-${i}',this.value)" style="width:44px;text-align:center;background:none;border:none;color:rgba(255,255,255,.7);font-family:inherit;font-size:12px;padding:0;outline:none"></div></td>`).join('')}
     <td><div class="cc" style="justify-content:center;font-size:12.5px;font-weight:700;color:#0a84ff">${grow}</div></td>
+    <td><button class="row-del-btn" onclick="delYtRow('${m.id}')">×</button></td>
   </tr>`;}).join('')}
-  </tbody></table></div>`;
+  </tbody></table>
+  <div class="add-row-planner" onclick="addYtRow()">+ Добавить показатель</div>
+  </div>`;
 }
+function pfYtTxt(id,field,v){const pf=getPF();const r=(pf.yt_rows||[]).find(x=>x.id===id);if(r){r[field]=v;save();}}
+function addYtRow(){
+  const name=prompt('Название показателя (например Подписчики Instagram):','');if(!name)return;
+  const goal=prompt('Цель к декабрю:','');
+  const pf=getPF();if(!pf.yt_rows)pf.yt_rows=[];
+  pf.yt_rows.push({id:'yt'+Date.now(),name,goal:goal||'',def:[],_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yeartrack');
+}
+function delYtRow(id){const pf=getPF();if(!pf.yt_rows)return;pf.yt_rows=pf.yt_rows.filter(r=>r.id!==id);save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('yeartrack');}
 
 function ptFiveYear(){
-  const d=getPF().fy||{}; const yrs=[2026,2027,2028,2029,2030];let lcat='';
-  return`<div class="sec-lbl">Большая картина. Пересматривай каждый Новый год.</div>
+  const pf=getPF(); const d=pf.fy||{}; const yrs=[2026,2027,2028,2029,2030];let lcat='';
+  const customGoals=pf.fy_rows||[];
+  const allGoals=[...FY_GOALS,...customGoals];
+  return`<div class="sec-lbl">Большая картина — 5-летний план. Пересматривай каждый Новый год.</div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
-    <th style="min-width:90px">Категория</th><th style="min-width:190px">Цель</th>
-    ${yrs.map(y=>`<th style="width:70px;text-align:center">${y}</th>`).join('')}
+    <th style="min-width:100px">Категория</th><th style="min-width:180px">Цель / Направление</th>
+    ${yrs.map(y=>`<th style="width:74px;text-align:center">${y}</th>`).join('')}
     <th style="width:52px;text-align:center">✅</th>
   </tr></thead><tbody>
-  ${FY_GOALS.map((g,gi)=>{const sep=g.cat!==lcat;lcat=g.cat;const chk=yrs.map((_,yi)=>!!d[gi+'-'+yi]);const tot=chk.filter(Boolean).length;
+  ${allGoals.length===0?`<tr><td colspan="8"><div style="padding:40px 20px;text-align:center;color:rgba(255,255,255,.2)"><div style="font-size:28px;margin-bottom:8px">🌍</div><div style="font-size:13px">Нет целей — нажми кнопку ниже чтобы добавить</div></div></td></tr>`
+  :allGoals.map((g,gi)=>{const sep=g.cat!==lcat;lcat=g.cat;const chk=yrs.map((_,yi)=>!!d[gi+'-'+yi]);const tot=chk.filter(Boolean).length;const isCustom=!!g._custom;
     return(sep?`<tr><td colspan="8"><div style="padding:10px 8px 2px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em">${g.cat}</div></td></tr>`:'')+
     `<tr>
-    <td><div class="cc"><span style="font-size:10px;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4)">${g.cat}</span></div></td>
-    <td><div class="cc" style="font-size:12.5px">${g.name}</div></td>
-    ${g.vals.map((val,yi)=>`<td style="text-align:center"><div class="cc" style="flex-direction:column;align-items:center;gap:3px;height:30px">
-      <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.6)">${val}</span>
+    <td><div class="cc"><input class="edtxt" style="font-size:10.5px;color:rgba(255,255,255,.4)" value="${g.cat}" oninput="pfFyTxt(${gi},'cat',this.value)"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${g.name}" oninput="pfFyTxt(${gi},'name',this.value)"></div></td>
+    ${(g.vals||['','','','','']).map((val,yi)=>`<td style="text-align:center"><div class="cc" style="flex-direction:column;align-items:center;gap:3px;height:36px">
+      <input class="edtxt" style="font-size:11px;font-weight:600;color:rgba(255,255,255,.6);text-align:center;width:65px" value="${val}" placeholder="цель" oninput="pfFyVal(${gi},${yi},this.value)">
       <input type="checkbox"${chk[yi]?' checked':''} onchange="pfChk('fy','${gi}-${yi}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:12px;height:12px">
     </div></td>`).join('')}
-    <td><div class="cc" style="justify-content:center;font-weight:700;color:${tot>0?'#0a84ff':'rgba(255,255,255,.18)'}">${tot}/5</div></td>
+    <td><div class="cc" style="justify-content:center;gap:3px;font-weight:700;color:${tot>0?'#0a84ff':'rgba(255,255,255,.18)'}">${tot}/5
+    ${isCustom?`<button class="row-del-btn" onclick="delFyRow(${gi})">×</button>`:''}
+    </div></td>
   </tr>`;}).join('')}
-  </tbody></table></div>
+  </tbody></table>
+  <div class="add-row-planner" onclick="addFyRow()">+ Добавить цель</div>
+  </div>
   <div class="sec-lbl" style="margin-top:18px">💭 Моя миссия и большая мечта</div>
   <textarea style="width:100%;min-height:80px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;color:rgba(255,255,255,.72);font-family:inherit;font-size:13.5px;padding:12px 14px;outline:none;resize:vertical;line-height:1.7;transition:border-color .1s" onfocus="this.style.borderColor='rgba(10,132,255,.4)'" onblur="this.style.borderColor='rgba(255,255,255,.08)'" placeholder="Зачем всё это? Запиши свою миссию здесь..." oninput="pfMiss(this.value)">${getPF().miss||''}</textarea>`;
 }
+
+function editFinGoal(i,field,v){const fin=getFIN();if(!fin.finGoals)fin.finGoals=[];if(fin.finGoals[i])fin.finGoals[i][field]=field==='goal'?(+v||0):v;save();}
+function delFinGoal(i){const fin=getFIN();if(!fin.finGoals)return;fin.finGoals.splice(i,1);save();switchFT('dashboard');}
+function addFinGoal(){
+  const fin=getFIN();if(!fin.finGoals)fin.finGoals=[];
+  fin.finGoals.push({name:'🎯 Новая цель',goal:100000,cur:0,note:''});
+  save();switchFT('dashboard');
+}
+
 function pfMiss(v){const pf=getPF();pf.miss=v;save();}
+function pfFyTxt(gi,field,v){const pf=getPF();const arr=pf.fy_rows||[];const idx=gi-FY_GOALS.length;if(idx>=0&&arr[idx]){arr[idx][field]=v;save();}}
+function pfFyVal(gi,yi,v){const pf=getPF();const arr=pf.fy_rows||[];const idx=gi-FY_GOALS.length;if(idx>=0&&arr[idx]){arr[idx].vals[yi]=v;save();}}
+function addFyRow(){
+  const cat=prompt('Категория (например 📱 Instagram):','');if(cat===null)return;
+  const name=prompt('Цель / направление:','');if(!name)return;
+  const pf=getPF();if(!pf.fy_rows)pf.fy_rows=[];
+  pf.fy_rows.push({cat,name,vals:['','','','',''],_custom:true});
+  save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('fiveyear');
+}
+function delFyRow(gi){
+  const pf=getPF();const arr=pf.fy_rows||[];const idx=gi-FY_GOALS.length;
+  if(idx>=0){arr.splice(idx,1);pf.fy_rows=arr;save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('fiveyear');}
+}
 
 // ══ FINANCE RENDER ══
 function renderFinanceHTML(){
@@ -2173,16 +2092,18 @@ function ftDashboard(){
   </tbody></table></div>
   <div class="sec-lbl" style="margin-top:18px">🎯 Финансовые цели 2026</div>
   <div style="background:#222;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:4px 16px">
-  ${[{name:'🛡 Подушка безопасности',cur:0,goal:450000,note:'Цель: 3 мес расходов'},
-     {name:'🎓 Заработать на курсе',cur:csTot,goal:200000,note:'2 потока × 100К'},
-     {name:'💰 Стабильный доход/мес',cur:tInc>0?Math.round(tInc/12):0,goal:500000,note:'Зарплата + курс + съёмки'},
-     {name:'🎬 Фонд оборудования',cur:0,goal:50000,note:'Камера / свет / микрофон'},
-  ].map(g=>{const p=Math.min(100,Math.round(g.cur/g.goal*100)||0);return`<div class="fin-goal-item">
-    <div class="fin-goal-hd"><div class="fin-goal-name">${g.name}</div><div class="fin-goal-pct">${p}%</div></div>
+  ${(getFIN().finGoals||[]).map((g,gi)=>{const cur=g.auto==='course'?csTot:g.auto==='income'?(tInc>0?Math.round(tInc/12):0):+(g.cur||0);const goal=+(g.goal||1);const p=Math.min(100,Math.round(cur/goal*100)||0);return`<div class="fin-goal-item" style="position:relative">
+    <div class="fin-goal-hd"><div class="fin-goal-name"><input class="edtxt" style="font-size:13px;font-weight:500" value="${g.name}" oninput="editFinGoal(${gi},'name',this.value)"></div><div class="fin-goal-pct">${p}%</div></div>
     <div class="prog-wrap"><div class="prog-bar ${p>=80?'prog-green':p>=50?'prog-orange':'prog-blue'}" style="width:${p}%"></div></div>
-    <div class="fin-goal-nums">${fmtR(g.cur)} / ${fmtR(g.goal)} · ${g.note}</div>
+    <div class="fin-goal-nums" style="display:flex;gap:8px;align-items:center">
+      <span>${fmtR(cur)} / </span><input class="edtxt" style="font-size:11.5px;width:80px;color:rgba(255,255,255,.4)" type="number" value="${g.goal}" placeholder="цель ₽" oninput="editFinGoal(${gi},'goal',this.value)">
+      <input class="edtxt" style="font-size:11.5px;color:rgba(255,255,255,.25);flex:1" value="${g.note||''}" placeholder="заметка" oninput="editFinGoal(${gi},'note',this.value)">
+      <button onclick="delFinGoal(${gi})" style="background:none;border:none;color:rgba(255,80,80,.3);cursor:pointer;font-size:14px;padding:0 3px;transition:color .15s" onmouseover="this.style.color='#eb5757'" onmouseout="this.style.color='rgba(255,80,80,.3)'">×</button>
+    </div>
   </div>`;}).join('')}
-  </div>`;
+  ${(getFIN().finGoals||[]).length===0?`<div style="padding:20px;text-align:center;color:rgba(255,255,255,.2);font-size:12.5px">Нет целей — нажми кнопку ниже</div>`:''}
+  </div>
+  <div class="add-row-planner" onclick="addFinGoal()">+ Добавить финансовую цель</div>`;
 }
 
 function getPlanInc(id){const fin=getFIN();return+(fin.planInc&&fin.planInc[id]!==undefined?fin.planInc[id]:INC_SRC.find(x=>x.id===id)?.plan||0);}
