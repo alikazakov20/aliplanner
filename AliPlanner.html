@@ -110,7 +110,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-seri
 .callout-ico{font-size:18px;flex-shrink:0;margin-top:1px}
 .block-divider{height:1px;background:rgba(255,255,255,.1);margin:12px 0;border:none;width:100%}
 /* slash menu */
-.slash-menu{position:fixed;background:#252525;border:1px solid rgba(255,255,255,.1);border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.5);width:240px;z-index:300;overflow:hidden}
+.slash-menu{position:fixed;background:#222;border:1px solid rgba(255,255,255,.1);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.7);width:260px;z-index:300;overflow:hidden;padding:4px 0}
+.slash-menu-header{font-size:10px;font-weight:700;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.08em;padding:8px 14px 4px}
+/* block picker toolbar */
+.block-add-bar{display:flex;flex-wrap:wrap;gap:6px;padding:18px 28px 14px}
+.bab-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 14px;background:#1e1e1e;border:1px solid rgba(255,255,255,.08);border-radius:8px;cursor:pointer;transition:all .15s;min-width:74px;color:rgba(255,255,255,.65);font-family:inherit}
+.bab-btn:hover{background:#2a2a2a;border-color:rgba(10,132,255,.4);color:#fff}
+.bab-ico{font-size:20px;line-height:1}
+.bab-lbl{font-size:11px;font-weight:500}
+/* floating add block btn */
+.block-add-float{position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.3);font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .15s;z-index:2;user-select:none}
+.block:hover .block-add-float{opacity:1}
+.block-add-float:hover{background:rgba(10,132,255,.2);border-color:#0a84ff;color:#0a84ff}
 .slash-item{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.72);transition:background .1s}
 .slash-item:hover,.slash-item.sel{background:rgba(255,255,255,.08)}
 .slash-item-ico{width:28px;height:28px;background:rgba(255,255,255,.07);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
@@ -315,14 +326,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-seri
 /* note card */
 .mc-note{background:#2a2a2a;border:1px solid rgba(255,255,255,.08);min-width:180px;min-height:120px}
 .mc-note .mc-header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px 4px}
-.mc-note .mc-title{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.55);flex:1;outline:none;border:none;background:none;font-family:inherit;cursor:text}
+.mc-note .mc-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);flex:1;outline:none;border:none;background:none;font-family:inherit;cursor:text;padding:0;line-height:1.4;resize:none;overflow:hidden;max-width:100%}
+.mc-note .mc-title:focus{color:#fff}
+.mc-title-wrap{display:flex;align-items:center;gap:6px;flex:1;min-width:0}
 .mc-note .mc-body{padding:0 10px 10px}
 .mc-note .mc-text{font-size:13px;color:rgba(255,255,255,.75);outline:none;border:none;background:none;font-family:inherit;width:100%;resize:none;min-height:60px;line-height:1.6;cursor:text}
 /* todo card */
 .mc-todo{background:#2a2a2a;border:1px solid rgba(255,255,255,.08)}
+.mc-todo .mc-header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px 6px;border-bottom:1px solid rgba(255,255,255,.06)}
+.mc-todo .mc-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);flex:1;outline:none;border:none;background:none;font-family:inherit;cursor:text;padding:0;line-height:1.4;resize:none;overflow:hidden;min-height:unset}
+.mc-todo .mc-title:focus{color:#fff}
 .mc-todo-item{display:flex;align-items:center;gap:7px;padding:4px 10px}
 .mc-todo-item input[type=checkbox]{accent-color:#0a84ff;cursor:pointer;width:14px;height:14px;flex-shrink:0}
-.mc-todo-item span{font-size:13px;color:rgba(255,255,255,.7);cursor:text;flex:1;outline:none}
+.mc-todo-item span{font-size:13px;color:rgba(255,255,255,.7);cursor:text;flex:1;outline:none;min-width:0;word-break:break-word}
 .mc-todo-item span.done{text-decoration:line-through;color:rgba(255,255,255,.28)}
 /* heading card */
 .mc-heading{background:transparent}
@@ -620,6 +636,66 @@ th.dragging{opacity:.4}
 .row-del-btn{background:none;border:none;color:rgba(255,80,80,.0);cursor:pointer;font-size:14px;padding:1px 4px;transition:color .15s;line-height:1}
 tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 .row-del-btn:hover{color:#eb5757!important}
+
+
+/* ── Board card file attachments ── */
+.mc-attach-zone{border-top:1px solid rgba(255,255,255,.07);padding:6px 10px;display:flex;flex-wrap:wrap;gap:5px;min-height:0}
+.mc-attach-item{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.07);border-radius:5px;padding:3px 7px;font-size:11px;color:rgba(255,255,255,.6);cursor:pointer;transition:background .15s;max-width:160px}
+.mc-attach-item:hover{background:rgba(255,255,255,.13)}
+.mc-attach-ico{font-size:14px;flex-shrink:0}
+.mc-attach-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-attach-add{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12);border-radius:5px;padding:3px 8px;font-size:11px;color:rgba(255,255,255,.3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.mc-attach-add:hover{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.6);background:rgba(255,255,255,.06)}
+/* ── snap indicator ── */
+.snap-line{position:absolute;pointer-events:none;background:rgba(10,132,255,.5);z-index:999}
+.snap-line.h{height:1px;left:0;right:0}
+.snap-line.v{width:1px;top:0;bottom:0}
+/* ── lock icon ── */
+.mc-lock-badge{position:absolute;top:4px;left:6px;font-size:10px;color:rgba(255,255,255,.25);pointer-events:none}
+.mc-locked{cursor:default!important}
+.mc-locked .mc-resize{display:none}
+/* ── card image attach preview ── */
+.mc-img-preview{width:100%;max-height:140px;object-fit:cover;border-radius:4px;display:block;margin-bottom:4px}
+/* ── snap highlight ── */
+.mcard.snap-target{outline:1px dashed rgba(10,132,255,.4);outline-offset:3px}
+/* ── add attachment button in actions ── */
+.mc-note .mc-text{color:rgba(255,255,255,.72);font-size:13px;line-height:1.65}
+
+
+.block-table-wrap{overflow-x:auto;margin:4px 0}
+.block-table{border-collapse:collapse;min-width:100%}
+.block-table td{border:1px solid rgba(255,255,255,.1);padding:0;min-width:80px}
+.block-table td:last-child{border:none;width:24px;min-width:24px}
+.btable-cell{width:100%;background:none;border:none;outline:none;color:rgba(255,255,255,.75);font-family:inherit;font-size:13px;padding:6px 8px;resize:none;line-height:1.4}
+.btable-cell:focus{background:rgba(10,132,255,.06)}
+.block-table tr:first-child td .btable-cell{font-weight:600;color:rgba(255,255,255,.88)}
+
+
+.vp-folder-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:#222;border:1px solid rgba(255,255,255,.1);border-radius:20px;font-size:12.5px;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;user-select:none}
+.vp-folder-chip:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.85)}
+.vp-folder-chip.on{background:rgba(10,132,255,.18);border-color:rgba(10,132,255,.4);color:#fff}
+.vp-folder-menu{margin-left:2px;font-size:13px;color:rgba(255,255,255,.3);padding:0 3px;border-radius:3px;transition:all .1s}
+.vp-folder-menu:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+/* folder modal */
+#vp-folder-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center}
+#vp-folder-modal.open{display:flex}
+#vp-folder-modal-inner{background:#1e1e1e;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:24px;width:360px;max-width:90vw}
+.vfm-title{font-size:15px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:16px}
+.vfm-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:rgba(255,255,255,.85);font-family:inherit;font-size:14px;padding:9px 12px;outline:none;box-sizing:border-box;transition:border-color .15s;margin-bottom:12px}
+.vfm-inp:focus{border-color:#0a84ff}
+.vfm-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.vfm-ico-opt{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;font-size:16px;border:2px solid transparent;transition:all .15s}
+.vfm-ico-opt:hover,.vfm-ico-opt.on{border-color:#0a84ff;background:rgba(10,132,255,.1)}
+.vfm-color-opt{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.vfm-color-opt:hover,.vfm-color-opt.on{border-color:#fff;transform:scale(1.15)}
+.vfm-btns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.vfm-btn{padding:8px 18px;border-radius:7px;border:none;font-family:inherit;font-size:13px;cursor:pointer;font-weight:500;transition:all .15s}
+.vfm-btn.cancel{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
+.vfm-btn.save{background:#0a84ff;color:#fff}
+/* folder context menu */
+#vp-folder-ctx{display:none;position:fixed;background:#222;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px;z-index:9100;min-width:140px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.vp-fctx-item{padding:6px 12px;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-radius:5px;display:flex;align-items:center;gap:8px;transition:background .1s}
+.vp-fctx-item:hover{background:rgba(255,255,255,.08);color:#fff}
 
 </style>
 </head>
@@ -1223,20 +1299,60 @@ function renderNotesHTML(pg){
     </div>
     <textarea class="pg-title" id="pg-title" rows="1" oninput="autoResize(this);updatePgTitle(this.value)" placeholder="Без названия">${pg.name}</textarea>
     <div class="blocks" id="blocks-container">${blocksHTML}</div>
-    <div style="height:40px;cursor:text;color:rgba(255,255,255,.12);font-size:14px;padding:6px 28px;display:flex;align-items:center;gap:8px" onclick="addBlock('text')">
-      <span>Нажми Enter или нажми</span> <span style="padding:2px 8px;border:1px solid rgba(255,255,255,.12);border-radius:4px;font-size:11px">/ для команд</span>
+    <div id="block-add-bar-wrap" style="padding:12px 28px 40px">
+      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.18);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Добавить блок</div>
+      <div class="block-add-bar">
+        <div class="bab-btn" onclick="addBlock('text')"><div class="bab-ico">📝</div><div class="bab-lbl">Текст</div></div>
+        <div class="bab-btn" onclick="addBlock('h1')"><div class="bab-ico" style="font-size:16px;font-weight:800">H1</div><div class="bab-lbl">Заголовок</div></div>
+        <div class="bab-btn" onclick="addBlock('h2')"><div class="bab-ico" style="font-size:14px;font-weight:700">H2</div><div class="bab-lbl">Подзаголовок</div></div>
+        <div class="bab-btn" onclick="addBlock('todo')"><div class="bab-ico">☑️</div><div class="bab-lbl">Задача</div></div>
+        <div class="bab-btn" onclick="addBlock('bullet')"><div class="bab-ico">•</div><div class="bab-lbl">Список</div></div>
+        <div class="bab-btn" onclick="addBlock('numbered')"><div class="bab-ico">1.</div><div class="bab-lbl">Нумерация</div></div>
+        <div class="bab-btn" onclick="addBlock('callout')"><div class="bab-ico">💡</div><div class="bab-lbl">Выноска</div></div>
+        <div class="bab-btn" onclick="addBlock('quote')"><div class="bab-ico">❝</div><div class="bab-lbl">Цитата</div></div>
+        <div class="bab-btn" onclick="addBlock('code')"><div class="bab-ico">&lt;/&gt;</div><div class="bab-lbl">Код</div></div>
+        <div class="bab-btn" onclick="addBlockTable()"><div class="bab-ico">⊞</div><div class="bab-lbl">Таблица</div></div>
+        <div class="bab-btn" onclick="addBlockImg()"><div class="bab-ico">🖼</div><div class="bab-lbl">Картинка</div></div>
+        <div class="bab-btn" onclick="addBlockFileBlock()"><div class="bab-ico">📎</div><div class="bab-lbl">Файл</div></div>
+        <div class="bab-btn" onclick="addBlock('divider')"><div class="bab-ico">——</div><div class="bab-lbl">Разделитель</div></div>
+        <div class="bab-btn" onclick="openEmojiPickerPage()"><div class="bab-ico">🎨</div><div class="bab-lbl">Иконка</div></div>
+      </div>
     </div>
   </div>`;
 }
 
 function blockHTML(b,i){
   if(b.type==='divider')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><hr class="block-divider"></div></div>`;
+  if(b.type==='table'){
+    const rows=b.rows||[['','',''],['','',''],['','','']];
+    const tableHTML=`<div class="block-table-wrap"><table class="block-table">${rows.map((row,ri)=>`<tr>${row.map((cell,ci)=>`<td><textarea class="btable-cell" rows="1" oninput="updateTableCell('${b.id}',${ri},${ci},this.value);autoResize(this)">${esc(cell)}</textarea></td>`).join('')}<td class="btable-del-col"><button onclick="delTableCol('${b.id}',${ri===0?0:null})" style="background:none;border:none;color:rgba(255,80,80,.3);cursor:pointer;font-size:11px;padding:1px 3px" title="Удалить строку" onclick="delTableRow('${b.id}',${ri})">×</button></td></tr>`).join('')}</table>
+    <div style="display:flex;gap:6px;padding:4px 0;margin-top:4px">
+      <button onclick="addTableRow('${b.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);font-size:11.5px;padding:2px 10px;cursor:pointer;font-family:inherit;transition:all .1s" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">+ Строка</button>
+      <button onclick="addTableCol('${b.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);font-size:11.5px;padding:2px 10px;cursor:pointer;font-family:inherit;transition:all .1s" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">+ Столбец</button>
+    </div>
+    </div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${tableHTML}</div></div>`;
+  }
+  if(b.type==='image'){
+    const imgHTML=b.imageData?`<img src="${b.imageData}" style="max-width:100%;border-radius:6px;display:block" alt="${esc(b.text||'')}">`:
+    `<div onclick="addBlockImage('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:30px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">🖼 Нажми чтобы выбрать изображение</div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${imgHTML}${b.imageData?`<textarea class="block-text" style="font-size:12px;color:rgba(255,255,255,.35);margin-top:4px" placeholder="Подпись к изображению" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)">${esc(b.text||'')}</textarea>`:''}</div></div>`;
+  }
+  if(b.type==='file'){
+    const fileHTML=b.fileData?
+    `<div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px 12px;cursor:pointer" onclick="downloadBlockFile('${b.id}')">
+      <span style="font-size:20px">📎</span>
+      <div><div style="font-size:13px;color:rgba(255,255,255,.75)">${esc(b.fileName||'Файл')}</div><div style="font-size:11px;color:rgba(255,255,255,.3)">${b.fileSize||''} · Нажми чтобы скачать</div></div>
+    </div>`:
+    `<div onclick="addBlockFile('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:18px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">📎 Нажми чтобы прикрепить файл</div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${fileHTML}</div></div>`;
+  }
   if(b.type==='callout')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-callout"><div class="callout-ico">💡</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')">${esc(b.text||'')}</textarea></div></div></div>`;
   if(b.type==='bullet')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-bullet"><div class="bullet-dot">•</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Элемент списка">${esc(b.text||'')}</textarea></div></div></div>`;
   if(b.type==='numbered'){const n=(i+1);return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-numbered"><div class="num-dot">${n}.</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Пункт">${esc(b.text||'')}</textarea></div></div></div>`;}
-  if(b.type==='todo')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-todo"><input type="checkbox" class="todo-cb" ${b.done?'checked':''} onchange="updateBlock('${b.id}','done',this.checked)"><textarea class="block-text" style="${b.done?'text-decoration:line-through;color:rgba(255,255,255,.28)':''}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Задача">${esc(b.text||'')}</textarea></div></div></div>`;
+  if(b.type==='todo')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><span class="block-add-float" title="Добавить блок" onclick="addBlock('text','${b.id}')">+</span><div class="block-body"><div class="block-todo"><input type="checkbox" class="todo-cb" ${b.done?'checked':''} onchange="updateBlock('${b.id}','done',this.checked)"><textarea class="block-text" style="${b.done?'text-decoration:line-through;color:rgba(255,255,255,.28)':''}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Задача">${esc(b.text||'')}</textarea></div></div></div>`;
   const cls=b.type==='h1'?'h1':b.type==='h2'?'h2':b.type==='h3'?'h3':b.type==='quote'?'quote':b.type==='code'?'code':'';
-  return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><textarea class="block-text ${cls}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="${cls?'Заголовок':'Введи текст или / для команд'}">${esc(b.text||'')}</textarea></div></div>`;
+  return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><span class="block-add-float" title="Добавить блок" onclick="addBlock('text','${b.id}')">+</span><div class="block-body"><textarea class="block-text ${cls}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="${cls?'Заголовок':'Введи текст или / для команд'}">${esc(b.text||'')}</textarea></div></div>`;
 }
 
 // ══════════════════════ BLOCK EDITOR ══════════════════════
@@ -1280,12 +1396,15 @@ const SLASH_ITEMS=[
   {type:'h2',ico:'H2',name:'Заголовок 2',desc:'Средний заголовок'},
   {type:'h3',ico:'H3',name:'Заголовок 3',desc:'Малый заголовок'},
   {type:'bullet',ico:'•',name:'Список',desc:'Маркированный список'},
-  {type:'numbered',ico:'1.',name:'Нумерованный список',desc:'Пронумерованный'},
-  {type:'todo',ico:'☐',name:'Задача',desc:'Чекбокс'},
+  {type:'numbered',ico:'1.',name:'Нумерованный',desc:'Пронумерованный список'},
+  {type:'todo',ico:'☑',name:'Задача',desc:'Чекбокс с задачей'},
   {type:'quote',ico:'❝',name:'Цитата',desc:'Блок цитаты'},
   {type:'callout',ico:'💡',name:'Выноска',desc:'Блок с иконкой'},
   {type:'divider',ico:'—',name:'Разделитель',desc:'Горизонтальная линия'},
   {type:'code',ico:'</>',name:'Код',desc:'Блок кода'},
+  {type:'table',ico:'⊞',name:'Таблица',desc:'Простая таблица 3×3'},
+  {type:'image',ico:'🖼',name:'Изображение',desc:'Вставить картинку'},
+  {type:'file',ico:'📎',name:'Файл',desc:'Прикрепить файл'},
 ];
 let slashBlockId='',slashIdx=0;
 function showSlashMenu(e,blockId){
@@ -1300,29 +1419,37 @@ function showSlashMenu(e,blockId){
 }
 function renderSlashItems(){
   const m=document.getElementById('slash-menu');
-  m.innerHTML=SLASH_ITEMS.map((it,i)=>`
-    <div class="slash-item ${i===slashIdx?'sel':''}" onclick="applySlash('${it.type}')">
-      <div class="slash-item-ico">${it.ico}</div>
-      <div class="slash-item-info"><div class="slash-item-name">${it.name}</div><div class="slash-item-desc">${it.desc}</div></div>
-    </div>`).join('');
+  const items=SLASH_ITEMS.filter(x=>!x._sep);
+  m.innerHTML=`<div class="slash-menu-header">Выбери тип блока</div>`+
+  items.map((it,i)=>`<div class="slash-item ${i===slashIdx?'sel':''}" onclick="applySlash('${it.type}')">
+    <div class="slash-item-ico">${it.ico}</div>
+    <div class="slash-item-info"><div class="slash-item-name">${it.name}</div>${it.desc?`<div class="slash-item-desc">${it.desc}</div>`:''}</div>
+  </div>`).join('');
 }
 function applySlash(type){
-  if(type==='divider'){
-    const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
-    const nb={id:'b'+Date.now(),type:'divider'};
-    const i=pg.blocks.findIndex(b=>b.id===slashBlockId);
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  const insertBlock=(nb,afterId)=>{
+    const i=pg.blocks.findIndex(b=>b.id===afterId);
     if(i>-1){pg.blocks.splice(i+1,0,nb);}else pg.blocks.push(nb);
     save();
     const c=document.getElementById('blocks-container');
-    const ref=c?.querySelector(`[data-id="${slashBlockId}"]`);
-    const div=document.createElement('div');div.innerHTML=blockHTML(nb,i+1);
-    if(ref)ref.after(div.firstElementChild);else c?.appendChild(div.firstElementChild);
+    const ref=c?.querySelector(`[data-id="${afterId}"]`);
+    const div=document.createElement('div');div.innerHTML=blockHTML(nb,pg.blocks.indexOf(nb));
+    const newEl=div.firstElementChild;
+    if(ref)ref.after(newEl);else c?.appendChild(newEl);
+    newEl.querySelector('textarea')?.focus();
+  };
+  if(type==='divider'||type==='table'||type==='image'||type==='file'){
+    const init={divider:{},table:{rows:[['Столбец 1','Столбец 2','Столбец 3'],['','',''],['','','']]},image:{},file:{}};
+    const nb={id:'b'+Date.now(),type,...(init[type]||{})};
+    insertBlock(nb,slashBlockId);
+    if(type==='image')setTimeout(()=>addBlockImage(nb.id),100);
+    if(type==='file')setTimeout(()=>addBlockFile(nb.id),100);
   } else {
-    const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
     const b=pg.blocks.find(x=>x.id===slashBlockId);
-    if(b){b.type=type;save();}
+    if(b){b.type=type;if(type==='table'&&!b.rows)b.rows=[['Столбец 1','Столбец 2','Столбец 3'],['','',''],['','','']];save();}
     const el=document.querySelector(`[data-id="${slashBlockId}"]`);
-    if(el&&pg){
+    if(el){
       const idx=pg.blocks.findIndex(x=>x.id===slashBlockId);
       el.outerHTML=blockHTML(pg.blocks[idx],idx);
       document.querySelector(`[data-id="${slashBlockId}"] textarea`)?.focus();
@@ -1331,6 +1458,36 @@ function applySlash(type){
   closeSlashMenu();
 }
 function closeSlashMenu(){document.getElementById('slash-menu').style.display='none';}
+function addBlockTable(){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  const nb={id:'b'+Date.now(),type:'table',rows:[['Столбец 1','Столбец 2','Столбец 3'],['','',''],['','','']]};
+  pg.blocks.push(nb);save();
+  const c=document.getElementById('blocks-container');if(!c)return;
+  const div=document.createElement('div');div.innerHTML=blockHTML(nb,pg.blocks.length-1);
+  c.appendChild(div.firstElementChild);
+}
+function addBlockImg(){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  const nb={id:'b'+Date.now(),type:'image'};
+  pg.blocks.push(nb);save();
+  const c=document.getElementById('blocks-container');if(!c)return;
+  const div=document.createElement('div');div.innerHTML=blockHTML(nb,pg.blocks.length-1);
+  c.appendChild(div.firstElementChild);
+  setTimeout(()=>addBlockImage(nb.id),100);
+}
+function addBlockFileBlock(){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  const nb={id:'b'+Date.now(),type:'file'};
+  pg.blocks.push(nb);save();
+  const c=document.getElementById('blocks-container');if(!c)return;
+  const div=document.createElement('div');div.innerHTML=blockHTML(nb,pg.blocks.length-1);
+  c.appendChild(div.firstElementChild);
+  setTimeout(()=>addBlockFile(nb.id),100);
+}
+function openEmojiPickerPage(){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  openEmojiPicker(pg.id);
+}
 
 // ══════════════════════ EMOJI PICKER ══════════════════════
 function openEmojiPicker(pgId){
@@ -2006,6 +2163,80 @@ function addFinGoal(){
   save();switchFT('dashboard');
 }
 
+
+// ════════════════════════════════════════════════
+// MEDIA LIBRARY FOLDERS
+// ════════════════════════════════════════════════
+let _vfmMode='create'; // 'create' | 'edit'
+let _vfmEditId=null;
+let _vfmIco='📁';
+let _vfmColor='#2a2a2a';
+let _vfCtxId=null;
+
+function setVpFolder(folderId){
+  vpCurrentFolder=folderId;
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
+}
+
+function openCreateFolder(){
+  _vfmMode='create';_vfmEditId=null;_vfmIco='📁';_vfmColor='#2a2a2a';
+  document.getElementById('vfm-title').textContent='Создать папку';
+  document.getElementById('vfm-name').value='';
+  renderFolderModalOpts();
+  document.getElementById('vp-folder-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('vfm-name').focus(),80);
+}
+
+function renderFolderModalOpts(){
+  document.getElementById('vfm-icons').innerHTML=FOLDER_ICONS.map(ico=>`<div class="vfm-ico-opt${ico===_vfmIco?' on':''}" onclick="selectFolderIco('${ico}')">${ico}</div>`).join('');
+  document.getElementById('vfm-colors').innerHTML=FOLDER_COLORS.map(c=>`<div class="vfm-color-opt${c===_vfmColor?' on':''}" style="background:${c}" onclick="selectFolderColor('${c}')"></div>`).join('');
+}
+function selectFolderIco(ico){_vfmIco=ico;renderFolderModalOpts();}
+function selectFolderColor(c){_vfmColor=c;renderFolderModalOpts();}
+
+function saveFolderModal(){
+  const name=document.getElementById('vfm-name').value.trim();
+  if(!name){document.getElementById('vfm-name').focus();return;}
+  if(_vfmMode==='create'){
+    window.VP_FOLDERS.push({id:'f'+Date.now(),name,icon:_vfmIco,color:_vfmColor});
+  } else {
+    const f=window.VP_FOLDERS.find(x=>x.id===_vfmEditId);
+    if(f){f.name=name;f.icon=_vfmIco;f.color=_vfmColor;}
+  }
+  closeFolderModal();
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
+}
+function closeFolderModal(){document.getElementById('vp-folder-modal').classList.remove('open');}
+
+function openFolderMenu(folderId,e){
+  _vfCtxId=folderId;
+  const ctx=document.getElementById('vp-folder-ctx');
+  ctx.style.display='block';
+  ctx.style.left=e.clientX+'px';
+  ctx.style.top=e.clientY+'px';
+  setTimeout(()=>document.addEventListener('click',()=>{ctx.style.display='none';},{once:true}),50);
+}
+function editFolderFromCtx(){
+  const f=window.VP_FOLDERS.find(x=>x.id===_vfCtxId);if(!f)return;
+  _vfmMode='edit';_vfmEditId=_vfCtxId;_vfmIco=f.icon||'📁';_vfmColor=f.color||'#2a2a2a';
+  document.getElementById('vfm-title').textContent='Изменить папку';
+  document.getElementById('vfm-name').value=f.name;
+  renderFolderModalOpts();
+  document.getElementById('vp-folder-modal').classList.add('open');
+}
+function shareFolderFromCtx(){
+  const f=window.VP_FOLDERS.find(x=>x.id===_vfCtxId);if(!f)return;
+  const videos=window.VIDEOS.filter(v=>v.folderId===_vfCtxId);
+  alert(`Папка "${f.name}"\nВидео: ${videos.length} шт.\n\nДля шаринга — экспортируй видео и отправь ссылку.`);
+}
+function deleteFolderFromCtx(){
+  if(!confirm('Удалить папку? Видео останутся в "Все файлы"'))return;
+  window.VP_FOLDERS=window.VP_FOLDERS.filter(x=>x.id!==_vfCtxId);
+  window.VIDEOS.forEach(v=>{if(v.folderId===_vfCtxId)delete v.folderId;});
+  if(vpCurrentFolder===_vfCtxId)vpCurrentFolder=null;
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
+}
+
 function pfMiss(v){const pf=getPF();pf.miss=v;save();}
 function pfFyTxt(gi,field,v){const pf=getPF();const arr=pf.fy_rows||[];const idx=gi-FY_GOALS.length;if(idx>=0&&arr[idx]){arr[idx][field]=v;save();}}
 function pfFyVal(gi,yi,v){const pf=getPF();const arr=pf.fy_rows||[];const idx=gi-FY_GOALS.length;if(idx>=0&&arr[idx]){arr[idx].vals[yi]=v;save();}}
@@ -2404,6 +2635,7 @@ function createCardEl(card,pg){
   // drag
   el.addEventListener('mousedown',e=>{
     if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT'||e.target.classList.contains('mc-act-btn')||e.target.classList.contains('mc-resize'))return;
+    if(card.locked)return;
     if(boardState.arrowMode){handleArrowClick(card.id,pg);return;}
     e.stopPropagation();
     boardState.selectedCard=card.id;
@@ -2447,52 +2679,182 @@ function createCardEl(card,pg){
 }
 
 function cardInnerHTML(card){
+  const lockIco=card.locked?`<span class="mc-lock-badge">🔒</span>`:'';
   const actBtns=`<div class="mc-actions">
+    <button class="mc-act-btn" title="Прикрепить файл" onclick="attachFileToCard('${card.id}')">📎</button>
+    <button class="mc-act-btn" title="${card.locked?'Открепить':'Зафиксировать'}" onclick="toggleCardLock('${card.id}')">${card.locked?'🔒':'📌'}</button>
     <button class="mc-act-btn" title="Цвет" onclick="openColorPop('${card.id}',event)">🎨</button>
     <button class="mc-act-btn" title="Удалить" onclick="delCard('${card.id}')">×</button>
   </div>`;
+  const attachHTML=cardAttachHTML(card);
   if(card.type==='note')return`
+    ${lockIco}
     <div class="mc-header">
       <textarea class="mc-title" rows="1" data-field="title" placeholder="Заголовок">${esc(card.title||'')}</textarea>
       ${actBtns}
     </div>
     <div class="mc-body"><textarea class="mc-text" data-field="text" placeholder="Добавь заметку...">${esc(card.text||'')}</textarea></div>
+    ${attachHTML}
     <div class="mc-resize"></div>`;
   if(card.type==='todo'){
     const items=(card.todos||[]).map((t,i)=>`<div class="mc-todo-item">
       <input type="checkbox" ${t.d?'checked':''} onchange="toggleBoardTodo('${card.id}',${i},this.checked)">
       <span class="${t.d?'done':''}" contenteditable="true">${esc(t.t)}</span>
     </div>`).join('');
-    return`<div class="mc-header">
+    return`${lockIco}<div class="mc-header">
       <textarea class="mc-title" rows="1" data-field="title" placeholder="Список задач">${esc(card.title||'')}</textarea>
       ${actBtns}
     </div>
     ${items}
     <div style="padding:4px 10px 8px"><button onclick="addBoardTodo('${card.id}')" style="background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:12.5px;font-family:inherit;padding:3px 0;transition:color .1s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">+ Добавить</button></div>
+    ${attachHTML}
     <div class="mc-resize"></div>`;
   }
-  if(card.type==='heading')return`<textarea class="mc-text" style="font-size:22px;font-weight:700;color:rgba(255,255,255,.82);width:100%;background:none;border:none;outline:none;padding:4px 0;resize:none;font-family:inherit;line-height:1.3" data-field="text" placeholder="Заголовок">${esc(card.text||'')}</textarea>`;
-  if(card.type==='link')return`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px">
+  if(card.type==='heading')return`${lockIco}<textarea class="mc-text" style="font-size:22px;font-weight:700;color:rgba(255,255,255,.82);width:100%;background:none;border:none;outline:none;padding:4px 0;resize:none;font-family:inherit;line-height:1.3" data-field="text" placeholder="Заголовок">${esc(card.text||'')}</textarea>`;
+  if(card.type==='link')return`${lockIco}<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px">
     <div>
       <div style="font-size:12px;color:rgba(255,255,255,.35);margin-bottom:4px">🔗 Ссылка</div>
-      <a href="${card.url||'#'}" target="_blank">${esc(card.label||card.url||'')}</a>
+      <div style="margin-bottom:4px"><input type="text" value="${esc(card.url||'')}" placeholder="https://..." data-field="url" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.7);font-size:11.5px;padding:3px 7px;width:100%;outline:none;font-family:inherit" oninput="saveBoardField('${card.id}','url',this.value)"></div>
+      <div><input type="text" value="${esc(card.label||'')}" placeholder="Название ссылки" data-field="label" style="background:rgba(255,255,255,.04);border:none;color:#0a84ff;font-size:12.5px;padding:2px 0;width:100%;outline:none;font-family:inherit;font-weight:500" oninput="saveBoardField('${card.id}','label',this.value)"></div>
     </div>${actBtns}</div>
-    <div class="mc-resize"></div>`;
-  if(card.type==='image')return`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px;position:relative">
+    ${attachHTML}<div class="mc-resize"></div>`;
+  if(card.type==='image'){
+    const imgSrc=card.imageData||'';
+    return`${lockIco}<div style="position:relative;padding:10px">
     <div style="position:absolute;top:8px;right:8px">${actBtns}</div>
-    <div style="font-size:52px;line-height:1">${card.emoji||'🖼'}</div>
-    <div style="font-size:11.5px;color:rgba(255,255,255,.4);text-align:center;white-space:pre-line">${esc(card.label||'')}</div>
+    ${imgSrc?`<img src="${imgSrc}" class="mc-img-preview" alt="Изображение">`:`<div onclick="attachImageToCard('${card.id}')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px;cursor:pointer;border:2px dashed rgba(255,255,255,.15);border-radius:6px;transition:border-color .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)'">
+      <div style="font-size:36px">${card.emoji||'🖼'}</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3)">Нажми чтобы добавить фото</div>
+    </div>`}
+    <textarea data-field="label" placeholder="Описание..." style="background:none;border:none;outline:none;width:100%;font-size:12px;color:rgba(255,255,255,.45);font-family:inherit;resize:none;margin-top:4px">${esc(card.label||'')}</textarea>
     </div>`;
+  }
   return`<div style="padding:10px">${esc(card.text||card.title||'')}</div>`;
 }
 
+function cardAttachHTML(card){
+  const files=card.files||[];
+  if(files.length===0)return`<div class="mc-attach-zone"><span class="mc-attach-add" onclick="attachFileToCard('${card.id}')">+ Прикрепить</span></div>`;
+  const icons={image:'🖼',video:'🎬',pdf:'📄',doc:'📝',default:'📎'};
+  const fileItems=files.map((f,fi)=>{
+    const ico=f.type?.startsWith('image')?icons.image:f.type?.startsWith('video')?icons.video:f.name?.endsWith('.pdf')?icons.pdf:icons.default;
+    return`<span class="mc-attach-item" onclick="openBoardAttach('${card.id}',${fi})" title="${f.name}"><span class="mc-attach-ico">${ico}</span><span class="mc-attach-name">${f.name}</span></span>`;
+  }).join('');
+  return`<div class="mc-attach-zone">${fileItems}<span class="mc-attach-add" onclick="attachFileToCard('${card.id}')">+</span></div>`;
+}
+
+function attachFileToCard(cardId){
+  const inp=document.createElement('input');inp.type='file';inp.multiple=true;
+  inp.accept='image/*,video/*,.pdf,.doc,.docx,.txt,.zip';
+  inp.onchange=e=>{
+    const pg=getBoardPg();if(!pg)return;
+    const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+    if(!c.files)c.files=[];
+    Array.from(e.target.files).forEach(file=>{
+      if(file.size>20*1024*1024){alert(file.name+': файл слишком большой (макс 20MB)');return;}
+      const reader=new FileReader();
+      reader.onload=ev=>{
+        c.files.push({name:file.name,type:file.type,size:file.size,data:ev.target.result});
+        save();
+        const el=document.getElementById('card-'+cardId);
+        if(el)el.innerHTML=cardInnerHTML(c);
+        // re-attach textarea events
+        const pg2=getBoardPg();if(!pg2)return;
+        const newEl=document.getElementById('card-'+cardId);
+        if(newEl)newEl.querySelectorAll('textarea').forEach(ta=>{ta.addEventListener('input',()=>{const cc=pg2.cards.find(x=>x.id===cardId);if(cc&&ta.dataset.field)cc[ta.dataset.field]=ta.value;save();ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+  inp.click();
+}
+
+function attachImageToCard(cardId){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const pg=getBoardPg();if(!pg)return;
+      const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+      c.imageData=ev.target.result;save();
+      const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function openBoardAttach(cardId,fi){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c||!c.files)return;
+  const f=c.files[fi];if(!f)return;
+  if(f.type?.startsWith('image')||f.type?.startsWith('video')){
+    const w=window.open();w.document.write(`<body style="margin:0;background:#111"><img src="${f.data}" style="max-width:100%;display:block"><video src="${f.data}" controls style="max-width:100%"></video>
+<!-- VP Folder Modal -->
+<div id="vp-folder-modal">
+  <div id="vp-folder-modal-inner">
+    <div class="vfm-title" id="vfm-title">Создать папку</div>
+    <input class="vfm-inp" id="vfm-name" placeholder="Название папки...">
+    <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Иконка</div>
+    <div class="vfm-row" id="vfm-icons"></div>
+    <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Цвет</div>
+    <div class="vfm-row" id="vfm-colors"></div>
+    <div class="vfm-btns">
+      <button class="vfm-btn cancel" onclick="closeFolderModal()">Отмена</button>
+      <button class="vfm-btn save" onclick="saveFolderModal()">Сохранить</button>
+    </div>
+  </div>
+</div>
+<div id="vp-folder-ctx">
+  <div class="vp-fctx-item" onclick="editFolderFromCtx()">✏️ Переименовать</div>
+  <div class="vp-fctx-item" onclick="shareFolderFromCtx()">🔗 Поделиться</div>
+  <div class="vp-fctx-item" onclick="deleteFolderFromCtx()" style="color:rgba(235,87,87,.7)">🗑 Удалить</div>
+</div>
+</body>`);
+  } else {
+    const a=document.createElement('a');a.href=f.data;a.download=f.name;a.click();
+  }
+}
+
+function toggleCardLock(cardId){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  c.locked=!c.locked;save();
+  const el=document.getElementById('card-'+cardId);if(el){el.innerHTML=cardInnerHTML(c);if(c.locked)el.classList.add('mc-locked');else el.classList.remove('mc-locked');}
+}
+
+function saveBoardField(cardId,field,val){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(c){c[field]=val;save();}
+}
+
+const SNAP_DIST=18;
 function onCardDrag(e){
   const id=boardState.draggingCard;if(!id)return;
   const pg=getBoardPg();if(!pg)return;
-  const c=pg.cards.find(x=>x.id===id);if(!c)return;
+  const c=pg.cards.find(x=>x.id===id);if(!c||c.locked)return;
   const canvasRect=document.getElementById('board-canvas').getBoundingClientRect();
-  c.x=Math.round((e.clientX-canvasRect.left)/boardState.zoom-boardState.dragOff.x);
-  c.y=Math.round((e.clientY-canvasRect.top)/boardState.zoom-boardState.dragOff.y);
+  let nx=Math.round((e.clientX-canvasRect.left)/boardState.zoom-boardState.dragOff.x);
+  let ny=Math.round((e.clientY-canvasRect.top)/boardState.zoom-boardState.dragOff.y);
+  // Grid snap (20px)
+  if(e.shiftKey){nx=Math.round(nx/20)*20;ny=Math.round(ny/20)*20;}
+  // Card-to-card snap
+  for(const other of pg.cards){
+    if(other.id===id)continue;
+    const ox=other.x,oy=other.y,ow=other.w||180,oh=other.h||120;
+    const cw=c.w||180,ch=c.h||120;
+    // Horizontal snap: left edges, right edges, center
+    if(Math.abs(nx-ox)<SNAP_DIST)nx=ox;
+    else if(Math.abs(nx-(ox+ow-cw))<SNAP_DIST)nx=ox+ow-cw;
+    else if(Math.abs((nx+cw)-(ox+ow))<SNAP_DIST)nx=ox+ow-cw;
+    else if(Math.abs(nx-(ox+ow+10))<SNAP_DIST)nx=ox+ow+10;
+    // Vertical snap
+    if(Math.abs(ny-oy)<SNAP_DIST)ny=oy;
+    else if(Math.abs(ny-(oy+oh+10))<SNAP_DIST)ny=oy+oh+10;
+    else if(Math.abs((ny+ch)-(oy+oh))<SNAP_DIST)ny=oy+oh-ch;
+  }
+  c.x=nx;c.y=ny;
   const el=document.getElementById('card-'+id);
   if(el){el.style.left=c.x+'px';el.style.top=c.y+'px';}
   renderArrows(pg);
@@ -2763,10 +3125,15 @@ async function checkSession() {
 // Videos stored in memory as array of {id, name, size, duration, dataUrl, note, tags, date}
 // DataURL allows playback without server — works from local file
 if(!window.VIDEOS)window.VIDEOS=[];
-let vpView='grid'; // 'grid' or 'list'
-let vpFilter='all'; // 'all','reels','course','music'
+if(!window.VP_FOLDERS)window.VP_FOLDERS=[];
+let vpView='grid';
+let vpFilter='all';
 let vpSearch='';
 let vpCurrentId=null;
+let vpCurrentFolder=null; // null = root
+
+const FOLDER_ICONS=['📁','🎬','📸','🎵','🎓','📝','📊','🎨','🏆','⭐','🔥','💡','🚀','🎯','📦','🔗'];
+const FOLDER_COLORS=['#2a2a2a','#1e2d1e','#1e1e2d','#2d1e1e','#2d2a1e','#1e2a2d'];
 
 function renderVideosHTML(){
   return`<div id="video-page">
@@ -2783,6 +3150,7 @@ function renderVideosHTML(){
           ⬆ Загрузить видео
         </button>
         <input type="file" id="vp-upload-input" accept="video/*" multiple onchange="handleVideoUpload(this.files)">
+        <button id="vp-upload-btn" style="background:rgba(255,255,255,.07)" onclick="openCreateFolder()">📁 Папка</button>
         <div style="width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 4px"></div>
         <button class="vp-filter-btn ${vpFilter==='all'?'on':''}" onclick="setVpFilter('all')">Все</button>
         <button class="vp-filter-btn ${vpFilter==='reels'?'on':''}" onclick="setVpFilter('reels')">Reels</button>
@@ -2794,6 +3162,13 @@ function renderVideosHTML(){
           <button class="vp-filter-btn ${vpView==='list'?'on':''}" onclick="setVpView('list')" title="Список">☰</button>
         </div>
         <div id="vp-count">${window.VIDEOS.length} видео</div>
+      </div>
+      <div id="vp-folders-bar" style="display:flex;gap:8px;padding:6px 0 2px;flex-wrap:wrap;align-items:center">
+        <span class="vp-folder-chip ${vpCurrentFolder===null?'on':''}" onclick="setVpFolder(null)">🏠 Все файлы</span>
+        ${window.VP_FOLDERS.map(f=>{const cnt=window.VIDEOS.filter(v=>v.folderId===f.id).length;return`<span class="vp-folder-chip ${vpCurrentFolder===f.id?'on':''}" style="${f.color&&f.color!=='#2a2a2a'?'background:'+f.color+';border-color:'+f.color+'88':''}" onclick="setVpFolder('${f.id}')">
+          ${f.icon||'📁'} ${f.name}${cnt>0?` <span style="font-size:10px;opacity:.55">${cnt}</span>`:''}
+          <span class="vp-folder-menu" onclick="event.stopPropagation();openFolderMenu('${f.id}',event)">⋯</span>
+        </span>`;}).join('')}
       </div>
     </div>
     <div id="vp-body">
@@ -2867,6 +3242,7 @@ function initVideoPage(){
 
 function getFilteredVideos(){
   let vids=window.VIDEOS;
+  if(vpCurrentFolder!==null)vids=vids.filter(v=>v.folderId===vpCurrentFolder);
   if(vpFilter!=='all')vids=vids.filter(v=>(v.tags||[]).includes(vpFilter));
   if(vpSearch)vids=vids.filter(v=>v.name.toLowerCase().includes(vpSearch.toLowerCase()));
   return vids;
@@ -3477,6 +3853,81 @@ closeModal=function(){
 setTimeout(()=>{applySETT();updateInboxBadge();},200);
 
 
+
+// ════════════════════════════════════════════════
+// TABLE / IMAGE / FILE BLOCK HELPERS
+// ════════════════════════════════════════════════
+function getPageBlock(blockId){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  if(!pg)return null;
+  return pg.blocks.find(b=>b.id===blockId)||null;
+}
+function updateTableCell(blockId,ri,ci,val){
+  const b=getPageBlock(blockId);if(!b||!b.rows)return;
+  if(!b.rows[ri])b.rows[ri]=[];
+  b.rows[ri][ci]=val;save();
+}
+function addTableRow(blockId){
+  const b=getPageBlock(blockId);if(!b)return;
+  if(!b.rows)b.rows=[['','','']];
+  const cols=b.rows[0]?.length||3;
+  b.rows.push(Array(cols).fill(''));save();
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  const el=document.querySelector(`[data-id="${blockId}"]`);
+  if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+}
+function addTableCol(blockId){
+  const b=getPageBlock(blockId);if(!b)return;
+  if(!b.rows)b.rows=[['']];
+  b.rows=b.rows.map(row=>[...row,'']);save();
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  const el=document.querySelector(`[data-id="${blockId}"]`);
+  if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+}
+function delTableRow(blockId,ri){
+  const b=getPageBlock(blockId);if(!b||!b.rows)return;
+  b.rows.splice(ri,1);if(b.rows.length===0)b.rows=[['','','']];save();
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  const el=document.querySelector(`[data-id="${blockId}"]`);
+  if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+}
+function addBlockImage(blockId){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const b=getPageBlock(blockId);if(!b)return;
+      b.imageData=ev.target.result;save();
+      const pg=DB.pages.find(p=>p.id===DB.curPage);
+      const el=document.querySelector(`[data-id="${blockId}"]`);
+      if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+function addBlockFile(blockId){
+  const inp=document.createElement('input');inp.type='file';
+  inp.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const b=getPageBlock(blockId);if(!b)return;
+      b.fileData=ev.target.result;b.fileName=file.name;b.fileSize=fmtSize(file.size);save();
+      const pg=DB.pages.find(p=>p.id===DB.curPage);
+      const el=document.querySelector(`[data-id="${blockId}"]`);
+      if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+    };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+function downloadBlockFile(blockId){
+  const b=getPageBlock(blockId);if(!b||!b.fileData)return;
+  const a=document.createElement('a');a.href=b.fileData;a.download=b.fileName||'file';a.click();
+}
+
 // ════════════════════════════════════════════════
 // PLANNER EDIT HELPERS
 // ════════════════════════════════════════════════
@@ -3545,5 +3996,26 @@ finInc=function(src,m,v){_origFinInc(src,m,v);};
 
 <!-- SHARE MODAL (uses existing modal) -->
 
+
+<!-- VP Folder Modal -->
+<div id="vp-folder-modal">
+  <div id="vp-folder-modal-inner">
+    <div class="vfm-title" id="vfm-title">Создать папку</div>
+    <input class="vfm-inp" id="vfm-name" placeholder="Название папки...">
+    <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Иконка</div>
+    <div class="vfm-row" id="vfm-icons"></div>
+    <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Цвет</div>
+    <div class="vfm-row" id="vfm-colors"></div>
+    <div class="vfm-btns">
+      <button class="vfm-btn cancel" onclick="closeFolderModal()">Отмена</button>
+      <button class="vfm-btn save" onclick="saveFolderModal()">Сохранить</button>
+    </div>
+  </div>
+</div>
+<div id="vp-folder-ctx">
+  <div class="vp-fctx-item" onclick="editFolderFromCtx()">✏️ Переименовать</div>
+  <div class="vp-fctx-item" onclick="shareFolderFromCtx()">🔗 Поделиться</div>
+  <div class="vp-fctx-item" onclick="deleteFolderFromCtx()" style="color:rgba(235,87,87,.7)">🗑 Удалить</div>
+</div>
 </body>
 </html>
