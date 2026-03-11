@@ -584,6 +584,43 @@ th.dragging{opacity:.4}
 .cal-view-tab{padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.45);font-size:12px;cursor:pointer;transition:all .15s}
 .cal-view-tab.on{background:#0a84ff;border-color:#0a84ff;color:#fff}
 
+
+/* ── Editable inline ── */
+.edtxt{background:none;border:none;color:inherit;font-family:inherit;font-size:inherit;width:100%;outline:none;padding:0;cursor:text}
+.edtxt:hover{background:rgba(255,255,255,.04);border-radius:3px}
+.edtxt:focus{background:rgba(10,132,255,.08);border-radius:3px;color:rgba(255,255,255,.92)}
+.ed-num{background:none;border:none;color:inherit;font-family:inherit;font-size:inherit;width:80px;outline:none;text-align:center;padding:2px 4px;cursor:text}
+.ed-num:hover{background:rgba(255,255,255,.05);border-radius:3px}
+.ed-num:focus{background:rgba(10,132,255,.1);border-radius:3px}
+/* plan editable */
+.plan-inp{width:88px;text-align:center;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.12);border-radius:4px;color:rgba(255,255,255,.55);font-family:inherit;font-size:12.5px;padding:3px 5px;outline:none;transition:all .15s}
+.plan-inp:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.75)}
+.plan-inp:focus{border-color:rgba(10,132,255,.5);background:rgba(10,132,255,.07);color:rgba(255,255,255,.88)}
+/* add row btn */
+.add-row-planner{display:flex;align-items:center;gap:6px;padding:6px 12px;color:rgba(255,255,255,.2);font-size:12.5px;cursor:pointer;transition:color .15s;border-top:1px solid rgba(255,255,255,.04)}
+.add-row-planner:hover{color:rgba(255,255,255,.6);background:rgba(255,255,255,.03)}
+/* month selector */
+.month-sel{background:#1e1e1e;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.72);padding:5px 10px;font-size:12.5px;outline:none;cursor:pointer;transition:border-color .15s}
+.month-sel:focus{border-color:#0a84ff}
+/* mini bar chart */
+.mini-chart{display:flex;align-items:flex-end;gap:3px;height:56px;padding:6px 0}
+.mini-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:0}
+.mini-bar{width:100%;border-radius:2px 2px 0 0;transition:height .3s;min-height:2px}
+.mini-bar-lbl{font-size:8.5px;color:rgba(255,255,255,.2);text-align:center;white-space:nowrap}
+/* analytics grid */
+.analytics-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.an-card{background:#1e1e1e;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px 14px}
+.an-card-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+/* budget totals row */
+.budget-total-row{display:flex;gap:8px;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:6px;margin:10px 0;flex-wrap:wrap}
+.bt-item{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:80px}
+.bt-lbl{font-size:10.5px;color:rgba(255,255,255,.28)}
+.bt-val{font-size:15px;font-weight:700}
+/* row delete btn */
+.row-del-btn{background:none;border:none;color:rgba(255,80,80,.0);cursor:pointer;font-size:14px;padding:1px 4px;transition:color .15s;line-height:1}
+tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
+.row-del-btn:hover{color:#eb5757!important}
+
 </style>
 </head>
 <body>
@@ -1861,43 +1898,59 @@ function renderPT(tab){
 }
 
 function ptWeekdays(){
-  const d=getPF().wd||{}; const days=['Пн','Вт','Ср','Чт','Пт'];
-  const stats=days.map((_,di)=>({done:WD_ROWS.filter(r=>d[r.id+'-'+di]).length,tot:WD_ROWS.length}));
-  return`<div class="stat-cards">${stats.map((s,i)=>{const p=Math.round(s.done/s.tot*100);return`<div class="stat-card"><div class="stat-card-val" style="color:${p>=80?'#4db885':p>=50?'#e9a84c':'rgba(255,255,255,.7)'}">${p}%</div><div class="stat-card-lbl">${days[i]}</div><div class="stat-card-sub">${s.done}/${s.tot}</div><div class="prog-wrap"><div class="prog-bar ${p>=80?'prog-green':p>=50?'prog-orange':'prog-red'}" style="width:${p}%"></div></div></div>`;}).join('')}</div>
-  <div class="sec-lbl">Расписание будних дней</div>
+  const pf=getPF(); const d=pf.wd||{}; const tx=pf.wd_txt||{}; const days=['Пн','Вт','Ср','Чт','Пт'];
+  const customRows=pf.wd_rows||[];
+  const allRows=[...WD_ROWS,...customRows];
+  const stats=days.map((_,di)=>({done:allRows.filter(r=>d[r.id+'-'+di]).length,tot:allRows.length}));
+  const rowHTML=r=>{const dc=days.map((_,di)=>!!d[r.id+'-'+di]);const tot=dc.filter(Boolean).length;const isCustom=!!r._custom;
+    return`<tr style="${tot===5?'background:rgba(77,184,133,.05)':''}">
+    <td><div class="cc"><input class="edtxt" style="width:44px;color:rgba(255,255,255,.35);font-size:11px" value="${tx[r.id+'-t']||r.t}" oninput="pfTxt('wd_txt','${r.id}-t',this.value)" title="Изменить время"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:11.5px;color:rgba(255,255,255,.45)" value="${tx[r.id+'-b']||r.b}" oninput="pfTxt('wd_txt','${r.id}-b',this.value)" title="Изменить блок"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${tx[r.id+'-task']||r.task}" oninput="pfTxt('wd_txt','${r.id}-task',this.value)" title="Изменить задачу"></div></td>
+    ${dc.map((v,di)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('wd','${r.id}-${di}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px"></div></td>`).join('')}
+    <td><div class="cc" style="justify-content:center;gap:4px;font-weight:700;color:${tot===5?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}
+    ${isCustom?`<button class="row-del-btn" onclick="delPlanRow('wd_rows','${r.id}')">×</button>`:''}
+    </div></td>
+  </tr>`;};
+  return`<div class="stat-cards">${stats.map((s,i)=>{const p=Math.round(s.done/s.tot*100)||0;return`<div class="stat-card"><div class="stat-card-val" style="color:${p>=80?'#4db885':p>=50?'#e9a84c':'rgba(255,255,255,.7)'}">${p}%</div><div class="stat-card-lbl">${days[i]}</div><div class="stat-card-sub">${s.done}/${s.tot}</div><div class="prog-wrap"><div class="prog-bar ${p>=80?'prog-green':p>=50?'prog-orange':'prog-red'}" style="width:${p}%"></div></div></div>`;}).join('')}</div>
+  <div class="sec-lbl" style="display:flex;align-items:center;gap:8px">Расписание будних дней <span style="font-size:11px;color:rgba(255,255,255,.2);font-weight:400">— кликни на любую ячейку чтобы редактировать</span></div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
     <th style="width:52px">Время</th><th style="min-width:150px">Блок</th><th style="min-width:290px">Задача / Действие</th>
     ${days.map(d=>`<th style="width:36px;text-align:center">${d}</th>`).join('')}
-    <th style="width:44px;text-align:center">✅</th>
+    <th style="width:52px;text-align:center">✅</th>
   </tr></thead><tbody>
-  ${WD_ROWS.map(r=>{const dc=days.map((_,di)=>!!d[r.id+'-'+di]);const tot=dc.filter(Boolean).length;return`<tr style="${tot===5?'background:rgba(77,184,133,.05)':''}">
-    <td><div class="cc" style="color:rgba(255,255,255,.28);font-size:11px">${r.t}</div></td>
-    <td><div class="cc" style="font-size:11.5px;color:rgba(255,255,255,.45)">${r.b}</div></td>
-    <td><div class="cc" style="font-size:12.5px">${r.task}</div></td>
-    ${dc.map((v,di)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('wd','${r.id}-${di}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px"></div></td>`).join('')}
-    <td><div class="cc" style="justify-content:center;font-weight:700;color:${tot===5?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}</div></td>
-  </tr>`;}).join('')}
-  </tbody></table></div>`;
+  ${allRows.map(rowHTML).join('')}
+  </tbody></table>
+  <div class="add-row-planner" onclick="addPlanRow('wd_rows','wd')">+ Добавить строку</div>
+  </div>`;
 }
 
 function ptWeekend(){
-  const d=getPF().we||{}; const days=['Сб','Вс'];
-  const stats=days.map((_,di)=>({done:WE_ROWS.filter(r=>d[r.id+'-'+di]).length,tot:WE_ROWS.length}));
-  return`<div class="stat-cards">${stats.map((s,i)=>{const p=Math.round(s.done/s.tot*100);return`<div class="stat-card"><div class="stat-card-val" style="color:${p>=80?'#4db885':p>=50?'#e9a84c':'rgba(255,255,255,.7)'}">${p}%</div><div class="stat-card-lbl">${days[i]}</div><div class="stat-card-sub">${s.done}/${s.tot}</div><div class="prog-wrap"><div class="prog-bar ${p>=80?'prog-green':'prog-orange'}" style="width:${p}%"></div></div></div>`;}).join('')}</div>
+  const pf=getPF(); const d=pf.we||{}; const tx=pf.we_txt||{}; const days=['Сб','Вс'];
+  const customRows=pf.we_rows||[];
+  const allRows=[...WE_ROWS,...customRows];
+  const stats=days.map((_,di)=>({done:allRows.filter(r=>d[r.id+'-'+di]).length,tot:allRows.length}));
+  const rowHTML=r=>{const dc=days.map((_,di)=>!!d[r.id+'-'+di]);const tot=dc.filter(Boolean).length;const isCustom=!!r._custom;
+    return`<tr style="${tot===2?'background:rgba(77,184,133,.05)':''}">
+    <td><div class="cc"><input class="edtxt" style="width:44px;color:rgba(255,255,255,.35);font-size:11px" value="${tx[r.id+'-t']||r.t}" oninput="pfTxt('we_txt','${r.id}-t',this.value)"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:11.5px;color:rgba(255,255,255,.45)" value="${tx[r.id+'-b']||r.b}" oninput="pfTxt('we_txt','${r.id}-b',this.value)"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px" value="${tx[r.id+'-task']||r.task}" oninput="pfTxt('we_txt','${r.id}-task',this.value)"></div></td>
+    ${dc.map((v,di)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('we','${r.id}-${di}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px"></div></td>`).join('')}
+    <td><div class="cc" style="justify-content:center;gap:4px;font-weight:700;color:${tot===2?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}
+    ${isCustom?`<button class="row-del-btn" onclick="delPlanRow('we_rows','${r.id}')">×</button>`:''}
+    </div></td>
+  </tr>`;};
+  return`<div class="stat-cards">${stats.map((s,i)=>{const p=Math.round(s.done/s.tot*100)||0;return`<div class="stat-card"><div class="stat-card-val" style="color:${p>=80?'#4db885':p>=50?'#e9a84c':'rgba(255,255,255,.7)'}">${p}%</div><div class="stat-card-lbl">${days[i]}</div><div class="stat-card-sub">${s.done}/${s.tot}</div><div class="prog-wrap"><div class="prog-bar ${p>=80?'prog-green':'prog-orange'}" style="width:${p}%"></div></div></div>`;}).join('')}</div>
   <div class="sec-lbl">Суббота — съёмка · Воскресенье — монтаж и публикация</div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
     <th style="width:52px">Время</th><th style="min-width:150px">Блок</th><th style="min-width:290px">Задача / Действие</th>
     ${days.map(d=>`<th style="width:42px;text-align:center">${d} ✓</th>`).join('')}
-    <th style="width:44px;text-align:center">✅</th>
+    <th style="width:52px;text-align:center">✅</th>
   </tr></thead><tbody>
-  ${WE_ROWS.map(r=>{const dc=days.map((_,di)=>!!d[r.id+'-'+di]);const tot=dc.filter(Boolean).length;return`<tr style="${tot===2?'background:rgba(77,184,133,.05)':''}">
-    <td><div class="cc" style="color:rgba(255,255,255,.28);font-size:11px">${r.t}</div></td>
-    <td><div class="cc" style="font-size:11.5px;color:rgba(255,255,255,.45)">${r.b}</div></td>
-    <td><div class="cc" style="font-size:12.5px">${r.task}</div></td>
-    ${dc.map((v,di)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('we','${r.id}-${di}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px"></div></td>`).join('')}
-    <td><div class="cc" style="justify-content:center;font-weight:700;color:${tot===2?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}</div></td>
-  </tr>`;}).join('')}
-  </tbody></table></div>`;
+  ${allRows.map(rowHTML).join('')}
+  </tbody></table>
+  <div class="add-row-planner" onclick="addPlanRow('we_rows','we')">+ Добавить строку</div>
+  </div>`;
 }
 
 function ptWeekly(){
@@ -1918,27 +1971,39 @@ function ptWeekly(){
 }
 
 function ptMonthly(){
-  const d=getPF().mt||{}; let lcat='';
-  const done=MT_TASKS.filter(t=>[1,2,3,4].every(w=>d[t.id+'-'+w])).length;
-  return`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-    <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,.78)">📅 Март 2026</div>
-    <div style="font-size:12.5px;color:rgba(255,255,255,.3)">${done}/${MT_TASKS.length} задач выполнено</div>
+  const pf=getPF(); const d=pf.mt||{}; const tx=pf.mt_txt||{};
+  const customTasks=pf.mt_rows||[];
+  const allTasks=[...MT_TASKS,...customTasks];
+  const done=allTasks.filter(t=>[1,2,3,4].every(w=>d[t.id+'-'+w])).length;
+  let lcat='';
+  const MN_FULL2=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  const curM=pf.mt_month!==undefined?pf.mt_month:new Date().getMonth();
+  return`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,.78)">📅 План на месяц</div>
+      <select class="month-sel" onchange="setPFMonth('mt_month',+this.value)">${MN_FULL2.map((m,i)=>`<option value="${i}"${i===curM?' selected':''}>${m} 2026</option>`).join('')}</select>
+    </div>
+    <div style="font-size:12.5px;color:rgba(255,255,255,.3)">${done}/${allTasks.length} выполнено</div>
   </div>
   <div style="overflow-x:auto"><table class="ctbl"><thead><tr>
     <th style="width:28px">#</th><th style="min-width:120px">Категория</th><th style="min-width:280px">Задача / Цель на месяц</th>
     ${[1,2,3,4].map(w=>`<th style="width:52px;text-align:center">Нед ${w}</th>`).join('')}
-    <th style="width:54px;text-align:center">✅</th>
+    <th style="width:60px;text-align:center">✅</th>
   </tr></thead><tbody>
-  ${MT_TASKS.map((t,i)=>{const sep=t.cat!==lcat;lcat=t.cat;const wc=[1,2,3,4].map(w=>!!d[t.id+'-'+w]);const tot=wc.filter(Boolean).length;const fin=tot===4;
+  ${allTasks.map((t,i)=>{const sep=t.cat!==lcat;lcat=t.cat;const wc=[1,2,3,4].map(w=>!!d[t.id+'-'+w]);const tot=wc.filter(Boolean).length;const fin=tot===4;const isCustom=!!t._custom;
     return(sep?`<tr><td colspan="8"><div style="padding:10px 8px 2px;font-size:10.5px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:.06em">${t.cat}</div></td></tr>`:'')+
     `<tr style="${fin?'background:rgba(77,184,133,.05)':''}">
     <td><div class="cc" style="color:rgba(255,255,255,.25);font-size:11.5px">${i+1}</div></td>
-    <td><div class="cc"><span style="font-size:10.5px;padding:1px 6px;border-radius:3px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)">${t.cat}</span></div></td>
-    <td><div class="cc" style="font-size:12.5px;${fin?'text-decoration:line-through;color:rgba(255,255,255,.3)':''}">${t.task}</div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:10.5px;color:rgba(255,255,255,.4)" value="${tx[t.id+'-cat']||t.cat}" oninput="pfTxt('mt_txt','${t.id}-cat',this.value)"></div></td>
+    <td><div class="cc"><input class="edtxt" style="font-size:12.5px;${fin?'text-decoration:line-through;color:rgba(255,255,255,.3)':''}" value="${tx[t.id+'-task']||t.task}" oninput="pfTxt('mt_txt','${t.id}-task',this.value)"></div></td>
     ${wc.map((v,wi)=>`<td style="text-align:center"><div class="cc" style="justify-content:center"><input type="checkbox"${v?' checked':''} onchange="pfChk('mt','${t.id}-${wi+1}',this.checked)" style="accent-color:#0a84ff;cursor:pointer;width:14px;height:14px"></div></td>`).join('')}
-    <td><div class="cc" style="justify-content:center;font-weight:700;color:${fin?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}/4</div></td>
+    <td><div class="cc" style="justify-content:center;gap:4px;font-weight:700;color:${fin?'#4db885':tot>0?'#e9a84c':'rgba(255,255,255,.2)'}">${tot}/4
+    ${isCustom?`<button class="row-del-btn" onclick="delPlanRow('mt_rows','${t.id}')">×</button>`:''}
+    </div></td>
   </tr>`;}).join('')}
-  </tbody></table></div>`;
+  </tbody></table>
+  <div class="add-row-planner" onclick="addMTRow()">+ Добавить задачу</div>
+  </div>`;
 }
 
 function ptHabits(){
@@ -2120,45 +2185,78 @@ function ftDashboard(){
   </div>`;
 }
 
+function getPlanInc(id){const fin=getFIN();return+(fin.planInc&&fin.planInc[id]!==undefined?fin.planInc[id]:INC_SRC.find(x=>x.id===id)?.plan||0);}
+function getPlanExp(id){const fin=getFIN();return+(fin.planExp&&fin.planExp[id]!==undefined?fin.planExp[id]:EXP_CAT.find(x=>x.id===id)?.plan||0);}
+function setPlanInc(id,v){const fin=getFIN();if(!fin.planInc)fin.planInc={};fin.planInc[id]=+v||0;save();finRecalcBudget();}
+function setPlanExp(id,v){const fin=getFIN();if(!fin.planExp)fin.planExp={};fin.planExp[id]=+v||0;save();finRecalcBudget();}
+function getBudgetMonth(){const fin=getFIN();return fin.budgetMonth!==undefined?fin.budgetMonth:new Date().getMonth();}
+function setBudgetMonth(m){const fin=getFIN();fin.budgetMonth=+m;save();const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderFT('budget');}
+function finRecalcBudget(){const b=document.getElementById('ipg-body');if(b&&getFIN().tab==='budget')b.innerHTML=renderFT('budget');}
+
 function ftBudget(){
-  const mi=2;// March
+  const mi=getBudgetMonth();
+  const MN_FULL2=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
   const incFact=INC_SRC.reduce((s,src)=>s+getI(src.id,mi),0);
   const expFact=EXP_CAT.reduce((s,cat)=>s+getX(cat.id,mi),0);
+  const incPlan=INC_SRC.reduce((s,src)=>s+getPlanInc(src.id),0);
+  const expPlan=EXP_CAT.reduce((s,cat)=>s+getPlanExp(cat.id),0);
   const bal=incFact-expFact;
-  return`<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
-    <div style="font-size:16px;font-weight:700;color:rgba(255,255,255,.78)">💳 Бюджет — Март 2026</div>
-    <div style="display:flex;gap:8px;margin-left:auto">
-      ${[{lbl:'Доходы',val:incFact,c:'#4db885',bg:'rgba(77,184,133,.08)'},{lbl:'Расходы',val:expFact,c:'#eb5757',bg:'rgba(235,87,87,.07)'},{lbl:'Остаток',val:bal,c:bal>=0?'#4db885':'#eb5757',bg:'rgba(10,132,255,.07)'}].map(x=>`<div style="padding:5px 14px;background:${x.bg};border-radius:6px;text-align:center"><div style="font-size:14px;font-weight:700;color:${x.c}">${fmtR(x.val)}</div><div style="font-size:10.5px;color:rgba(255,255,255,.28)">${x.lbl}</div></div>`).join('')}
+  const savRate=incFact>0?Math.round((incFact-expFact)/incFact*100):0;
+  return`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+    <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,.78)">💳 Бюджет</div>
+    <select class="month-sel" onchange="setBudgetMonth(this.value)">${MN_FULL2.map((m,i)=>`<option value="${i}"${i===mi?' selected':''}>${m} 2026</option>`).join('')}</select>
+    <div class="budget-total-row" style="flex:1">
+      ${[{lbl:'Доходы факт',val:incFact,c:'#4db885'},{lbl:'Расходы факт',val:expFact,c:'#eb5757'},{lbl:'Остаток',val:bal,c:bal>=0?'#4db885':'#eb5757'},{lbl:'Норма сбережений',val:savRate+'%',c:savRate>=20?'#4db885':savRate>=10?'#e9a84c':'#eb5757',noFmt:true}].map(x=>`<div class="bt-item"><div class="bt-lbl">${x.lbl}</div><div class="bt-val" style="color:${x.c}">${x.noFmt?x.val:fmtR(x.val)}</div></div>`).join('')}
     </div>
   </div>
-  <div class="sec-lbl">💵 Доходы</div>
+  <div class="sec-lbl">💵 Доходы — план и факт <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.2)">(план можно изменить)</span></div>
   <table class="ctbl" style="margin-bottom:14px"><thead><tr>
-    <th style="min-width:210px">Источник</th><th style="width:100px;text-align:center">ПЛАН ₽</th><th style="width:120px;text-align:center">ФАКТ ₽</th><th style="width:90px;text-align:center">Разница</th>
+    <th style="min-width:200px">Источник</th><th style="width:110px;text-align:center">ПЛАН ₽ ✏️</th><th style="width:110px;text-align:center">ФАКТ ₽</th><th style="width:90px;text-align:center">Разница</th><th style="width:60px;text-align:center">%</th>
   </tr></thead><tbody>
-  ${INC_SRC.map(src=>{const plan=src.plan;const fact=getI(src.id,mi);const diff=fact-plan;return`<tr>
+  ${INC_SRC.map(src=>{const plan=getPlanInc(src.id);const fact=getI(src.id,mi);const diff=fact-plan;const pct=incFact?Math.round(fact/incFact*100):0;return`<tr>
     <td><div class="cc" style="font-size:13px">${src.name}</div></td>
-    <td><div class="cc" style="justify-content:center;color:rgba(255,255,255,.38);font-size:12px">${fmtR(plan)}</div></td>
-    <td><div class="cc" style="justify-content:center"><input type="number" value="${fact||''}" placeholder="0" oninput="finInc('${src.id}',${mi},this.value)" style="width:90px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:4px;color:rgba(255,255,255,.8);font-family:inherit;font-size:13px;padding:4px 6px;outline:none"></div></td>
+    <td><div class="cc" style="justify-content:center"><input class="plan-inp" type="number" value="${plan||''}" placeholder="0" oninput="setPlanInc('${src.id}',this.value)" title="Измени план"></div></td>
+    <td><div class="cc" style="justify-content:center"><input type="number" value="${fact||''}" placeholder="0" oninput="finInc('${src.id}',${mi},this.value);finRecalcBudget()" style="width:90px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:4px;color:rgba(255,255,255,.8);font-family:inherit;font-size:13px;padding:4px 6px;outline:none"></div></td>
     <td><div class="cc" style="justify-content:center;font-size:12.5px;font-weight:600;color:${diff>=0?'#4db885':'#eb5757'}">${diff>0?'+':''}${fmtR(diff)}</div></td>
+    <td><div class="cc" style="justify-content:center;font-size:11.5px;color:rgba(255,255,255,.35)">${pct}%</div></td>
   </tr>`;}).join('')}
-  <tr style="background:rgba(255,255,255,.03)"><td><div class="cc" style="font-weight:700">ИТОГО ДОХОДОВ</div></td><td><div class="cc" style="justify-content:center;font-weight:700;color:#4db885">${fmtR(INC_SRC.reduce((s,x)=>s+x.plan,0))}</div></td><td><div class="cc" style="justify-content:center;font-weight:700;color:#4db885">${fmtR(incFact)}</div></td><td><div class="cc" style="justify-content:center;font-weight:600;color:${incFact>=INC_SRC.reduce((s,x)=>s+x.plan,0)?'#4db885':'#eb5757'}">${fmtR(incFact-INC_SRC.reduce((s,x)=>s+x.plan,0))}</div></td></tr>
+  <tr style="background:rgba(255,255,255,.04)"><td><div class="cc" style="font-weight:700">ИТОГО ДОХОДОВ</div></td>
+    <td><div class="cc" style="justify-content:center;font-weight:700;color:rgba(255,255,255,.5)">${fmtR(incPlan)}</div></td>
+    <td><div class="cc" style="justify-content:center;font-weight:700;color:#4db885">${fmtR(incFact)}</div></td>
+    <td><div class="cc" style="justify-content:center;font-weight:700;color:${incFact>=incPlan?'#4db885':'#eb5757'}">${incFact>=incPlan?'+':''}${fmtR(incFact-incPlan)}</div></td>
+    <td><div class="cc" style="justify-content:center;font-size:12px;color:rgba(255,255,255,.3)">100%</div></td></tr>
   </tbody></table>
-  <div class="sec-lbl">📤 Расходы</div>
-  <table class="ctbl"><thead><tr>
-    <th style="min-width:200px">Категория</th><th style="width:80px;text-align:center">Тип</th><th style="width:90px;text-align:center">ПЛАН ₽</th><th style="width:120px;text-align:center">ФАКТ ₽</th><th style="width:80px;text-align:center">Разница</th><th style="width:56px;text-align:center">%</th>
+  <div class="sec-lbl">📤 Расходы — план и факт <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,.2)">(план можно изменить)</span></div>
+  <table class="ctbl" style="margin-bottom:16px"><thead><tr>
+    <th style="min-width:190px">Категория</th><th style="width:80px;text-align:center">Тип</th><th style="width:110px;text-align:center">ПЛАН ₽ ✏️</th><th style="width:110px;text-align:center">ФАКТ ₽</th><th style="width:80px;text-align:center">Разница</th><th style="width:56px;text-align:center">%</th>
   </tr></thead><tbody>
-  ${EXP_CAT.map(cat=>{const plan=cat.plan;const fact=getX(cat.id,mi);const diff=fact-plan;const pct=incFact?Math.round(fact/incFact*100):0;
+  ${EXP_CAT.map(cat=>{const plan=getPlanExp(cat.id);const fact=getX(cat.id,mi);const diff=fact-plan;const pct=incFact?Math.round(fact/incFact*100):0;
     const tc=cat.type==='Необходимое'?'rgba(235,87,87,.22)':cat.type==='Желаемое'?'rgba(233,168,76,.2)':'rgba(10,132,255,.2)';
+    const barW=Math.min(100,plan?Math.round(fact/plan*100):0);
     return`<tr>
-    <td><div class="cc" style="font-size:12.5px">${cat.name}</div></td>
+    <td><div class="cc" style="font-size:12.5px;flex-direction:column;align-items:flex-start;gap:2px;padding:4px 7px">
+      <span>${cat.name}</span>
+      <div style="width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px"><div style="width:${barW}%;height:100%;background:${barW>100?'#eb5757':barW>80?'#e9a84c':'#0a84ff'};border-radius:2px;transition:width .3s"></div></div>
+    </div></td>
     <td><div class="cc" style="justify-content:center"><span style="font-size:10px;padding:1px 6px;border-radius:3px;background:${tc};color:rgba(255,255,255,.55)">${cat.type}</span></div></td>
-    <td><div class="cc" style="justify-content:center;color:rgba(255,255,255,.38);font-size:12px">${fmtR(plan)}</div></td>
-    <td><div class="cc" style="justify-content:center"><input type="number" value="${fact||''}" placeholder="0" oninput="finExp('${cat.id}',${mi},this.value)" style="width:90px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:4px;color:rgba(255,255,255,.8);font-family:inherit;font-size:13px;padding:4px 6px;outline:none"></div></td>
+    <td><div class="cc" style="justify-content:center"><input class="plan-inp" type="number" value="${plan||''}" placeholder="0" oninput="setPlanExp('${cat.id}',this.value)" title="Измени план"></div></td>
+    <td><div class="cc" style="justify-content:center"><input type="number" value="${fact||''}" placeholder="0" oninput="finExp('${cat.id}',${mi},this.value);finRecalcBudget()" style="width:90px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:4px;color:rgba(255,255,255,.8);font-family:inherit;font-size:13px;padding:4px 6px;outline:none"></div></td>
     <td><div class="cc" style="justify-content:center;font-size:12.5px;font-weight:600;color:${diff<=0?'#4db885':'#eb5757'}">${diff>0?'+':''}${fmtR(diff)}</div></td>
-    <td><div class="cc" style="justify-content:center;font-size:12px;color:rgba(255,255,255,.35)">${pct}%</div></td>
+    <td><div class="cc" style="justify-content:center;font-size:12px;color:${pct>30?'#eb5757':pct>20?'#e9a84c':'rgba(255,255,255,.35)'}">${pct}%</div></td>
   </tr>`;}).join('')}
-  <tr style="background:rgba(255,255,255,.03)"><td><div class="cc" style="font-weight:700">ИТОГО РАСХОДОВ</div></td><td></td><td><div class="cc" style="justify-content:center;font-weight:700;color:#eb5757">${fmtR(EXP_CAT.reduce((s,x)=>s+x.plan,0))}</div></td><td><div class="cc" style="justify-content:center;font-weight:700;color:#eb5757">${fmtR(expFact)}</div></td><td></td><td><div class="cc" style="justify-content:center;font-weight:600;color:rgba(255,255,255,.3)">${incFact?Math.round(expFact/incFact*100):0}%</div></td></tr>
-  </tbody></table>`;
+  <tr style="background:rgba(255,255,255,.04)"><td colspan="2"><div class="cc" style="font-weight:700">ИТОГО РАСХОДОВ</div></td>
+    <td><div class="cc" style="justify-content:center;font-weight:700;color:rgba(255,255,255,.5)">${fmtR(expPlan)}</div></td>
+    <td><div class="cc" style="justify-content:center;font-weight:700;color:#eb5757">${fmtR(expFact)}</div></td>
+    <td></td>
+    <td><div class="cc" style="justify-content:center;font-weight:600;color:rgba(255,255,255,.35)">${incFact?Math.round(expFact/incFact*100):0}%</div></td></tr>
+  </tbody></table>
+  <div style="background:rgba(77,184,133,.06);border:1px solid rgba(77,184,133,.14);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#4db885">💰 Чистый остаток за ${MN_FULL2[mi]}</div>
+      <div style="font-size:11.5px;color:rgba(255,255,255,.3);margin-top:2px">Доходы ${fmtR(incFact)} − Расходы ${fmtR(expFact)}</div>
+    </div>
+    <div style="font-size:26px;font-weight:800;color:${bal>=0?'#4db885':'#eb5757'}">${bal>=0?'+':''}${fmtR(bal)}</div>
+  </div>`;
 }
 
 function ftExpenses(){
@@ -2679,6 +2777,7 @@ async function doRegister() {
 
 function onAuthSuccess(data) {
   _currentUser = data;
+  DB = defaultDB(); // ← сбрасываем данные перед загрузкой данных этого пользователя
   document.getElementById('auth-overlay').style.display = 'none';
   document.getElementById('user-badge').textContent = data.username;
   document.getElementById('user-menu-btn').style.display = '';
@@ -3455,6 +3554,45 @@ closeModal=function(){
 
 // Apply settings on load
 setTimeout(()=>{applySETT();updateInboxBadge();},200);
+
+
+// ════════════════════════════════════════════════
+// PLANNER EDIT HELPERS
+// ════════════════════════════════════════════════
+function pfTxt(field,k,v){const pf=getPF();if(!pf[field])pf[field]={};pf[field][k]=v;save();}
+function setPFMonth(field,m){const pf=getPF();pf[field]=m;save();}
+
+function addPlanRow(field,checkField){
+  const time=prompt('Время (например 22:00):','');if(time===null)return;
+  const block=prompt('Блок (например Отдых):','');if(block===null)return;
+  const task=prompt('Задача / действие:','');if(task===null)return;
+  const pf=getPF();if(!pf[field])pf[field]=[];
+  pf[field].push({id:'cr'+Date.now(),t:time,b:block,task:task,_custom:true});
+  save();
+  const b=document.getElementById('ipg-body');
+  if(b)b.innerHTML=renderPT(checkField==='wd'?'weekdays':checkField==='we'?'weekend':'monthly');
+}
+
+function addMTRow(){
+  const cat=prompt('Категория:','Личное');if(cat===null)return;
+  const task=prompt('Задача на месяц:','');if(!task)return;
+  const pf=getPF();if(!pf.mt_rows)pf.mt_rows=[];
+  pf.mt_rows.push({id:'mr'+Date.now(),cat,task,_custom:true});
+  save();
+  const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT('monthly');
+}
+
+function delPlanRow(field,id){
+  const pf=getPF();if(!pf[field])return;
+  pf[field]=pf[field].filter(r=>r.id!==id);save();
+  const tabMap={'wd_rows':'weekdays','we_rows':'weekend','mt_rows':'monthly'};
+  const tab=tabMap[field]||'weekdays';
+  const b=document.getElementById('ipg-body');if(b)b.innerHTML=renderPT(tab);
+}
+
+// Override finInc/finExp to also trigger budget recalc
+const _origFinInc=finInc;
+finInc=function(src,m,v){_origFinInc(src,m,v);};
 
 </script>
 
