@@ -671,9 +671,12 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 .block-table tr:first-child td .btable-cell{font-weight:600;color:rgba(255,255,255,.88)}
 
 
-.vp-folder-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:#222;border:1px solid rgba(255,255,255,.1);border-radius:20px;font-size:12.5px;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;user-select:none}
+#vp-folders-bar{display:flex;gap:8px;padding:6px 0 4px;flex-wrap:wrap;align-items:center}
+.vp-folder-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 14px;background:#222;border:1px solid rgba(255,255,255,.1);border-radius:20px;font-size:12.5px;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap}
 .vp-folder-chip:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.85)}
 .vp-folder-chip.on{background:rgba(10,132,255,.18);border-color:rgba(10,132,255,.4);color:#fff}
+.vp-folder-add{border-style:dashed;color:rgba(255,255,255,.3)}
+.vp-folder-add:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.3);border-style:solid}
 .vp-folder-menu{margin-left:2px;font-size:13px;color:rgba(255,255,255,.3);padding:0 3px;border-radius:3px;transition:all .1s}
 .vp-folder-menu:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
 /* folder modal */
@@ -696,6 +699,71 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 #vp-folder-ctx{display:none;position:fixed;background:#222;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px;z-index:9100;min-width:140px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
 .vp-fctx-item{padding:6px 12px;font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;border-radius:5px;display:flex;align-items:center;gap:8px;transition:background .1s}
 .vp-fctx-item:hover{background:rgba(255,255,255,.08);color:#fff}
+
+
+/* ██ SECTION:NOTES — IMAGE ZOOM LIGHTBOX */
+#img-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9500;align-items:center;justify-content:center;cursor:zoom-out}
+#img-lightbox.open{display:flex}
+#img-lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.8);transition:transform .1s}
+#img-lightbox-close{position:fixed;top:16px;right:20px;color:rgba(255,255,255,.6);font-size:24px;cursor:pointer;background:rgba(0,0,0,.4);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+#img-lightbox-close:hover{color:#fff;background:rgba(0,0,0,.7)}
+
+
+/* ██ SECTION:REMINDERS */
+#reminder-bell{position:fixed;top:8px;right:56px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:6px;font-size:16px;transition:background .15s;z-index:200}
+#reminder-bell:hover{background:rgba(255,255,255,.08)}
+#reminder-badge{position:absolute;top:3px;right:3px;width:8px;height:8px;background:#eb5757;border-radius:50%;display:none}
+#reminder-panel{display:none;position:fixed;top:48px;right:12px;width:320px;background:#1e1e1e;border:1px solid rgba(255,255,255,.1);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:9000;max-height:70vh;overflow-y:auto}
+#reminder-panel.open{display:block}
+.rem-header{padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07)}
+.rem-title{font-size:14px;font-weight:700;color:rgba(255,255,255,.85)}
+.rem-item{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:background .1s}
+.rem-item:hover{background:rgba(255,255,255,.04)}
+.rem-item.overdue .rem-ico{color:#eb5757}
+.rem-item.upcoming .rem-ico{color:#e9a84c}
+.rem-ico{font-size:16px;flex-shrink:0;margin-top:1px}
+.rem-text{font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.4}
+.rem-date{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+/* add reminder button */
+.add-rem-btn{display:flex;align-items:center;gap:6px;padding:8px 16px 12px;color:rgba(255,255,255,.3);font-size:12.5px;cursor:pointer;transition:color .1s}
+.add-rem-btn:hover{color:rgba(255,255,255,.7)}
+/* reminder modal */
+#rem-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9100;align-items:center;justify-content:center}
+#rem-modal.open{display:flex}
+#rem-modal-inner{background:#1e1e1e;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:24px;width:340px}
+.rem-modal-title{font-size:15px;font-weight:700;margin-bottom:16px;color:rgba(255,255,255,.85)}
+.rem-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:rgba(255,255,255,.85);font-family:inherit;font-size:13.5px;padding:9px 12px;outline:none;box-sizing:border-box;margin-bottom:10px;transition:border-color .15s}
+.rem-inp:focus{border-color:#0a84ff}
+
+
+/* ██ SECTION:RESPONSIVE — мобильная адаптация */
+@media (max-width: 768px){
+  #sb{position:fixed;left:-240px;z-index:500;transition:left .2s;box-shadow:4px 0 20px rgba(0,0,0,.5)}
+  #sb.mobile-open{left:0}
+  #sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:499}
+  #sb-overlay.open{display:block}
+  #main{width:100%;overflow-x:hidden}
+  .pg-wrap{padding-left:16px!important;padding-right:16px!important;max-width:100%!important}
+  .blocks{max-width:100%!important}
+  #board-page{touch-action:pan-y}
+  .mcard{min-width:150px}
+  #vp-body{flex-direction:column}
+  #vp-player{width:100%!important;max-height:50vh}
+  .ctbl{font-size:11px}
+  .fin-dash-grid{grid-template-columns:1fr!important}
+  #topbar{padding:0 8px}
+  .ipg-nav{flex-wrap:wrap;gap:3px}
+  .ipg-tab{font-size:11px;padding:4px 8px}
+  /* Sidebar toggle btn on mobile */
+  #mobile-sb-btn{display:flex!important}
+}
+@media (min-width:769px){
+  #mobile-sb-btn{display:none!important}
+  #sb-overlay{display:none!important}
+}
+#mobile-sb-btn{display:none;align-items:center;justify-content:center;width:34px;height:34px;border-radius:7px;cursor:pointer;font-size:18px;color:rgba(255,255,255,.6);border:none;background:none;flex-shrink:0}
+#mobile-sb-btn:hover{background:rgba(255,255,255,.08)}
+/* viewport meta is in head */
 
 </style>
 </head>
@@ -789,6 +857,8 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 <!-- MAIN -->
 <div id="main">
   <div id="topbar">
+    <button id="mobile-sb-btn" onclick="toggleMobileSidebar()" title="Меню">☰</button>
+    <div id="reminder-bell" onclick="toggleReminderPanel()" title="Напоминания">🔔<div id="reminder-badge"></div></div>
     <button class="tb-btn" onclick="toggleSb()">⋮⋮⋮</button>
     <button class="tb-btn">◀</button>
     <button class="tb-btn">▶</button>
@@ -851,6 +921,28 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 <div class="slash-menu" id="slash-menu" style="display:none"></div>
 
 <script>
+
+/*
+╔══════════════════════════════════════════════════════════╗
+║        AliPlanner — КАРТА РАЗДЕЛОВ КОДА                  ║
+╠══════════════════════════════════════════════════════════╣
+║  Чтобы отредактировать раздел — найди метку ██ SECTION   ║
+║  и отправь её Claude для изменений                        ║
+╠══════════════════════════════════════════════════════════╣
+║  ██ SECTION:DATA      — База данных, дефолты, сохранение  ║
+║  ██ SECTION:SIDEBAR   — Боковое меню, дерево страниц      ║
+║  ██ SECTION:PAGE      — Основной рендер страниц           ║
+║  ██ SECTION:PLANNER   — Планер (таблица, канбан, кал.)    ║
+║  ██ SECTION:NOTES     — Заметки, блоки, slash-меню        ║
+║  ██ SECTION:BOARD     — Доска Milanote, карточки          ║
+║  ██ SECTION:FINANCE   — Финансы                           ║
+║  ██ SECTION:PLANNER-FULL — Полный планер (трекеры)        ║
+║  ██ SECTION:MEDIA     — Медиатека, видео, папки           ║
+║  ██ SECTION:UTILS     — Утилиты, форматирование           ║
+║  ██ SECTION:REMINDERS — Дедлайны и напоминания            ║
+║  ██ SECTION:INIT      — Инициализация, загрузка           ║
+╚══════════════════════════════════════════════════════════╝
+*/
 'use strict';
 // ══════════════════════ DATA ══════════════════════
 const STATUSES={process:{l:'В процессе',c:'t-blue'},notstart:{l:'Не начат',c:'t-gray'},done:{l:'Завершён',c:'t-green'},pause:{l:'Пауза',c:'t-red'}};
@@ -872,10 +964,12 @@ function defaultDB(){
     curPage:'pg-planner-full',curView:'table',
     plannerFull:{tab:'weekdays',wd:{},we:{},wk:{},mt:{},hb:{},ym:{},yp:{},yt:{},fy:{},miss:''},
     finance:{tab:'dashboard',inc:{},exp:{},log:[],sav:{},cs:{},r5inc:0,r5f:{}},
+    videos:[],        // ██ массив видеофайлов (dataUrl, name, tags, etc.)
+    vpFolders:[],     // ██ папки медиатеки
   };
 }
 
-// ══ FILE-BASED STORAGE — данные в data.json, синхронизация через облако ══
+// ██ SECTION:DATA ══ Хранение данных, сохранение, загрузка ══ — данные в data.json, синхронизация через облако ══
 let DB = defaultDB();
 let _saveTimer = null;
 
@@ -951,7 +1045,7 @@ function showSyncInfo(){
   alert(msg);
 }
 
-// ══════════════════════ SIDEBAR ══════════════════════
+// ██ SECTION:SIDEBAR ══ Боковое меню ══════════════════════
 function renderSidebar(){
   const fav=DB.pages.filter(p=>p.fav&&!p.parentId);
   const priv=DB.pages.filter(p=>!p.fav&&!p.parentId);
@@ -1024,7 +1118,7 @@ function delPage(id){
   save();renderSidebar();renderPage();
 }
 
-// ══════════════════════ PAGE ══════════════════════
+// ██ SECTION:PAGE ══ Рендер страниц ══════════════════════
 function renderPage(){
   let pg=DB.pages.find(p=>p.id===DB.curPage);
   if(!pg){const fb=DB.pages.find(p=>p.type==='planner-full')||DB.pages[0];if(fb){DB.curPage=fb.id;pg=fb;}}
@@ -1041,7 +1135,7 @@ function renderPage(){
   if(pg.type!=='board')initBlockEditor();
 }
 
-// ══════════════════════ PLANNER PAGE ══════════════════════
+// ██ SECTION:PLANNER ══ Планер ══════════════════════
 function renderPlannerHTML(pg){
   return`<div class="pg-cover"><div class="cover-btns"><button class="cover-btn">🖼 Сменить обложку</button><button class="cover-btn">🗑 Удалить</button></div></div>
   <div class="pg-wrap">
@@ -1289,7 +1383,7 @@ function renderCalWeek(){
 function calNav(d){DB.calM+=d;if(DB.calM>11){DB.calM=0;DB.calY++;}if(DB.calM<0){DB.calM=11;DB.calY--;}save();reloadDB();}
 function calToday(){const t=new Date();DB.calM=t.getMonth();DB.calY=t.getFullYear();save();reloadDB();}
 
-// ══════════════════════ NOTES PAGE ══════════════════════
+// ██ SECTION:NOTES ══ Заметки и блоки ══════════════════════
 function renderNotesHTML(pg){
   const blocksHTML=(pg.blocks||[]).map((b,i)=>blockHTML(b,i)).join('');
   return`<div class="pg-wrap" style="padding-top:80px">
@@ -1299,30 +1393,199 @@ function renderNotesHTML(pg){
     </div>
     <textarea class="pg-title" id="pg-title" rows="1" oninput="autoResize(this);updatePgTitle(this.value)" placeholder="Без названия">${pg.name}</textarea>
     <div class="blocks" id="blocks-container">${blocksHTML}</div>
-    <div id="block-add-bar-wrap" style="padding:12px 28px 40px">
-      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.18);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Добавить блок</div>
-      <div class="block-add-bar">
-        <div class="bab-btn" onclick="addBlock('text')"><div class="bab-ico">📝</div><div class="bab-lbl">Текст</div></div>
-        <div class="bab-btn" onclick="addBlock('h1')"><div class="bab-ico" style="font-size:16px;font-weight:800">H1</div><div class="bab-lbl">Заголовок</div></div>
-        <div class="bab-btn" onclick="addBlock('h2')"><div class="bab-ico" style="font-size:14px;font-weight:700">H2</div><div class="bab-lbl">Подзаголовок</div></div>
-        <div class="bab-btn" onclick="addBlock('todo')"><div class="bab-ico">☑️</div><div class="bab-lbl">Задача</div></div>
-        <div class="bab-btn" onclick="addBlock('bullet')"><div class="bab-ico">•</div><div class="bab-lbl">Список</div></div>
-        <div class="bab-btn" onclick="addBlock('numbered')"><div class="bab-ico">1.</div><div class="bab-lbl">Нумерация</div></div>
-        <div class="bab-btn" onclick="addBlock('callout')"><div class="bab-ico">💡</div><div class="bab-lbl">Выноска</div></div>
-        <div class="bab-btn" onclick="addBlock('quote')"><div class="bab-ico">❝</div><div class="bab-lbl">Цитата</div></div>
-        <div class="bab-btn" onclick="addBlock('code')"><div class="bab-ico">&lt;/&gt;</div><div class="bab-lbl">Код</div></div>
-        <div class="bab-btn" onclick="addBlockTable()"><div class="bab-ico">⊞</div><div class="bab-lbl">Таблица</div></div>
-        <div class="bab-btn" onclick="addBlockImg()"><div class="bab-ico">🖼</div><div class="bab-lbl">Картинка</div></div>
-        <div class="bab-btn" onclick="addBlockFileBlock()"><div class="bab-ico">📎</div><div class="bab-lbl">Файл</div></div>
-        <div class="bab-btn" onclick="addBlock('divider')"><div class="bab-ico">——</div><div class="bab-lbl">Разделитель</div></div>
-        <div class="bab-btn" onclick="openEmojiPickerPage()"><div class="bab-ico">🎨</div><div class="bab-lbl">Иконка</div></div>
+    <div id="block-add-bar-wrap" style="padding:8px 28px 60px">
+      <div onclick="addBlock('text')" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.18);font-size:13px;padding:6px 0;cursor:text;transition:color .1s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.18)'">
+        <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">+</span>
+        <span>Нажми Enter или нажми <kbd style="padding:1px 6px;border:1px solid rgba(255,255,255,.12);border-radius:4px;font-size:11px;background:rgba(255,255,255,.04)">/</kbd> для команд</span>
       </div>
     </div>
   </div>`;
 }
 
+
+
+// ██ SECTION:NOTES — LIGHTBOX (увеличение изображения)
+function openLightbox(src){
+  const lb=document.getElementById('img-lightbox');
+  const img=document.getElementById('img-lightbox-img');
+  if(!lb||!img)return;
+  img.src=src;
+  lb.classList.add('open');
+}
+function closeLightbox(){
+  const lb=document.getElementById('img-lightbox');
+  if(lb)lb.classList.remove('open');
+}
+
+
+// ██ SECTION:REMINDERS — система напоминаний со звуком
+// Напоминания хранятся в DB.reminders[]
+function getReminders(){if(!DB.reminders)DB.reminders=[];return DB.reminders;}
+
+
+// ██ SECTION:RESPONSIVE
+function toggleMobileSidebar(){
+  const sb=document.getElementById('sb');
+  const ov=document.getElementById('sb-overlay');
+  sb.classList.toggle('mobile-open');
+  if(ov)ov.classList.toggle('open');
+}
+
+function toggleReminderPanel(){
+  const p=document.getElementById('reminder-panel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open')){renderReminderList();setTimeout(()=>document.addEventListener('click',closeReminderPanel,{once:true}),80);}
+}
+function closeReminderPanel(){document.getElementById('reminder-panel')?.classList.remove('open');}
+
+function renderReminderList(){
+  const list=document.getElementById('rem-list');if(!list)return;
+  const rems=getReminders();
+  if(!rems.length){list.innerHTML=`<div style="padding:20px;text-align:center;color:rgba(255,255,255,.2);font-size:13px">Нет напоминаний</div>`;return;}
+  const now=Date.now();
+  const sorted=[...rems].sort((a,b)=>a.ts-b.ts);
+  list.innerHTML=sorted.map((r,i)=>{
+    const d=new Date(r.ts);
+    const isOver=r.ts<now;
+    const diff=r.ts-now;
+    const hrs=Math.round(diff/36e5);
+    const label=isOver?`просрочено`:`через ${hrs<24?hrs+' ч':Math.round(hrs/24)+' дн'}`;
+    return`<div class="rem-item ${isOver?'overdue':'upcoming'}" onclick="event.stopPropagation()">
+      <div class="rem-ico">${r.done?'✅':'🔔'}</div>
+      <div style="flex:1">
+        <div class="rem-text">${esc(r.text)}</div>
+        <div class="rem-date">${d.toLocaleDateString('ru',{day:'2-digit',month:'short'})} ${d.toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'})} · ${label}</div>
+      </div>
+      <button onclick="delReminder(${i})" style="background:none;border:none;color:rgba(255,80,80,.3);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0">×</button>
+    </div>`;
+  }).join('');
+  // Update badge
+  const overdue=rems.filter(r=>r.ts<now&&!r.done).length;
+  const badge=document.getElementById('reminder-badge');
+  if(badge){badge.style.display=overdue>0?'block':'none';}
+}
+
+function openAddReminder(){
+  const now=new Date();now.setMinutes(now.getMinutes()+60);
+  const fmt=now.toISOString().slice(0,16);
+  document.getElementById('rem-text-inp').value='';
+  document.getElementById('rem-date-inp').value=fmt;
+  document.getElementById('rem-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('rem-text-inp').focus(),80);
+}
+function closeRemModal(){document.getElementById('rem-modal').classList.remove('open');}
+function saveReminder(){
+  const text=document.getElementById('rem-text-inp').value.trim();
+  const dateVal=document.getElementById('rem-date-inp').value;
+  const sound=document.getElementById('rem-sound-sel').value;
+  if(!text||!dateVal)return;
+  const ts=new Date(dateVal).getTime();
+  getReminders().push({text,ts,sound,done:false,id:'r'+Date.now()});
+  save();
+  closeRemModal();
+  renderReminderList();
+  scheduleReminder(getReminders()[getReminders().length-1]);
+}
+function delReminder(i){getReminders().splice(i,1);save();renderReminderList();}
+
+// ── Sound engine ──
+const REM_SOUNDS={
+  bell:()=>playTone([880,660,440],0.3),
+  chime:()=>playTone([523,659,784,1047],0.25),
+  ping:()=>playTone([1000],0.2),
+  none:()=>{}
+};
+function playTone(freqs,vol){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    freqs.forEach((freq,i)=>{
+      const osc=ctx.createOscillator();
+      const gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.frequency.value=freq;
+      osc.type='sine';
+      gain.gain.setValueAtTime(vol,ctx.currentTime+i*0.2);
+      gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.2+0.5);
+      osc.start(ctx.currentTime+i*0.2);
+      osc.stop(ctx.currentTime+i*0.2+0.6);
+    });
+  }catch(e){console.warn('Audio error',e);}
+}
+
+function scheduleReminder(rem){
+  const delay=rem.ts-Date.now();
+  if(delay<=0||delay>7*24*3600*1000)return; // только в ближайшие 7 дней
+  setTimeout(()=>{
+    const r=getReminders().find(x=>x.id===rem.id);
+    if(!r||r.done)return;
+    (REM_SOUNDS[r.sound]||REM_SOUNDS.bell)();
+    r.done=true;save();renderReminderList();
+    // Show notification
+    if(Notification.permission==='granted'){
+      new Notification('⏰ '+r.text,{body:new Date(r.ts).toLocaleTimeString('ru',{hour:'2-digit',minute:'2-digit'})});
+    } else {
+      const badge=document.getElementById('reminder-badge');
+      if(badge)badge.style.display='block';
+    }
+  },delay);
+}
+
+function initReminders(){
+  if(Notification.permission==='default')Notification.requestPermission();
+  getReminders().forEach(r=>{if(!r.done)scheduleReminder(r);});
+  renderReminderList();
+  // Check overdue every minute
+  setInterval(()=>{
+    const overdue=getReminders().filter(r=>r.ts<Date.now()&&!r.done).length;
+    const badge=document.getElementById('reminder-badge');
+    if(badge)badge.style.display=overdue>0?'block':'none';
+  },60000);
+}
+
+// ██ SECTION:NOTES — POPUP МЕНЮ ДОБАВЛЕНИЯ БЛОКА (кнопка + у каждой строки)
+function showBlockMenu(e, afterBlockId){
+  e.stopPropagation();
+  const ITEMS=[
+    {type:'text',ico:'📝',name:'Текст'},
+    {type:'h1',ico:'H1',name:'Заголовок 1'},
+    {type:'h2',ico:'H2',name:'Заголовок 2'},
+    {type:'h3',ico:'H3',name:'Заголовок 3'},
+    {type:'todo',ico:'☑',name:'Задача'},
+    {type:'bullet',ico:'•',name:'Список'},
+    {type:'numbered',ico:'1.',name:'Нумерованный'},
+    {type:'callout',ico:'💡',name:'Выноска'},
+    {type:'quote',ico:'❝',name:'Цитата'},
+    {type:'code',ico:'</>',name:'Код'},
+    {type:'table',ico:'⊞',name:'Таблица'},
+    {type:'image',ico:'🖼',name:'Изображение'},
+    {type:'file',ico:'📎',name:'Файл'},
+    {type:'divider',ico:'—',name:'Разделитель'},
+  ];
+  // Remove old popup
+  let old=document.getElementById('block-plus-popup');if(old)old.remove();
+  const pop=document.createElement('div');
+  pop.id='block-plus-popup';
+  pop.style.cssText=`position:fixed;z-index:8000;background:#222;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:6px;box-shadow:0 8px 32px rgba(0,0,0,.6);min-width:200px;display:grid;grid-template-columns:1fr 1fr;gap:3px`;
+  pop.innerHTML=ITEMS.map(it=>`
+    <div onclick="addBlock('${it.type}','${afterBlockId}');this.closest('#block-plus-popup').remove()"
+      style="display:flex;align-items:center;gap:7px;padding:6px 10px;border-radius:6px;cursor:pointer;color:rgba(255,255,255,.7);font-size:12.5px;transition:background .1s"
+      onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='none'">
+      <span style="width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.07);border-radius:5px;font-size:12px;flex-shrink:0;font-weight:700">${it.ico}</span>
+      ${it.name}
+    </div>`).join('');
+  // Position near the + button
+  const rect=e.target.getBoundingClientRect();
+  pop.style.left=Math.min(rect.right+4, window.innerWidth-220)+'px';
+  pop.style.top=Math.max(rect.top-50,8)+'px';
+  document.body.appendChild(pop);
+  setTimeout(()=>document.addEventListener('click',()=>{pop.remove();},{once:true}),50);
+}
+
+// ██ SECTION:NOTES — генерация HTML для каждого блока
 function blockHTML(b,i){
-  if(b.type==='divider')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><hr class="block-divider"></div></div>`;
+  // ++ кнопка присутствует на КАЖДОМ блоке (кроме divider)
+  const plusBtn=`<span class="block-add-float" title="Добавить блок" onclick="showBlockMenu(event,'${b.id}')">+</span>`;
+  if(b.type==='divider')return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><hr class="block-divider"></div></div>`;
   if(b.type==='table'){
     const rows=b.rows||[['','',''],['','',''],['','','']];
     const tableHTML=`<div class="block-table-wrap"><table class="block-table">${rows.map((row,ri)=>`<tr>${row.map((cell,ci)=>`<td><textarea class="btable-cell" rows="1" oninput="updateTableCell('${b.id}',${ri},${ci},this.value);autoResize(this)">${esc(cell)}</textarea></td>`).join('')}<td class="btable-del-col"><button onclick="delTableCol('${b.id}',${ri===0?0:null})" style="background:none;border:none;color:rgba(255,80,80,.3);cursor:pointer;font-size:11px;padding:1px 3px" title="Удалить строку" onclick="delTableRow('${b.id}',${ri})">×</button></td></tr>`).join('')}</table>
@@ -1331,12 +1594,12 @@ function blockHTML(b,i){
       <button onclick="addTableCol('${b.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);font-size:11.5px;padding:2px 10px;cursor:pointer;font-family:inherit;transition:all .1s" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">+ Столбец</button>
     </div>
     </div>`;
-    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${tableHTML}</div></div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body">${tableHTML}</div></div>`;
   }
   if(b.type==='image'){
-    const imgHTML=b.imageData?`<img src="${b.imageData}" style="max-width:100%;border-radius:6px;display:block" alt="${esc(b.text||'')}">`:
+    const imgHTML=b.imageData?`<div style="position:relative"><img src="${b.imageData}" style="max-width:100%;border-radius:6px;display:block;cursor:zoom-in" onclick="openLightbox(this.src)" title="Нажми чтобы увеличить"><span onclick="event.stopPropagation();openLightbox(this.parentNode.querySelector('img').src)" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.9);font-size:11px;padding:3px 8px;border-radius:5px;cursor:pointer">🔍</span></div>`:
     `<div onclick="addBlockImage('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:30px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">🖼 Нажми чтобы выбрать изображение</div>`;
-    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${imgHTML}${b.imageData?`<textarea class="block-text" style="font-size:12px;color:rgba(255,255,255,.35);margin-top:4px" placeholder="Подпись к изображению" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)">${esc(b.text||'')}</textarea>`:''}</div></div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body">${imgHTML}${b.imageData?`<textarea class="block-text" style="font-size:12px;color:rgba(255,255,255,.35);margin-top:4px" placeholder="Подпись к изображению" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)">${esc(b.text||'')}</textarea>`:''}</div></div>`;
   }
   if(b.type==='file'){
     const fileHTML=b.fileData?
@@ -1345,17 +1608,17 @@ function blockHTML(b,i){
       <div><div style="font-size:13px;color:rgba(255,255,255,.75)">${esc(b.fileName||'Файл')}</div><div style="font-size:11px;color:rgba(255,255,255,.3)">${b.fileSize||''} · Нажми чтобы скачать</div></div>
     </div>`:
     `<div onclick="addBlockFile('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:18px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">📎 Нажми чтобы прикрепить файл</div>`;
-    return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body">${fileHTML}</div></div>`;
+    return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body">${fileHTML}</div></div>`;
   }
-  if(b.type==='callout')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-callout"><div class="callout-ico">💡</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')">${esc(b.text||'')}</textarea></div></div></div>`;
-  if(b.type==='bullet')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-bullet"><div class="bullet-dot">•</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Элемент списка">${esc(b.text||'')}</textarea></div></div></div>`;
+  if(b.type==='callout')return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-callout"><div class="callout-ico">💡</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')">${esc(b.text||'')}</textarea></div></div></div>`;
+  if(b.type==='bullet')return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-bullet"><div class="bullet-dot">•</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Элемент списка">${esc(b.text||'')}</textarea></div></div></div>`;
   if(b.type==='numbered'){const n=(i+1);return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-numbered"><div class="num-dot">${n}.</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Пункт">${esc(b.text||'')}</textarea></div></div></div>`;}
-  if(b.type==='todo')return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><span class="block-add-float" title="Добавить блок" onclick="addBlock('text','${b.id}')">+</span><div class="block-body"><div class="block-todo"><input type="checkbox" class="todo-cb" ${b.done?'checked':''} onchange="updateBlock('${b.id}','done',this.checked)"><textarea class="block-text" style="${b.done?'text-decoration:line-through;color:rgba(255,255,255,.28)':''}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Задача">${esc(b.text||'')}</textarea></div></div></div>`;
+  if(b.type==='todo')return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-todo"><input type="checkbox" class="todo-cb" ${b.done?'checked':''} onchange="updateBlock('${b.id}','done',this.checked)"><textarea class="block-text" style="${b.done?'text-decoration:line-through;color:rgba(255,255,255,.28)':''}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="Задача">${esc(b.text||'')}</textarea></div></div></div>`;
   const cls=b.type==='h1'?'h1':b.type==='h2'?'h2':b.type==='h3'?'h3':b.type==='quote'?'quote':b.type==='code'?'code':'';
-  return`<div class="block" data-id="${b.id}" data-i="${i}"><div class="block-handle" draggable="true">⠿</div><span class="block-add-float" title="Добавить блок" onclick="addBlock('text','${b.id}')">+</span><div class="block-body"><textarea class="block-text ${cls}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="${cls?'Заголовок':'Введи текст или / для команд'}">${esc(b.text||'')}</textarea></div></div>`;
+  return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><textarea class="block-text ${cls}" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')" placeholder="${cls?'Заголовок':'Введи текст или / для команд'}">${esc(b.text||'')}</textarea></div></div>`;
 }
 
-// ══════════════════════ BLOCK EDITOR ══════════════════════
+// ██ SECTION:NOTES:EDITOR ══ Редактор блоков ══════════════════════
 function initBlockEditor(){
   const c=document.getElementById('blocks-container');if(!c)return;
   c.querySelectorAll('textarea.block-text').forEach(ta=>autoResize(ta));
@@ -1389,7 +1652,7 @@ function deleteBlock(id){
   const el=document.querySelector(`[data-id="${id}"]`);if(el){el.remove();}
 }
 
-// ══════════════════════ SLASH MENU ══════════════════════
+// ██ SECTION:NOTES:SLASH ══ Slash меню ══════════════════════
 const SLASH_ITEMS=[
   {type:'text',ico:'📝',name:'Текст',desc:'Обычный абзац'},
   {type:'h1',ico:'H1',name:'Заголовок 1',desc:'Большой заголовок'},
@@ -2173,6 +2436,21 @@ let _vfmIco='📁';
 let _vfmColor='#2a2a2a';
 let _vfCtxId=null;
 
+
+function vpMoveToFolder(folderId){
+  const v=getVids().find(x=>x.id===vpCurrentId);if(!v)return;
+  if(folderId==='')delete v.folderId;
+  else v.folderId=folderId;
+  save();
+}
+function updateFolderSelect(){
+  const sel=document.getElementById('vpp-folder-select');if(!sel)return;
+  const v=getVids().find(x=>x.id===vpCurrentId);
+  const curFolder=v?.folderId||'';
+  sel.innerHTML=`<option value="">📂 Без папки</option>`+
+    getFolders().map(f=>`<option value="${f.id}" ${curFolder===f.id?'selected':''}>${f.icon||'📁'} ${f.name}</option>`).join('');
+}
+
 function setVpFolder(folderId){
   vpCurrentFolder=folderId;
   const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
@@ -2198,10 +2476,11 @@ function saveFolderModal(){
   const name=document.getElementById('vfm-name').value.trim();
   if(!name){document.getElementById('vfm-name').focus();return;}
   if(_vfmMode==='create'){
-    window.VP_FOLDERS.push({id:'f'+Date.now(),name,icon:_vfmIco,color:_vfmColor});
+    getFolders().push({id:'f'+Date.now(),name,icon:_vfmIco,color:_vfmColor});
   } else {
-    const f=window.VP_FOLDERS.find(x=>x.id===_vfmEditId);
+    const f=getFolders().find(x=>x.id===_vfmEditId);
     if(f){f.name=name;f.icon=_vfmIco;f.color=_vfmColor;}
+    save(); // ██ сохранить правки папки
   }
   closeFolderModal();
   const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
@@ -2217,7 +2496,7 @@ function openFolderMenu(folderId,e){
   setTimeout(()=>document.addEventListener('click',()=>{ctx.style.display='none';},{once:true}),50);
 }
 function editFolderFromCtx(){
-  const f=window.VP_FOLDERS.find(x=>x.id===_vfCtxId);if(!f)return;
+  const f=getFolders().find(x=>x.id===_vfCtxId);if(!f)return;
   _vfmMode='edit';_vfmEditId=_vfCtxId;_vfmIco=f.icon||'📁';_vfmColor=f.color||'#2a2a2a';
   document.getElementById('vfm-title').textContent='Изменить папку';
   document.getElementById('vfm-name').value=f.name;
@@ -2225,14 +2504,14 @@ function editFolderFromCtx(){
   document.getElementById('vp-folder-modal').classList.add('open');
 }
 function shareFolderFromCtx(){
-  const f=window.VP_FOLDERS.find(x=>x.id===_vfCtxId);if(!f)return;
-  const videos=window.VIDEOS.filter(v=>v.folderId===_vfCtxId);
+  const f=getFolders().find(x=>x.id===_vfCtxId);if(!f)return;
+  const videos=getVids().filter(v=>v.folderId===_vfCtxId);
   alert(`Папка "${f.name}"\nВидео: ${videos.length} шт.\n\nДля шаринга — экспортируй видео и отправь ссылку.`);
 }
 function deleteFolderFromCtx(){
   if(!confirm('Удалить папку? Видео останутся в "Все файлы"'))return;
-  window.VP_FOLDERS=window.VP_FOLDERS.filter(x=>x.id!==_vfCtxId);
-  window.VIDEOS.forEach(v=>{if(v.folderId===_vfCtxId)delete v.folderId;});
+  getFolders()=getFolders().filter(x=>x.id!==_vfCtxId);
+  getVids().forEach(v=>{if(v.folderId===_vfCtxId)delete v.folderId;});
   if(vpCurrentFolder===_vfCtxId)vpCurrentFolder=null;
   const pg=DB.pages.find(p=>p.id===DB.curPage);if(pg)renderPage();
 }
@@ -2811,6 +3090,44 @@ function openBoardAttach(cardId,fi){
   <div class="vp-fctx-item" onclick="shareFolderFromCtx()">🔗 Поделиться</div>
   <div class="vp-fctx-item" onclick="deleteFolderFromCtx()" style="color:rgba(235,87,87,.7)">🗑 Удалить</div>
 </div>
+
+
+<!-- ██ SECTION:REMINDERS -->
+<div id="sb-overlay" onclick="toggleMobileSidebar()"></div>
+<div id="reminder-panel">
+  <div class="rem-header">
+    <div class="rem-title">🔔 Напоминания</div>
+    <button onclick="openAddReminder()" style="background:#0a84ff;border:none;color:#fff;border-radius:6px;padding:4px 10px;font-family:inherit;font-size:12px;cursor:pointer">+ Добавить</button>
+  </div>
+  <div id="rem-list"></div>
+  <div class="add-rem-btn" onclick="openAddReminder()">+ Новое напоминание</div>
+</div>
+<div id="rem-modal">
+  <div id="rem-modal-inner">
+    <div class="rem-modal-title">🔔 Новое напоминание</div>
+    <input class="rem-inp" id="rem-text-inp" placeholder="Название / задача...">
+    <input class="rem-inp" id="rem-date-inp" type="datetime-local">
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Звук</div>
+      <select id="rem-sound-sel" style="background:#252525;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.7);font-family:inherit;font-size:13px;padding:7px 10px;width:100%;outline:none">
+        <option value="bell">🔔 Звонок</option>
+        <option value="chime">🎵 Мелодия</option>
+        <option value="ping">📌 Пинг</option>
+        <option value="none">🔇 Без звука</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button onclick="closeRemModal()" style="background:rgba(255,255,255,.07);border:none;border-radius:7px;color:rgba(255,255,255,.6);font-family:inherit;font-size:13px;padding:8px 16px;cursor:pointer">Отмена</button>
+      <button onclick="saveReminder()" style="background:#0a84ff;border:none;border-radius:7px;color:#fff;font-family:inherit;font-size:13px;padding:8px 16px;cursor:pointer;font-weight:500">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ██ IMAGE LIGHTBOX -->
+<div id="img-lightbox" onclick="closeLightbox()">
+  <div id="img-lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="img-lightbox-img" src="" alt="">
+</div>
 </body>`);
   } else {
     const a=document.createElement('a');a.href=f.data;a.download=f.name;a.click();
@@ -3124,8 +3441,13 @@ async function checkSession() {
 // ══════════════════════ VIDEO LIBRARY ══════════════════════
 // Videos stored in memory as array of {id, name, size, duration, dataUrl, note, tags, date}
 // DataURL allows playback without server — works from local file
-if(!window.VIDEOS)window.VIDEOS=[];
-if(!window.VP_FOLDERS)window.VP_FOLDERS=[];
+
+// ██ SECTION:MEDIA — ВИДЕО ХЕЛПЕРЫ
+// Все видео хранятся в DB.videos и сохраняются на сервер
+function getVids(){if(!DB.videos)DB.videos=[];return DB.videos;}
+function getFolders(){if(!DB.vpFolders)DB.vpFolders=[];return DB.vpFolders;}
+
+// ── Состояние медиатеки (не сохраняется между сессиями) ──
 let vpView='grid';
 let vpFilter='all';
 let vpSearch='';
@@ -3153,19 +3475,19 @@ function renderVideosHTML(){
         <button id="vp-upload-btn" style="background:rgba(255,255,255,.07)" onclick="openCreateFolder()">📁 Папка</button>
         <div style="width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 4px"></div>
         <button class="vp-filter-btn ${vpFilter==='all'?'on':''}" onclick="setVpFilter('all')">Все</button>
-        <button class="vp-filter-btn ${vpFilter==='reels'?'on':''}" onclick="setVpFilter('reels')">Reels</button>
-        <button class="vp-filter-btn ${vpFilter==='course'?'on':''}" onclick="setVpFilter('course')">Курс</button>
-        <button class="vp-filter-btn ${vpFilter==='music'?'on':''}" onclick="setVpFilter('music')">Музыка</button>
+        
+        
+        
         <input id="vp-search" type="text" placeholder="🔍 Поиск..." value="${vpSearch}" oninput="vpSearch=this.value;refreshGallery()">
         <div style="margin-left:auto;display:flex;gap:6px">
           <button class="vp-filter-btn ${vpView==='grid'?'on':''}" onclick="setVpView('grid')" title="Сетка">⊞</button>
           <button class="vp-filter-btn ${vpView==='list'?'on':''}" onclick="setVpView('list')" title="Список">☰</button>
         </div>
-        <div id="vp-count">${window.VIDEOS.length} видео</div>
+        <div id="vp-count">${getVids().length} видео</div>
       </div>
       <div id="vp-folders-bar" style="display:flex;gap:8px;padding:6px 0 2px;flex-wrap:wrap;align-items:center">
         <span class="vp-folder-chip ${vpCurrentFolder===null?'on':''}" onclick="setVpFolder(null)">🏠 Все файлы</span>
-        ${window.VP_FOLDERS.map(f=>{const cnt=window.VIDEOS.filter(v=>v.folderId===f.id).length;return`<span class="vp-folder-chip ${vpCurrentFolder===f.id?'on':''}" style="${f.color&&f.color!=='#2a2a2a'?'background:'+f.color+';border-color:'+f.color+'88':''}" onclick="setVpFolder('${f.id}')">
+        ${getFolders().map(f=>{const cnt=getVids().filter(v=>v.folderId===f.id).length;return`<span class="vp-folder-chip ${vpCurrentFolder===f.id?'on':''}" style="${f.color&&f.color!=='#2a2a2a'?'background:'+f.color+';border-color:'+f.color+'88':''}" onclick="setVpFolder('${f.id}')">
           ${f.icon||'📁'} ${f.name}${cnt>0?` <span style="font-size:10px;opacity:.55">${cnt}</span>`:''}
           <span class="vp-folder-menu" onclick="event.stopPropagation();openFolderMenu('${f.id}',event)">⋯</span>
         </span>`;}).join('')}
@@ -3200,13 +3522,11 @@ function renderVideosHTML(){
           <div id="vpp-info">
             <div id="vpp-vname">—</div>
             <div id="vpp-vmeta">Выбери видео из галереи</div>
-            <div class="sec-lbl" style="font-size:10px;margin:10px 0 6px">Теги</div>
-            <div id="vpp-tags">
-              <span class="vpp-tag" onclick="vpTag('reels')">Reels</span>
-              <span class="vpp-tag" onclick="vpTag('course')">Курс</span>
-              <span class="vpp-tag" onclick="vpTag('music')">Музыка</span>
-              <span class="vpp-tag" onclick="vpTag('broll')">B-roll</span>
-              <span class="vpp-tag" onclick="vpTag('draft')">Черновик</span>
+            <div class="sec-lbl" style="font-size:10px;margin:10px 0 6px">Папка</div>
+            <div id="vpp-folder-sel">
+              <select id="vpp-folder-select" onchange="vpMoveToFolder(this.value)" style="background:#252525;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.7);font-family:inherit;font-size:12px;padding:5px 8px;width:100%;outline:none">
+                <option value="">📂 Без папки</option>
+              </select>
             </div>
             <div class="sec-lbl" style="font-size:10px;margin:10px 0 6px">Заметки</div>
             <textarea id="vpp-notes" placeholder="Заметки к видео..." oninput="vpSaveNote(this.value)"></textarea>
@@ -3241,9 +3561,9 @@ function initVideoPage(){
 }
 
 function getFilteredVideos(){
-  let vids=window.VIDEOS;
+  let vids=getVids();
+  // ██ SECTION:MEDIA — фильтрация по папке и поиску
   if(vpCurrentFolder!==null)vids=vids.filter(v=>v.folderId===vpCurrentFolder);
-  if(vpFilter!=='all')vids=vids.filter(v=>(v.tags||[]).includes(vpFilter));
   if(vpSearch)vids=vids.filter(v=>v.name.toLowerCase().includes(vpSearch.toLowerCase()));
   return vids;
 }
@@ -3253,14 +3573,14 @@ function refreshGallery(){
   if(!gallery)return;
   const vids=getFilteredVideos();
   const cnt=document.getElementById('vp-count');
-  if(cnt)cnt.textContent=window.VIDEOS.length+' видео';
+  if(cnt)cnt.textContent=getVids().length+' файлов';
   if(vpView==='list')gallery.className='list-view';
   else gallery.className='';
 
   if(vids.length===0){
     gallery.innerHTML=`<div id="vp-drop" onclick="document.getElementById('vp-upload-input').click()">
       <div class="drop-ico">🎬</div>
-      <div class="drop-lbl">${window.VIDEOS.length>0?'Нет видео по фильтру':'Перетащи видео сюда или нажми'}</div>
+      <div class="drop-lbl">${getVids().length>0?'Нет видео по фильтру':'Перетащи видео сюда или нажми'}</div>
       <div class="drop-sub">MP4, MOV, AVI, MKV, WebM — любые форматы</div>
     </div>`;
   } else {
@@ -3343,7 +3663,8 @@ function handleVideoUpload(files){
           date:new Date().toLocaleDateString('ru',{day:'2-digit',month:'2-digit',year:'2-digit'}),
           thumbDone:false
         };
-        window.VIDEOS.unshift(v);
+        getVids().unshift(v);
+        save(); // ██ сохранить видео в базу
         refreshGallery();
         playVideo(v.id);
       };
@@ -3353,10 +3674,11 @@ function handleVideoUpload(files){
 }
 
 function playVideo(id){
-  const v=window.VIDEOS.find(x=>x.id===id);
+  const v=getVids().find(x=>x.id===id);
   if(!v)return;
   vpCurrentId=id;
   // open player
+  setTimeout(updateFolderSelect,50); // ██ обновить выбор папки
   const player=document.getElementById('vp-player');
   if(player)player.classList.add('open');
   const videoEl=document.getElementById('vpp-video');
@@ -3424,9 +3746,10 @@ function vpOnEnded(){
 }
 function vpTag(tag){
   if(!vpCurrentId)return;
-  const v=window.VIDEOS.find(x=>x.id===vpCurrentId);if(!v)return;
+  const v=getVids().find(x=>x.id===vpCurrentId);if(!v)return;
   if(!v.tags)v.tags=[];
   if(v.tags.includes(tag))v.tags=v.tags.filter(t=>t!==tag);
+  save(); // ██ сохранить теги
   else v.tags.push(tag);
   // update tag buttons
   document.querySelectorAll('.vpp-tag').forEach(el=>{
@@ -3437,16 +3760,16 @@ function vpTag(tag){
 }
 function vpSaveNote(val){
   if(!vpCurrentId)return;
-  const v=window.VIDEOS.find(x=>x.id===vpCurrentId);if(v)v.note=val;
+  const v=getVids().find(x=>x.id===vpCurrentId);if(v)v.note=val;
+  save(); // ██ сохранить заметку к видео
 }
 function deleteVideo(id){
   if(!confirm('Удалить видео?'))return;
-  window.VIDEOS=window.VIDEOS.filter(v=>v.id!==id);
+  getVids()=getVids().filter(v=>v.id!==id);
   if(vpCurrentId===id)closeVPlayer();
   refreshGallery();
 }
-function setVpFilter(f){vpFilter=f;refreshGallery();
-  document.querySelectorAll('.vp-filter-btn').forEach((el,i)=>{el.classList.toggle('on',['all','reels','course','music'][i]===f);});
+function setVpFilter(f){/* removed - use folder tabs instead */});
 }
 function setVpView(v){vpView=v;refreshGallery();}
 function fmtDur(s){
@@ -4016,6 +4339,44 @@ finInc=function(src,m,v){_origFinInc(src,m,v);};
   <div class="vp-fctx-item" onclick="editFolderFromCtx()">✏️ Переименовать</div>
   <div class="vp-fctx-item" onclick="shareFolderFromCtx()">🔗 Поделиться</div>
   <div class="vp-fctx-item" onclick="deleteFolderFromCtx()" style="color:rgba(235,87,87,.7)">🗑 Удалить</div>
+</div>
+
+
+<!-- ██ SECTION:REMINDERS -->
+<div id="sb-overlay" onclick="toggleMobileSidebar()"></div>
+<div id="reminder-panel">
+  <div class="rem-header">
+    <div class="rem-title">🔔 Напоминания</div>
+    <button onclick="openAddReminder()" style="background:#0a84ff;border:none;color:#fff;border-radius:6px;padding:4px 10px;font-family:inherit;font-size:12px;cursor:pointer">+ Добавить</button>
+  </div>
+  <div id="rem-list"></div>
+  <div class="add-rem-btn" onclick="openAddReminder()">+ Новое напоминание</div>
+</div>
+<div id="rem-modal">
+  <div id="rem-modal-inner">
+    <div class="rem-modal-title">🔔 Новое напоминание</div>
+    <input class="rem-inp" id="rem-text-inp" placeholder="Название / задача...">
+    <input class="rem-inp" id="rem-date-inp" type="datetime-local">
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;color:rgba(255,255,255,.28);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Звук</div>
+      <select id="rem-sound-sel" style="background:#252525;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.7);font-family:inherit;font-size:13px;padding:7px 10px;width:100%;outline:none">
+        <option value="bell">🔔 Звонок</option>
+        <option value="chime">🎵 Мелодия</option>
+        <option value="ping">📌 Пинг</option>
+        <option value="none">🔇 Без звука</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button onclick="closeRemModal()" style="background:rgba(255,255,255,.07);border:none;border-radius:7px;color:rgba(255,255,255,.6);font-family:inherit;font-size:13px;padding:8px 16px;cursor:pointer">Отмена</button>
+      <button onclick="saveReminder()" style="background:#0a84ff;border:none;border-radius:7px;color:#fff;font-family:inherit;font-size:13px;padding:8px 16px;cursor:pointer;font-weight:500">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ██ IMAGE LIGHTBOX -->
+<div id="img-lightbox" onclick="closeLightbox()">
+  <div id="img-lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="img-lightbox-img" src="" alt="">
 </div>
 </body>
 </html>
