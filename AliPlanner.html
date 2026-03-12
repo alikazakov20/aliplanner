@@ -765,6 +765,112 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 #mobile-sb-btn:hover{background:rgba(255,255,255,.08)}
 /* viewport meta is in head */
 
+
+/* ██ SECTION:NOTES — FORMAT TOOLBAR */
+#block-format-bar{
+  display:none;position:fixed;z-index:7000;
+  background:#252525;border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;padding:4px 6px;
+  box-shadow:0 4px 16px rgba(0,0,0,.5);
+  align-items:center;gap:2px;flex-wrap:nowrap;
+}
+#block-format-bar.visible{display:flex}
+.fmt-btn{
+  height:26px;min-width:26px;padding:0 6px;
+  border:none;border-radius:5px;background:none;
+  color:rgba(255,255,255,.65);font-size:12px;
+  cursor:pointer;font-family:inherit;display:flex;
+  align-items:center;justify-content:center;
+  transition:background .1s,color .1s;white-space:nowrap;
+}
+.fmt-btn:hover,.fmt-btn.on{background:rgba(255,255,255,.12);color:#fff}
+.fmt-sep{width:1px;height:18px;background:rgba(255,255,255,.1);margin:0 2px;flex-shrink:0}
+.fmt-select{
+  height:26px;padding:0 6px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);border-radius:5px;
+  color:rgba(255,255,255,.75);font-family:inherit;font-size:12px;
+  outline:none;cursor:pointer;
+}
+
+
+/* ██ SECTION:BOARD — MERGE */
+.mcard.merge-target{outline:2px dashed #4db885!important;outline-offset:3px}
+.mc-divider{height:1px;background:rgba(255,255,255,.15);margin:6px 8px}
+.mc-section{padding:4px 10px}
+
+
+/* ██ SECTION:BOARD — TABLE CARD */
+.mc-table-wrap{padding:8px;overflow:auto}
+.mc-table{border-collapse:collapse;width:100%;min-width:160px}
+.mc-table td{
+  border:1px solid rgba(255,255,255,.12);
+  padding:0;min-width:60px;position:relative;
+}
+.mc-table td.selected-cell{outline:2px solid #0a84ff!important;outline-offset:-1px}
+.mc-tc{
+  width:100%;min-height:24px;padding:4px 6px;
+  background:transparent;border:none;outline:none;
+  color:rgba(255,255,255,.8);font-family:inherit;
+  font-size:12px;resize:none;line-height:1.4;
+}
+.mc-tc:focus{background:rgba(10,132,255,.06)}
+.mc-table-toolbar{
+  display:flex;align-items:center;gap:4px;padding:4px 8px 0;
+  flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.06);
+}
+.mc-tt-btn{
+  padding:2px 7px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);border-radius:4px;
+  color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;
+  font-family:inherit;transition:all .12s;
+}
+.mc-tt-btn:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+/* column resizer */
+.mc-col-resize{
+  position:absolute;right:0;top:0;bottom:0;
+  width:4px;cursor:col-resize;background:transparent;
+}
+.mc-col-resize:hover{background:rgba(10,132,255,.5)}
+
+
+/* ██ SECTION:PLANNER — COLUMN RESIZE */
+.ctbl th{position:relative}
+.th-resizer{
+  position:absolute;right:0;top:0;bottom:0;width:5px;
+  cursor:col-resize;background:transparent;z-index:3;
+}
+.th-resizer:hover,.th-resizer.dragging{background:rgba(10,132,255,.5)}
+
+
+/* ██ SECTION:PLANNER — ресайз колонок */
+.tbl th{position:relative;user-select:none}
+.col-resizer{position:absolute;right:-3px;top:0;bottom:0;width:6px;cursor:col-resize;z-index:10;background:transparent}
+.col-resizer:hover,.col-resizer.active{background:rgba(10,132,255,.5)}
+
+
+/* ██ SECTION:NOTES — тулбар форматирования */
+#fmt-toolbar{position:sticky;top:0;z-index:100;background:#191919;border-bottom:1px solid rgba(255,255,255,.06);padding:6px 28px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.fmt-btn{height:26px;padding:0 8px;border-radius:5px;border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);font-family:inherit;font-size:12px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.fmt-btn:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.fmt-btn.on{background:rgba(10,132,255,.2);color:#0a84ff;border:1px solid rgba(10,132,255,.3)}
+.fmt-sep{width:1px;height:18px;background:rgba(255,255,255,.1);margin:0 3px;flex-shrink:0}
+.fmt-select{height:26px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:rgba(255,255,255,.65);font-family:inherit;font-size:11.5px;padding:0 6px;outline:none;cursor:pointer}
+.fmt-select:hover{border-color:rgba(255,255,255,.2)}
+
+
+/* ██ SECTION:BOARD — склеивание, цвет таблиц, ресайз */
+.mc-merged{border:2px solid rgba(10,132,255,.35)!important}
+.mc-merged-header{background:rgba(10,132,255,.08);border-bottom:2px solid rgba(10,132,255,.25);padding:4px 10px;font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.06em}
+.mc-merge-divider{height:2px;background:rgba(255,255,255,.08);margin:4px 0}
+/* board table card */
+.mc-table-card table{border-collapse:collapse;width:100%}
+.mc-table-card td,.mc-table-card th{border:1px solid rgba(255,255,255,.1);padding:5px 8px;font-size:12px;color:rgba(255,255,255,.7);min-width:60px;position:relative}
+.mc-table-card th{font-weight:600;background:rgba(255,255,255,.06)}
+.mc-table-cell{background:none;border:none;outline:none;width:100%;color:inherit;font-family:inherit;font-size:inherit;padding:0;resize:none}
+.mc-table-color-sel{width:18px;height:18px;padding:0;border:none;border-radius:3px;cursor:pointer;background:none}
+/* merge target highlight */
+.mcard.merge-target{outline:2px dashed rgba(10,132,255,.6)!important;outline-offset:3px}
+
 </style>
 </head>
 <body>
@@ -947,87 +1053,32 @@ tr:hover .row-del-btn{color:rgba(255,80,80,.3)}
 // ══════════════════════ DATA ══════════════════════
 const STATUSES={process:{l:'В процессе',c:'t-blue'},notstart:{l:'Не начат',c:'t-gray'},done:{l:'Завершён',c:'t-green'},pause:{l:'Пауза',c:'t-red'}};
 const TYPES={constant:{l:'Постоянный',c:'t-yellow'},project:{l:'Разовый',c:'t-purple'}};
-const EMOJIS=['📄','📝','📖','🎬','🎵','🎓','⭐','✅','🏠','👗','📽','🗒','💡','🔥','🎯','📊','🗓','📦','🧠','🚀'];
-
-function defaultDB(){
-  // ⚠️ Чистый шаблон для новых пользователей — без личных данных
-  return{
-    pages:[
-      {id:'pg-planner-full',icon:'📅',name:'Планер',type:'planner-full',fav:true,parentId:null,open:false,comments:[]},
-      {id:'pg-finance',icon:'💰',name:'Финансы',type:'finance',fav:true,parentId:null,open:false,comments:[]},
-      {id:'pg-notes',icon:'📝',name:'Заметки',type:'notes',fav:false,parentId:null,open:false,content:'',comments:[],blocks:[]},
-      {id:'pg-board1',icon:'🗺',name:'Доска идей',type:'board',fav:false,parentId:null,open:false,comments:[],cards:[],arrows:[]},
-      {id:'pg-videos',icon:'🎬',name:'Медиатека',type:'videos',fav:false,parentId:null,open:false,comments:[]},
-    ],
-    rows:[],
-    events:[],calM:new Date().getMonth(),calY:new Date().getFullYear(),calView:'month',settings:{},
-    curPage:'pg-planner-full',curView:'table',
-    plannerFull:{tab:'weekdays',wd:{},we:{},wk:{},mt:{},hb:{},ym:{},yp:{},yt:{},fy:{},miss:''},
-    finance:{tab:'dashboard',inc:{},exp:{},log:[],sav:{},cs:{},r5inc:0,r5f:{}},
-    videos:[],        // ██ массив видеофайлов (dataUrl, name, tags, etc.)
-    vpFolders:[],     // ██ папки медиатеки
-  };
-}
-
-// ██ SECTION:DATA ══ Хранение данных, сохранение, загрузка ══ — данные в data.json, синхронизация через облако ══
-let DB = defaultDB();
-let _saveTimer = null;
-
-function migrateParsed(parsed){
-  if(!parsed.pages.find(p=>p.id==='pg-planner-full'))
-    parsed.pages.unshift({id:'pg-planner-full',icon:'📅',name:'Планер',type:'planner-full',fav:true,parentId:null,open:false,comments:[]});
-  if(!parsed.pages.find(p=>p.id==='pg-finance'))
-    parsed.pages.splice(1,0,{id:'pg-finance',icon:'💰',name:'Финансы',type:'finance',fav:true,parentId:null,open:false,comments:[]});
-  if(!parsed.plannerFull)parsed.plannerFull={tab:'weekdays',wd:{},we:{},wk:{},mt:{},hb:{},ym:{},yp:{},yt:{},fy:{},miss:''};
-  if(!parsed.finance)parsed.finance={tab:'dashboard',inc:{},exp:{},log:[],sav:{},cs:{},r5inc:200000,r5f:{}};
-  return parsed;
-}
-
-async function loadFromServer(){
-  try{
-    const r = await fetch('/data');
-    if(r.ok){ DB = migrateParsed(await r.json()); }
-  }catch(e){ console.warn('Загрузка данных не удалась, используем дефолт'); }
-}
-
-function save(){
-  clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(async ()=>{
-    const el = document.getElementById('sync-dot');
-    if(el) el.style.color='#e9a84c';
-    try{
-      const r = await fetch('/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(DB)});
-      if(el) el.style.color = r.ok ? '#4db885' : '#eb5757';
-    }catch(e){ if(el) el.style.color='#eb5757'; }
-  }, 800);
-}
-
-function hardReset(){
-  if(!confirm('Сбросить все данные? Это нельзя отменить.')) return;
-  DB=defaultDB(); save(); location.reload();
-}
-
-function exportData(){
-  const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='AliPlanner-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
-}
-
-function importData(){
-  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
-  inp.onchange=async e=>{
-    try{DB=migrateParsed(JSON.parse(await e.target.files[0].text()));save();location.reload();}
-    catch(err){alert('Ошибка: файл повреждён');}
-  };
-  inp.click();
-}
-function migrateDB(){
-  DB.pages.forEach(p=>{
-    if(!p.parentId&&p.parentId!==null)p.parentId=null;
-    if(p.open===undefined)p.open=false;
-    if(!p.comments)p.comments=[];
+const EMOJIS=[
+// 📄 Документы и работа
+'📝','📄','📃','📋','📊','📈','📉','🗒','🗓','📅','📆','🗂','📁','📂','🗃','🗄','🗑',
+// 💡 Идеи и мысль
+'💡','🔍','🔎','🧠','💭','💬','🗨','🗯','💡','✨','⭐','🌟','💫','🔥','⚡',
+// ✅ Задачи
+'✅','☑️','✔️','❌','⛔','🚫','⚠️','❗','❓','💯','🎯','🏆','🥇','🎖','🏅',
+// 🎨 Дизайн / творчество
+'🎨','🖌','🖊','✏️','📐','📏','🔧','🔨','⚙️','🛠','🔩','🔗','📎','🖇','✂️',
+// 🎬 Видео / Медиа
+'🎬','🎥','📹','📷','📸','🎞','🎤','🎧','🎵','🎶','🎙','📻','📺','🖥','💻','⌨',
+// 🚀 Бизнес / рост
+'🚀','💰','💵','💳','🏦','📊','💼','🤝','🌐','📡','🔔','📣','📢','🏷','💎',
+// 🌿 Природа
+'🌱','🌿','🌲','🌸','🌺','🌻','🍀','🌈','☀️','🌙','⭐','🌊','🏔','🌋','🗻',
+// 🏃 Активность / спорт
+'🏃','🧘','🏋','🤸','🚴','⚽','🏀','🎾','🏊','🎯','🎮','🕹','🎲','🧩','🎴',
+// 🍎 Еда
+'🍎','🍕','☕','🍺','🍰','🍣','🥗','🥤','🍿','🍜','🍔','🍦','🥐','🍩','🍫',
+// 😊 Эмоции
+'😊','🤩','🥳','😎','🤔','😤','🥺','😴','🤯','🙏','👏','👍','🫶','❤️','🧡','💛','💚','💙','💜',
+// 🏠 Места
+'🏠','🏢','🏫','🏥','🏪','🗼','🗽','🏰','🌆','🌇','🌃','🌉','🌌','🎡','🎠',
+// 🔑 Разное
+'🔑','🗝','🔐','🔒','🔓','🎁','🎀','🎊','🎉','🎈','💌','📮','📯','🕰','⏰',
+];
     if(!p.blocks)p.blocks=[];
   });
   DB.rows.forEach(r=>{
@@ -1226,7 +1277,7 @@ function renderTable(){
   }).join('');
   return`<table class="tbl">
     <thead><tr id="tbl-head-row">
-      <th style="min-width:240px" draggable="true" data-col="name" ondragstart="colDragStart(event,'name')" ondragover="colDragOver(event)" ondrop="colDrop(event,'name')" ondragleave="colDragLeave(event)"><div style="display:flex;align-items:center;gap:5px"><span style="opacity:.5;font-size:12px">Аа</span> Название <span style="opacity:.2;font-size:10px;margin-left:auto">⠿</span></div></th>
+      <th style="min-width:240px" id="th-name" draggable="true" data-col="name" ondragstart="colDragStart(event,'name')" ondragover="colDragOver(event)" ondrop="colDrop(event,'name')" ondragleave="colDragLeave(event)"><div style="display:flex;align-items:center;gap:5px"><span style="opacity:.5;font-size:12px">Аа</span> Название <span style="opacity:.2;font-size:10px;margin-left:auto">⠿</span></div><div class="col-resizer" onmousedown="startColResize(event,'th-name')"></div></th>
       <th draggable="true" data-col="status" ondragstart="colDragStart(event,'status')" ondragover="colDragOver(event)" ondrop="colDrop(event,'status')" ondragleave="colDragLeave(event)"><div style="display:flex;align-items:center;gap:5px"><span style="opacity:.5;font-size:12px">◉</span> Статус <span style="opacity:.2;font-size:10px;margin-left:auto">⠿</span></div></th>
       <th draggable="true" data-col="type" ondragstart="colDragStart(event,'type')" ondragover="colDragOver(event)" ondrop="colDrop(event,'type')" ondragleave="colDragLeave(event)"><div style="display:flex;align-items:center;gap:5px"><span style="opacity:.5;font-size:12px">⊞</span> Тип <span style="opacity:.2;font-size:10px;margin-left:auto">⠿</span></div></th>
       <th draggable="true" data-col="deadline" ondragstart="colDragStart(event,'deadline')" ondragover="colDragOver(event)" ondrop="colDrop(event,'deadline')" ondragleave="colDragLeave(event)"><div style="display:flex;align-items:center;gap:5px"><span style="opacity:.5;font-size:12px">📅</span> Дедлайн <span style="opacity:.2;font-size:10px;margin-left:auto">⠿</span></div></th>
@@ -1236,6 +1287,33 @@ function renderTable(){
     <tbody>${rows}</tbody>
   </table>
   <div class="add-row" onclick="openNewRow()">+ Новое</div>`;
+}
+
+
+// ██ SECTION:PLANNER — ресайз колонок таблицы
+let _colResize={active:false,th:null,startX:0,startW:0};
+function startColResize(e,thId){
+  e.stopPropagation();e.preventDefault();
+  const th=document.getElementById(thId);if(!th)return;
+  _colResize={active:true,th,startX:e.clientX,startW:th.offsetWidth};
+  document.body.style.cursor='col-resize';
+  document.body.style.userSelect='none';
+  th.querySelector('.col-resizer')?.classList.add('active');
+  document.addEventListener('mousemove',onColResize);
+  document.addEventListener('mouseup',stopColResize,{once:true});
+}
+function onColResize(e){
+  if(!_colResize.active)return;
+  const w=Math.max(80,_colResize.startW+(e.clientX-_colResize.startX));
+  _colResize.th.style.minWidth=w+'px';
+  _colResize.th.style.width=w+'px';
+}
+function stopColResize(){
+  _colResize.active=false;
+  document.body.style.cursor='';
+  document.body.style.userSelect='';
+  document.querySelectorAll('.col-resizer').forEach(r=>r.classList.remove('active'));
+  document.removeEventListener('mousemove',onColResize);
 }
 
 function toggleRowOpen(id){
@@ -1385,14 +1463,41 @@ function calToday(){const t=new Date();DB.calM=t.getMonth();DB.calY=t.getFullYea
 
 // ██ SECTION:NOTES ══ Заметки и блоки ══════════════════════
 function renderNotesHTML(pg){
+  const s=pg.style||{};
   const blocksHTML=(pg.blocks||[]).map((b,i)=>blockHTML(b,i)).join('');
-  return`<div class="pg-wrap" style="padding-top:80px">
+  return`<div id="fmt-toolbar">
+    <select class="fmt-select" id="fmt-font-size" onchange="applyPageStyle('fontSize',this.value)" title="Размер шрифта">
+      <option value="13" ${(s.fontSize||'14')==='13'?'selected':''}>Мелкий</option>
+      <option value="14" ${(!s.fontSize||s.fontSize==='14')?'selected':''}>Обычный</option>
+      <option value="16" ${s.fontSize==='16'?'selected':''}>Крупный</option>
+      <option value="18" ${s.fontSize==='18'?'selected':''}>Большой</option>
+    </select>
+    <select class="fmt-select" id="fmt-line-h" onchange="applyPageStyle('lineHeight',this.value)" title="Межстрочный интервал">
+      <option value="1.4" ${s.lineHeight==='1.4'?'selected':''}>Тесно</option>
+      <option value="1.6" ${(!s.lineHeight||s.lineHeight==='1.6')?'selected':''}>Обычно</option>
+      <option value="1.9" ${s.lineHeight==='1.9'?'selected':''}>Просторно</option>
+      <option value="2.2" ${s.lineHeight==='2.2'?'selected':''}>Широко</option>
+    </select>
+    <select class="fmt-select" id="fmt-width" onchange="applyPageStyle('maxWidth',this.value)" title="Ширина страницы">
+      <option value="680px" ${s.maxWidth==='680px'?'selected':''}>Узко</option>
+      <option value="900px" ${(!s.maxWidth||s.maxWidth==='900px')?'selected':''}>Обычно</option>
+      <option value="1200px" ${s.maxWidth==='1200px'?'selected':''}>Широко</option>
+      <option value="100%" ${s.maxWidth==='100%'?'selected':''}>На весь экран</option>
+    </select>
+    <div class="fmt-sep"></div>
+    <button class="fmt-btn" onclick="applyBlockFmt('bold')" title="Жирный"><b>B</b></button>
+    <button class="fmt-btn" onclick="applyBlockFmt('italic')" title="Курсив"><i>I</i></button>
+    <button class="fmt-btn" onclick="applyBlockFmt('underline')" title="Подчёркнутый"><u>U</u></button>
+    <div class="fmt-sep"></div>
+    <button class="fmt-btn" title="Иконка страницы" onclick="openEmojiPicker('${pg.id}')">🎨 Иконка</button>
+  </div>
+  <div class="pg-wrap" id="pg-content-wrap" style="padding-top:40px;${s.maxWidth?'max-width:'+s.maxWidth:''}">
     <div class="pg-emoji-wrap" style="margin-top:0">
       <span class="pg-emoji" id="pg-ico" onclick="openEmojiPicker('${pg.id}')">${pg.icon}</span>
       <div id="emoji-picker-box" style="display:none;position:absolute"></div>
     </div>
-    <textarea class="pg-title" id="pg-title" rows="1" oninput="autoResize(this);updatePgTitle(this.value)" placeholder="Без названия">${pg.name}</textarea>
-    <div class="blocks" id="blocks-container">${blocksHTML}</div>
+    <textarea class="pg-title" id="pg-title" rows="1" oninput="autoResize(this);updatePgTitle(this.value)" placeholder="Без названия" style="${s.fontSize?'font-size:'+Math.round(+s.fontSize*2.5)+'px':''}">${pg.name}</textarea>
+    <div class="blocks" id="blocks-container" style="${s.fontSize?'font-size:'+s.fontSize+'px':''}${s.lineHeight?';line-height:'+s.lineHeight:''}">${blocksHTML}</div>
     <div id="block-add-bar-wrap" style="padding:8px 28px 60px">
       <div onclick="addBlock('text')" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.18);font-size:13px;padding:6px 0;cursor:text;transition:color .1s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.18)'">
         <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">+</span>
@@ -1403,6 +1508,47 @@ function renderNotesHTML(pg){
 }
 
 
+
+
+// ██ SECTION:NOTES — форматирование страницы
+function applyPageStyle(prop, val){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  if(!pg.style)pg.style={};
+  pg.style[prop]=val;
+  save();
+  // Apply live without re-render
+  const wrap=document.getElementById('pg-content-wrap');
+  if(wrap){
+    if(prop==='maxWidth')wrap.style.maxWidth=val;
+    if(prop==='fontSize'){
+      const blocks=document.getElementById('blocks-container');
+      if(blocks)blocks.style.fontSize=val+'px';
+      const title=document.getElementById('pg-title');
+      if(title)title.style.fontSize=Math.round(+val*2.5)+'px';
+    }
+    if(prop==='lineHeight'){
+      const blocks=document.getElementById('blocks-container');
+      if(blocks)blocks.style.lineHeight=val;
+    }
+  }
+}
+function applyBlockFmt(cmd){
+  // execCommand for selected text in active textarea
+  const active=document.activeElement;
+  if(active&&(active.tagName==='TEXTAREA'||active.tagName==='INPUT')){
+    const start=active.selectionStart,end=active.selectionEnd;
+    if(start===end)return;
+    const sel=active.value.substring(start,end);
+    let wrapped=sel;
+    if(cmd==='bold')wrapped='**'+sel+'**';
+    if(cmd==='italic')wrapped='_'+sel+'_';
+    if(cmd==='underline')wrapped='<u>'+sel+'</u>';
+    active.value=active.value.substring(0,start)+wrapped+active.value.substring(end);
+    active.dispatchEvent(new Event('input',{bubbles:true}));
+  } else {
+    document.execCommand(cmd);
+  }
+}
 
 // ██ SECTION:NOTES — LIGHTBOX (увеличение изображения)
 function openLightbox(src){
@@ -1542,6 +1688,337 @@ function initReminders(){
   },60000);
 }
 
+
+// ██ SECTION:NOTES:FORMAT — панель форматирования текста
+let _fmtBlockId=null;
+
+function openFormatBar(blockId){
+  _fmtBlockId=blockId;
+  const bar=document.getElementById('block-format-bar');
+  if(!bar)return;
+  const el=document.querySelector(`[data-id="${blockId}"] textarea`);
+  if(!el)return;
+  // Load current block style
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  const b=pg?.blocks.find(x=>x.id===blockId);
+  if(b?.fmt){
+    const fs=document.getElementById('fmt-size');
+    const lh=document.getElementById('fmt-lh');
+    const al=document.getElementById('fmt-align');
+    if(fs&&b.fmt.fontSize)fs.value=b.fmt.fontSize;
+    if(lh&&b.fmt.lineHeight)lh.value=b.fmt.lineHeight;
+    if(al&&b.fmt.textAlign)al.value=b.fmt.textAlign;
+  }
+  // Position below block
+  const rect=el.getBoundingClientRect();
+  bar.style.top=(rect.top-42)+'px';
+  bar.style.left=Math.max(8,rect.left)+'px';
+  bar.classList.add('visible');
+}
+
+function closeFormatBar(){
+  document.getElementById('block-format-bar')?.classList.remove('visible');
+  _fmtBlockId=null;
+}
+
+function applyFmt(prop,val){
+  if(!_fmtBlockId)return;
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  const b=pg.blocks.find(x=>x.id===_fmtBlockId);if(!b)return;
+  if(!b.fmt)b.fmt={};
+  if(prop==='bold'){b.fmt.fontWeight=b.fmt.fontWeight==='700'?'400':'700';}
+  else if(prop==='italic'){b.fmt.fontStyle=b.fmt.fontStyle==='italic'?'normal':'italic';}
+  else if(prop==='underline'){b.fmt.textDecoration=b.fmt.textDecoration?.includes('underline')?b.fmt.textDecoration.replace('underline','').trim():(b.fmt.textDecoration||'')+' underline';}
+  else if(prop==='strikethrough'){b.fmt.textDecoration=b.fmt.textDecoration?.includes('line-through')?b.fmt.textDecoration.replace('line-through','').trim():(b.fmt.textDecoration||'')+' line-through';}
+  else if(prop==='color'){
+    const c=prompt('Цвет текста (hex, например #FFD700):',b.fmt.color||'#ffffff');
+    if(c)b.fmt.color=c;
+  }
+  else if(prop==='highlight'){
+    const c=prompt('Цвет фона (hex, например #FFD700):',b.fmt.background||'transparent');
+    if(c)b.fmt.background=c;
+  }
+  else{b.fmt[prop]=val;}
+  save();
+  // Apply style to textarea
+  const ta=document.querySelector(`[data-id="${_fmtBlockId}"] textarea`);
+  if(ta)applyFmtToEl(ta,b.fmt);
+  // Update button states
+  document.getElementById('fmt-bold')?.classList.toggle('on',b.fmt.fontWeight==='700');
+  document.getElementById('fmt-italic')?.classList.toggle('on',b.fmt.fontStyle==='italic');
+}
+
+function applyFmtToEl(el,fmt){
+  if(!fmt)return;
+  if(fmt.fontSize)el.style.fontSize=fmt.fontSize;
+  if(fmt.fontWeight)el.style.fontWeight=fmt.fontWeight;
+  if(fmt.fontStyle)el.style.fontStyle=fmt.fontStyle;
+  if(fmt.textDecoration)el.style.textDecoration=fmt.textDecoration;
+  if(fmt.textAlign)el.style.textAlign=fmt.textAlign;
+  if(fmt.lineHeight)el.style.lineHeight=fmt.lineHeight;
+  if(fmt.color)el.style.color=fmt.color;
+  if(fmt.background&&fmt.background!=='transparent')el.style.background=fmt.background;
+}
+
+// Call after blocks are rendered
+function applyAllFmts(){
+  const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
+  (pg.blocks||[]).forEach(b=>{
+    if(!b.fmt)return;
+    const ta=document.querySelector(`[data-id="${b.id}"] textarea`);
+    if(ta)applyFmtToEl(ta,b.fmt);
+  });
+}
+
+
+// ██ SECTION:BOARD — MERGE CARDS (склеить две заметки)
+let _mergeMode=false;
+let _mergeFrom=null;
+
+);
+}
+
+
+  if(_mergeFrom===cardId){_mergeFrom=null;document.querySelectorAll('.mcard').forEach(el=>el.classList.remove('merge-target'));return;}
+  // Merge: combine _mergeFrom into cardId
+  const from=pg.cards.find(c=>c.id===_mergeFrom);
+  const into=pg.cards.find(c=>c.id===cardId);
+  if(!from||!into){_mergeFrom=null;return;}
+  // Add section from "from" card to "into" card
+  if(!into.sections)into.sections=[];
+  into.sections.push({title:from.title||'',text:from.text||''});
+  // Remove from card
+  pg.cards=pg.cards.filter(c=>c.id!==_mergeFrom);
+  save();
+  _mergeFrom=null;_mergeMode=false;
+  const btn=document.getElementById('merge-mode-btn');if(btn)btn.classList.remove('on');
+  renderAllCards(pg);
+  renderArrows(pg);
+}
+
+
+
+// ██ SECTION:PLANNER — RESIZE КОЛОНОК ТАБЛИЦЫ
+let _tblColRes={active:false,th:null,startX:0,startW:0};
+
+function initTableColResize(){
+  const table=document.querySelector('#main-content .ctbl');
+  if(!table)return;
+  table.querySelectorAll('th').forEach(th=>{
+    if(th.querySelector('.th-resizer'))return; // already has it
+    const r=document.createElement('div');r.className='th-resizer';
+    r.addEventListener('mousedown',e=>{
+      e.stopPropagation();e.preventDefault();
+      _tblColRes={active:true,th,startX:e.clientX,startW:th.offsetWidth};
+      r.classList.add('dragging');
+      document.addEventListener('mousemove',onTblColResize);
+      document.addEventListener('mouseup',()=>{
+        _tblColRes.active=false;r.classList.remove('dragging');
+        document.removeEventListener('mousemove',onTblColResize);
+      },{once:true});
+    });
+    th.appendChild(r);
+  });
+}
+
+function onTblColResize(e){
+  if(!_tblColRes.active||!_tblColRes.th)return;
+  const newW=Math.max(60,_tblColRes.startW+(e.clientX-_tblColRes.startX));
+  _tblColRes.th.style.width=newW+'px';
+  _tblColRes.th.style.minWidth=newW+'px';
+}
+
+// ██ SECTION:BOARD — TABLE CARD FUNCTIONS
+function createBoardTableCard(){
+  return {rows:[['Столбец 1','Столбец 2'],['',''],['','']],colWidths:[120,120],cellColors:{},fontSize:12};
+}
+
+function boardTableHTML(card){
+  const rows=card.rows||[['',''],['','']];
+  const colWidths=card.colWidths||(rows[0]||['','']).map(()=>100);
+  const fs=card.fontSize||12;
+  const rowsHTML=rows.map((row,ri)=>`<tr>${row.map((cell,ci)=>{
+    const bgCol=(card.cellColors&&card.cellColors[ri+','+ci])||'transparent';
+    return`<td style="background:${bgCol}">
+      <textarea class="mc-tc" style="font-size:${fs}px;width:${colWidths[ci]||100}px"
+        oninput="saveBoardTableCell('${card.id}',${ri},${ci},this.value)"
+        ondblclick="selectBoardCell(event,'${card.id}',${ri},${ci})">${esc(cell)}</textarea>
+      ${ri===0?`<div class="mc-col-resize" onmousedown="startBoardColResize(event,'${card.id}',${ci})"></div>`:''}
+    </td>`;
+  }).join('')}</tr>`).join('');
+  return`<div class="mc-table-wrap">
+    <table class="mc-table">${rowsHTML}</table>
+    <div class="mc-table-toolbar">
+      <button class="mc-tt-btn" onclick="addBoardTableRow('${card.id}')">+ Строка</button>
+      <button class="mc-tt-btn" onclick="addBoardTableCol('${card.id}')">+ Столбец</button>
+      <button class="mc-tt-btn" onclick="delBoardTableRow('${card.id}')">− Строка</button>
+      <button class="mc-tt-btn" onclick="delBoardTableCol('${card.id}')">− Столбец</button>
+      <select class="mc-tt-btn" style="padding:2px 4px" onchange="setBoardTableFont('${card.id}',+this.value)" title="Размер шрифта">
+        ${[10,11,12,13,14,16,18,20].map(s=>`<option value="${s}"${s===fs?' selected':''}>${s}px</option>`).join('')}
+      </select>
+      <button class="mc-tt-btn" onclick="openBoardCellColor('${card.id}')" title="Цвет ячейки">🎨</button>
+    </div>
+  </div>`;
+}
+
+function saveBoardTableCell(cardId,ri,ci,val){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c||!c.rows)return;
+  if(!c.rows[ri])c.rows[ri]=[];
+  c.rows[ri][ci]=val;save();
+}
+
+let _selBoardCell={cardId:null,ri:null,ci:null};
+function selectBoardCell(e,cardId,ri,ci){
+  _selBoardCell={cardId,ri,ci};
+  document.querySelectorAll('.mc-table td').forEach(td=>td.classList.remove('selected-cell'));
+  e.target.closest('td')?.classList.add('selected-cell');
+}
+
+function openBoardCellColor(cardId){
+  if(!_selBoardCell.cardId){alert('Дважды кликни на ячейку сначала');return;}
+  const c=prompt('Цвет ячейки (hex, например #1a2a3a):');
+  if(!c)return;
+  const pg=getBoardPg();if(!pg)return;
+  const card=pg.cards.find(x=>x.id===cardId);if(!card)return;
+  if(!card.cellColors)card.cellColors={};
+  card.cellColors[_selBoardCell.ri+','+_selBoardCell.ci]=c;
+  save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(card);
+}
+
+
+
+
+function delBoardTableCol(cardId){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c||!c.rows)return;
+  if((c.rows[0]||[]).length<=1)return;
+  c.rows=c.rows.map(r=>r.slice(0,-1));
+  if(c.colWidths)c.colWidths.pop();
+  save();const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+function setBoardTableFont(cardId,size){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  c.fontSize=size;save();const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+
+// Column resizing
+let _boardColRes={active:false,cardId:null,ci:null,startX:0,startW:0};
+function startBoardColResize(e,cardId,ci){
+  e.stopPropagation();e.preventDefault();
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  if(!c.colWidths)c.colWidths=(c.rows&&c.rows[0]?c.rows[0]:[]).map(()=>100);
+  _boardColRes={active:true,cardId,ci,startX:e.clientX,startW:c.colWidths[ci]||100};
+  document.addEventListener('mousemove',onBoardColResize);
+  document.addEventListener('mouseup',()=>{
+    _boardColRes.active=false;
+    document.removeEventListener('mousemove',onBoardColResize);
+    save();
+  },{once:true});
+}
+function onBoardColResize(e){
+  if(!_boardColRes.active)return;
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===_boardColRes.cardId);if(!c)return;
+  const newW=Math.max(40,_boardColRes.startW+(e.clientX-_boardColRes.startX));
+  c.colWidths[_boardColRes.ci]=newW;
+  // Update only the textareas widths for performance
+  const el=document.getElementById('card-'+_boardColRes.cardId);
+  if(el){el.querySelectorAll(`td:nth-child(${_boardColRes.ci+1}) textarea`).forEach(ta=>ta.style.width=newW+'px');}
+}
+
+
+// ██ SECTION:BOARD — таблица, склеивание карточек
+function updateBoardTableCell(cardId,ri,ci,val){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  if(!c.tRows)c.tRows=[['','',''],['','',''],['','','']];
+  if(!c.tRows[ri])c.tRows[ri]=[];
+  c.tRows[ri][ci]=val;save();
+}
+function addBoardTableRow(cardId){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  if(!c.tRows)c.tRows=[['','','']];
+  const cols=c.tRows[0]?.length||3;
+  c.tRows.push(Array(cols).fill(''));save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+function addBoardTableCol(cardId){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  if(!c.tRows)c.tRows=[['']];
+  c.tRows=c.tRows.map(r=>[...r,'']);save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+function delBoardTableRow(cardId,ri){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c||!c.tRows)return;
+  c.tRows.splice(ri,1);if(!c.tRows.length)c.tRows=[['','','']];save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+function setBoardTableBg(cardId,color){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  c.tableBg=color;save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+function setBoardTableFontSize(cardId,size){
+  const pg=getBoardPg();if(!pg)return;
+  const c=pg.cards.find(x=>x.id===cardId);if(!c)return;
+  c.tableFontSize=size;save();
+  const el=document.getElementById('card-'+cardId);if(el)el.innerHTML=cardInnerHTML(c);
+}
+
+// ── MERGE MODE ──
+let _mergeMode=false;let _mergeFrom=null;
+function toggleMergeMode(){
+  _mergeMode=!_mergeMode;_mergeFrom=null;
+  const btn=document.getElementById('merge-mode-btn');
+  if(btn){btn.style.background=_mergeMode?'rgba(10,132,255,.25)':'';btn.style.color=_mergeMode?'#0a84ff':'';}
+  document.querySelectorAll('.mcard').forEach(c=>{
+    c.style.cursor=_mergeMode?'crosshair':'';
+    c.classList.remove('merge-target');
+  });
+}
+function handleMergeClick(cardId,pg){
+  if(!_mergeMode)return;
+  if(!_mergeFrom){
+    _mergeFrom=cardId;
+    const el=document.getElementById('card-'+cardId);
+    if(el)el.classList.add('merge-target');
+    return;
+  }
+  if(_mergeFrom===cardId){_mergeFrom=null;document.querySelectorAll('.mcard').forEach(c=>c.classList.remove('merge-target'));return;}
+  // Do merge
+  mergeCards(_mergeFrom,cardId,pg);
+  _mergeFrom=null;_mergeMode=false;
+  document.querySelectorAll('.mcard').forEach(c=>{c.style.cursor='';c.classList.remove('merge-target');});
+  const btn=document.getElementById('merge-mode-btn');
+  if(btn){btn.style.background='';btn.style.color='';}
+}
+function mergeCards(id1,id2,pg){
+  const c1=pg.cards.find(x=>x.id===id1);
+  const c2=pg.cards.find(x=>x.id===id2);
+  if(!c1||!c2)return;
+  // Create merged card at position of c1
+  const merged={
+    id:'mc'+Date.now(),type:'merged',x:Math.min(c1.x,c2.x),y:Math.min(c1.y,c2.y),
+    w:Math.max(c1.w||220,c2.w||220)+20,h:(c1.h||120)+(c2.h||120)+24,
+    color:c1.color||'#2a2a2a',
+    parts:[
+      {type:c1.type,title:c1.title,text:c1.text,todos:c1.todos,color:c1.color},
+      {type:c2.type,title:c2.title,text:c2.text,todos:c2.todos,color:c2.color}
+    ]
+  };
+  pg.cards=pg.cards.filter(c=>c.id!==id1&&c.id!==id2);
+  pg.cards.push(merged);
+  save();renderAllCards(pg);renderArrows(pg);
+}
+
 // ██ SECTION:NOTES — POPUP МЕНЮ ДОБАВЛЕНИЯ БЛОКА (кнопка + у каждой строки)
 function showBlockMenu(e, afterBlockId){
   e.stopPropagation();
@@ -1602,12 +2079,35 @@ function blockHTML(b,i){
     return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body">${imgHTML}${b.imageData?`<textarea class="block-text" style="font-size:12px;color:rgba(255,255,255,.35);margin-top:4px" placeholder="Подпись к изображению" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)">${esc(b.text||'')}</textarea>`:''}</div></div>`;
   }
   if(b.type==='file'){
-    const fileHTML=b.fileData?
-    `<div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px 12px;cursor:pointer" onclick="downloadBlockFile('${b.id}')">
-      <span style="font-size:20px">📎</span>
-      <div><div style="font-size:13px;color:rgba(255,255,255,.75)">${esc(b.fileName||'Файл')}</div><div style="font-size:11px;color:rgba(255,255,255,.3)">${b.fileSize||''} · Нажми чтобы скачать</div></div>
-    </div>`:
-    `<div onclick="addBlockFile('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:18px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">📎 Нажми чтобы прикрепить файл</div>`;
+    const viewMode=b.viewMode||'list'; // 'list' or 'open'
+    const isImg=b.fileType&&b.fileType.startsWith('image');
+    const isVid=b.fileType&&b.fileType.startsWith('video');
+    let fileHTML;
+    if(!b.fileData){
+      fileHTML=`<div onclick="addBlockFile('${b.id}')" style="border:2px dashed rgba(255,255,255,.15);border-radius:8px;padding:18px 20px;text-align:center;cursor:pointer;color:rgba(255,255,255,.3);font-size:13px;transition:all .15s" onmouseover="this.style.borderColor='rgba(255,255,255,.3)';this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='rgba(255,255,255,.3)'">📎 Нажми чтобы прикрепить файл</div>`;
+    } else if(viewMode==='open'&&isImg){
+      fileHTML=`<div style="position:relative"><img src="${b.fileData}" style="max-width:100%;border-radius:6px;display:block;cursor:zoom-in" onclick="openLightbox(this.src)">
+        <div style="display:flex;gap:4px;position:absolute;top:6px;right:6px">
+          <button onclick="setFileViewMode('${b.id}','list')" style="background:rgba(0,0,0,.5);border:none;color:rgba(255,255,255,.8);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer">☰ Список</button>
+          <button onclick="openLightbox('${b.fileData}')" style="background:rgba(0,0,0,.5);border:none;color:rgba(255,255,255,.8);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer">🔍</button>
+        </div>
+      </div>`;
+    } else if(viewMode==='open'&&isVid){
+      fileHTML=`<video src="${b.fileData}" controls style="max-width:100%;border-radius:6px;display:block;margin-bottom:4px"></video>
+        <button onclick="setFileViewMode('${b.id}','list')" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);font-size:11px;padding:2px 8px;cursor:pointer">☰ Список</button>`;
+    } else {
+      fileHTML=`<div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px 12px">
+        <span style="font-size:20px">${isImg?'🖼':isVid?'🎬':'📎'}</span>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;color:rgba(255,255,255,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(b.fileName||'Файл')}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.3)">${b.fileSize||''}</div>
+        </div>
+        <div style="display:flex;gap:4px;flex-shrink:0">
+          ${(isImg||isVid)?`<button onclick="setFileViewMode('${b.id}','open')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);font-size:11px;padding:2px 7px;cursor:pointer">⊞ Открыть</button>`:''}
+          <button onclick="downloadBlockFile('${b.id}')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);font-size:11px;padding:2px 7px;cursor:pointer">⬇ Скачать</button>
+        </div>
+      </div>`;
+    }
     return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body">${fileHTML}</div></div>`;
   }
   if(b.type==='callout')return`<div class="block" data-id="${b.id}" data-i="${i}">${plusBtn}<div class="block-handle" draggable="true">⠿</div><div class="block-body"><div class="block-callout"><div class="callout-ico">💡</div><textarea class="block-text" oninput="autoResize(this);updateBlock('${b.id}','text',this.value)" onkeydown="handleBlockKey(event,'${b.id}')">${esc(b.text||'')}</textarea></div></div></div>`;
@@ -1621,7 +2121,14 @@ function blockHTML(b,i){
 // ██ SECTION:NOTES:EDITOR ══ Редактор блоков ══════════════════════
 function initBlockEditor(){
   const c=document.getElementById('blocks-container');if(!c)return;
-  c.querySelectorAll('textarea.block-text').forEach(ta=>autoResize(ta));
+  c.querySelectorAll('textarea.block-text').forEach(ta=>{
+    autoResize(ta);
+    ta.addEventListener('focus',()=>{
+      const block=ta.closest('[data-id]');
+      if(block)openFormatBar(block.dataset.id);
+    });
+  });
+  applyAllFmts();
 }
 function updateBlock(id,field,val){
   const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
@@ -1721,6 +2228,10 @@ function applySlash(type){
   closeSlashMenu();
 }
 function closeSlashMenu(){document.getElementById('slash-menu').style.display='none';}
+document.addEventListener('mousedown',e=>{
+  if(!e.target.closest('[data-id]')&&!e.target.closest('#block-format-bar')&&!e.target.closest('#block-plus-popup'))
+    closeFormatBar();
+});
 function addBlockTable(){
   const pg=DB.pages.find(p=>p.id===DB.curPage);if(!pg)return;
   const nb={id:'b'+Date.now(),type:'table',rows:[['Столбец 1','Столбец 2','Столбец 3'],['','',''],['','','']]};
@@ -1756,9 +2267,18 @@ function openEmojiPickerPage(){
 function openEmojiPicker(pgId){
   const box=document.getElementById('emoji-picker-box');if(!box)return;
   if(box.style.display!=='none'){box.style.display='none';return;}
-  box.innerHTML=`<div class="emoji-picker">${EMOJIS.map(e=>`<span class="emoji-opt" onclick="setPgEmoji('${pgId}','${e}')">${e}</span>`).join('')}</div>`;
+  const search=`<input type="text" placeholder="🔍 Поиск иконки..." oninput="filterEmojis(this.value,'${pgId}')" id="emoji-search-inp"
+    style="width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.8);
+    font-family:inherit;font-size:13px;padding:6px 10px;outline:none;box-sizing:border-box;margin-bottom:6px">`;
+  box.innerHTML=`<div class="emoji-picker">${search}<div id="emoji-grid" style="display:flex;flex-wrap:wrap;gap:2px;max-height:200px;overflow-y:auto">${EMOJIS.map(e=>`<span class="emoji-opt" onclick="setPgEmoji('${pgId}','${e}')">${e}</span>`).join('')}</div></div>`;
   box.style.display='block';
-  setTimeout(()=>document.addEventListener('click',()=>{box.style.display='none';},{once:true}),50);
+  box.querySelector('#emoji-search-inp')?.focus();
+  setTimeout(()=>document.addEventListener('click',e=>{if(!e.target.closest('.emoji-picker'))box.style.display='none';},{once:true}),50);
+}
+function filterEmojis(q,pgId){
+  const grid=document.getElementById('emoji-grid');if(!grid)return;
+  const filtered=q?EMOJIS.filter(e=>e.includes(q)):EMOJIS;
+  grid.innerHTML=filtered.map(e=>`<span class="emoji-opt" onclick="setPgEmoji('${pgId}','${e}')">${e}</span>`).join('');
 }
 function setPgEmoji(pgId,emoji){
   const pg=DB.pages.find(p=>p.id===pgId);if(!pg)return;
@@ -2867,8 +3387,10 @@ function renderBoardPageHTML(pg){
       <button class="bt-btn" onclick="addBoardCard('heading')"><span class="bt-ico">T</span>Заголовок</button>
       <button class="bt-btn" onclick="addBoardCard('link')"><span class="bt-ico">🔗</span>Ссылка</button>
       <button class="bt-btn" onclick="addBoardCard('image')"><span class="bt-ico">🖼</span>Картинка</button>
+      <button class="bt-btn" onclick="addBoardCard('table-card')"><span class="bt-ico">⊞</span>Таблица</button>
       <div class="bt-sep"></div>
       <button class="bt-btn" id="arrow-mode-btn" onclick="toggleArrowMode()"><span class="bt-ico">↗</span>Стрелка</button>
+      <button class="bt-btn" id="merge-mode-btn" onclick="toggleMergeMode()" title="Склеить две заметки в одну"><span class="bt-ico">🔗</span>Склеить</button>
       <div class="bt-sep"></div>
       <button class="bt-btn" onclick="fitBoard()"><span class="bt-ico">⊞</span>По экрану</button>
     </div>
@@ -2915,6 +3437,7 @@ function createCardEl(card,pg){
   el.addEventListener('mousedown',e=>{
     if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT'||e.target.classList.contains('mc-act-btn')||e.target.classList.contains('mc-resize'))return;
     if(card.locked)return;
+    if(_mergeMode){handleMergeClick(card.id,pg);return;}
     if(boardState.arrowMode){handleArrowClick(card.id,pg);return;}
     e.stopPropagation();
     boardState.selectedCard=card.id;
@@ -2966,6 +3489,12 @@ function cardInnerHTML(card){
     <button class="mc-act-btn" title="Удалить" onclick="delCard('${card.id}')">×</button>
   </div>`;
   const attachHTML=cardAttachHTML(card);
+  const mergedSections=(card.sections||[]).map(s=>`
+    <div class="mc-divider"></div>
+    <div class="mc-section">
+      <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);margin-bottom:3px">${esc(s.title)}</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,.65);white-space:pre-wrap">${esc(s.text)}</div>
+    </div>`).join('');
   if(card.type==='note')return`
     ${lockIco}
     <div class="mc-header">
@@ -2973,6 +3502,7 @@ function cardInnerHTML(card){
       ${actBtns}
     </div>
     <div class="mc-body"><textarea class="mc-text" data-field="text" placeholder="Добавь заметку...">${esc(card.text||'')}</textarea></div>
+    ${mergedSections}
     ${attachHTML}
     <div class="mc-resize"></div>`;
   if(card.type==='todo'){
@@ -3006,6 +3536,45 @@ function cardInnerHTML(card){
       <div style="font-size:11px;color:rgba(255,255,255,.3)">Нажми чтобы добавить фото</div>
     </div>`}
     <textarea data-field="label" placeholder="Описание..." style="background:none;border:none;outline:none;width:100%;font-size:12px;color:rgba(255,255,255,.45);font-family:inherit;resize:none;margin-top:4px">${esc(card.label||'')}</textarea>
+    </div>`;
+  }
+  if(card.type==='table-card')return boardTableHTML(card);
+  if(card.type==='boardtable'){
+    // ██ board table card with color + resize
+    const rows=card.tRows||[['','',''],['','',''],['','','']];
+    const bg=card.tableBg||'transparent';
+    const fs=card.tableFontSize||12;
+    return`<div class="mc-table-card" style="padding:8px;position:relative">
+      ${lockIco}
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:4px">${actBtns}
+        <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:rgba(255,255,255,.3)">
+          <label title="Цвет фона">Фон:<input type="color" class="mc-table-color-sel" value="${bg==='transparent'?'#1e1e1e':bg}" onchange="setBoardTableBg('${card.id}',this.value)"></label>
+          <label title="Размер текста">Текст:<input type="number" min="9" max="24" value="${fs}" onchange="setBoardTableFontSize('${card.id}',+this.value)" style="width:36px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.6);font-size:11px;padding:1px 4px;outline:none;font-family:inherit"></label>
+        </div>
+      </div>
+      <table style="background:${bg};font-size:${fs}px">
+        ${rows.map((row,ri)=>`<tr>${row.map((cell,ci)=>`<td><textarea class="mc-table-cell" rows="1" style="font-size:${fs}px" oninput="updateBoardTableCell('${card.id}',${ri},${ci},this.value)" placeholder="...">${esc(cell)}</textarea></td>`).join('')}<td style="width:20px;border:none"><button onclick="delBoardTableRow('${card.id}',${ri})" style="background:none;border:none;color:rgba(255,80,80,.2);cursor:pointer;font-size:11px;padding:0 2px">×</button></td></tr>`).join('')}
+      </table>
+      <div style="display:flex;gap:4px;margin-top:5px">
+        <button onclick="addBoardTableRow('${card.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);font-size:11px;padding:2px 8px;cursor:pointer;font-family:inherit">+Строка</button>
+        <button onclick="addBoardTableCol('${card.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.4);font-size:11px;padding:2px 8px;cursor:pointer;font-family:inherit">+Столбец</button>
+      </div>
+      <div class="mc-resize"></div>
+    </div>`;
+  }
+  if(card.type==='merged'){
+    return`<div class="mc-merged" style="position:relative">
+      ${lockIco}
+      <div style="position:absolute;top:4px;right:4px">${actBtns}</div>
+      <div class="mc-merged-header">🧲 Объединённая заметка</div>
+      ${(card.parts||[]).map((p,pi)=>`
+        ${pi>0?'<div class="mc-merge-divider"></div>':''}
+        <div style="padding:8px 10px">
+          ${p.title?`<div style="font-size:12.5px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:4px">${esc(p.title)}</div>`:''}
+          ${p.text?`<div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.55">${esc(p.text)}</div>`:''}
+          ${(p.todos||[]).map(t=>`<div style="display:flex;gap:6px;align-items:center;padding:2px 0"><span>${t.d?'✅':'⬜'}</span><span style="font-size:12.5px;color:rgba(255,255,255,${t.d?'.3':'.65'});${t.d?'text-decoration:line-through':''}">${esc(t.t)}</span></div>`).join('')}
+        </div>`).join('')}
+      <div class="mc-resize"></div>
     </div>`;
   }
   return`<div style="padding:10px">${esc(card.text||card.title||'')}</div>`;
@@ -3123,6 +3692,48 @@ function openBoardAttach(cardId,fi){
   </div>
 </div>
 
+
+<!-- ██ SECTION:NOTES — FORMAT TOOLBAR -->
+<div id="block-format-bar">
+  <select class="fmt-select" id="fmt-size" onchange="applyFmt('fontSize',this.value)" title="Размер текста">
+    <option value="11px">11</option>
+    <option value="12px">12</option>
+    <option value="13px" selected>13</option>
+    <option value="14px">14</option>
+    <option value="16px">16</option>
+    <option value="18px">18</option>
+    <option value="20px">20</option>
+    <option value="24px">24</option>
+    <option value="28px">28</option>
+    <option value="32px">32</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" id="fmt-bold" onclick="applyFmt('bold')" title="Жирный (Ctrl+B)"><b>B</b></button>
+  <button class="fmt-btn" id="fmt-italic" onclick="applyFmt('italic')" title="Курсив (Ctrl+I)"><i>I</i></button>
+  <button class="fmt-btn" id="fmt-under" onclick="applyFmt('underline')" title="Подчёркивание"><u>U</u></button>
+  <button class="fmt-btn" id="fmt-strike" onclick="applyFmt('strikethrough')" title="Зачеркнуть"><s>S</s></button>
+  <div class="fmt-sep"></div>
+  <select class="fmt-select" id="fmt-lh" onchange="applyFmt('lineHeight',this.value)" title="Межстрочный интервал">
+    <option value="1.2">1.2×</option>
+    <option value="1.4">1.4×</option>
+    <option value="1.6" selected>1.6×</option>
+    <option value="1.8">1.8×</option>
+    <option value="2.0">2.0×</option>
+    <option value="2.4">2.4×</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <select class="fmt-select" id="fmt-align" onchange="applyFmt('textAlign',this.value)" title="Выравнивание">
+    <option value="left">⬅ Лево</option>
+    <option value="center">⬛ Центр</option>
+    <option value="right">➡ Право</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" onclick="applyFmt('color')" title="Цвет текста" id="fmt-color" style="font-size:16px">A</button>
+  <button class="fmt-btn" onclick="applyFmt('highlight')" title="Выделение" style="font-size:14px;background:rgba(255,220,50,.15)">🖊</button>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" onclick="closeFormatBar()" title="Закрыть" style="font-size:14px;color:rgba(255,255,255,.3)">✕</button>
+</div>
+
 <!-- ██ IMAGE LIGHTBOX -->
 <div id="img-lightbox" onclick="closeLightbox()">
   <div id="img-lightbox-close" onclick="closeLightbox()">✕</div>
@@ -3195,6 +3806,13 @@ function onResize(e){
 }
 
 function addBoardCard(type){
+  if(type==='table-card'){
+    const pg=getBoardPg();if(!pg)return;
+    const c={id:'c'+Date.now(),type:'table-card',x:100+Math.random()*100,y:80+Math.random()*50,w:280,h:180,color:'#1e1e1e',...createBoardTableCard()};
+    if(!pg.cards)pg.cards=[];pg.cards.push(c);save();
+    const canvas=document.getElementById('board-canvas');if(!canvas)return;
+    canvas.appendChild(createCardEl(c,pg));renderArrows(pg);return;
+  }
   const pg=getBoardPg();if(!pg)return;
   const id='c'+Date.now();
   const cx=-boardState.panX/boardState.zoom+Math.random()*200+100;
@@ -4237,7 +4855,7 @@ function addBlockFile(blockId){
     const reader=new FileReader();
     reader.onload=ev=>{
       const b=getPageBlock(blockId);if(!b)return;
-      b.fileData=ev.target.result;b.fileName=file.name;b.fileSize=fmtSize(file.size);save();
+      b.fileData=ev.target.result;b.fileName=file.name;b.fileSize=fmtSize(file.size);b.fileType=file.type;save();
       const pg=DB.pages.find(p=>p.id===DB.curPage);
       const el=document.querySelector(`[data-id="${blockId}"]`);
       if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
@@ -4246,6 +4864,15 @@ function addBlockFile(blockId){
   };
   inp.click();
 }
+
+function setFileViewMode(blockId,mode){
+  const b=getPageBlock(blockId);if(!b)return;
+  b.viewMode=mode;save();
+  const pg=DB.pages.find(p=>p.id===DB.curPage);
+  const el=document.querySelector('[data-id="'+blockId+'"]');
+  if(el&&pg){const idx=pg.blocks.findIndex(x=>x.id===blockId);el.outerHTML=blockHTML(b,idx);}
+}
+
 function downloadBlockFile(blockId){
   const b=getPageBlock(blockId);if(!b||!b.fileData)return;
   const a=document.createElement('a');a.href=b.fileData;a.download=b.fileName||'file';a.click();
@@ -4371,6 +4998,48 @@ finInc=function(src,m,v){_origFinInc(src,m,v);};
       <button onclick="saveReminder()" style="background:#0a84ff;border:none;border-radius:7px;color:#fff;font-family:inherit;font-size:13px;padding:8px 16px;cursor:pointer;font-weight:500">Сохранить</button>
     </div>
   </div>
+</div>
+
+
+<!-- ██ SECTION:NOTES — FORMAT TOOLBAR -->
+<div id="block-format-bar">
+  <select class="fmt-select" id="fmt-size" onchange="applyFmt('fontSize',this.value)" title="Размер текста">
+    <option value="11px">11</option>
+    <option value="12px">12</option>
+    <option value="13px" selected>13</option>
+    <option value="14px">14</option>
+    <option value="16px">16</option>
+    <option value="18px">18</option>
+    <option value="20px">20</option>
+    <option value="24px">24</option>
+    <option value="28px">28</option>
+    <option value="32px">32</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" id="fmt-bold" onclick="applyFmt('bold')" title="Жирный (Ctrl+B)"><b>B</b></button>
+  <button class="fmt-btn" id="fmt-italic" onclick="applyFmt('italic')" title="Курсив (Ctrl+I)"><i>I</i></button>
+  <button class="fmt-btn" id="fmt-under" onclick="applyFmt('underline')" title="Подчёркивание"><u>U</u></button>
+  <button class="fmt-btn" id="fmt-strike" onclick="applyFmt('strikethrough')" title="Зачеркнуть"><s>S</s></button>
+  <div class="fmt-sep"></div>
+  <select class="fmt-select" id="fmt-lh" onchange="applyFmt('lineHeight',this.value)" title="Межстрочный интервал">
+    <option value="1.2">1.2×</option>
+    <option value="1.4">1.4×</option>
+    <option value="1.6" selected>1.6×</option>
+    <option value="1.8">1.8×</option>
+    <option value="2.0">2.0×</option>
+    <option value="2.4">2.4×</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <select class="fmt-select" id="fmt-align" onchange="applyFmt('textAlign',this.value)" title="Выравнивание">
+    <option value="left">⬅ Лево</option>
+    <option value="center">⬛ Центр</option>
+    <option value="right">➡ Право</option>
+  </select>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" onclick="applyFmt('color')" title="Цвет текста" id="fmt-color" style="font-size:16px">A</button>
+  <button class="fmt-btn" onclick="applyFmt('highlight')" title="Выделение" style="font-size:14px;background:rgba(255,220,50,.15)">🖊</button>
+  <div class="fmt-sep"></div>
+  <button class="fmt-btn" onclick="closeFormatBar()" title="Закрыть" style="font-size:14px;color:rgba(255,255,255,.3)">✕</button>
 </div>
 
 <!-- ██ IMAGE LIGHTBOX -->
